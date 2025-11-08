@@ -9,5 +9,20 @@
   <body>
     <div id="root"></div>
     <script type="module" src="/src/main.tsx"></script>
+    <script src="three.r134.min.js"></script>
+    <script src="vanta.birds.min.js"></script>
+    <script>
+      VANTA.BIRDS({
+        el: "#your-element-selector",
+        mouseControls: true,
+        touchControls: true,
+        gyroControls: false,
+        minHeight: 200.0,
+        minWidth: 200.0,
+        scale: 1.0,
+        scaleMobile: 1.0,
+        backgroundColor: 0x476d95,
+      });
+    </script>
   </body>
 </html>
