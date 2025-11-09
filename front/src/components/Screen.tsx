@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from "react";
 import { motion } from "framer-motion";
-import HaloBackground from "../backgrounds/Vanta";
+import { WordsPullUp } from "../utils/words-pull-up";
+import ChangeCursor from "../interactive/ChangeCursor";
 
 const chevronDown: React.ReactNode = (
   <svg
@@ -21,59 +22,78 @@ const chevronDown: React.ReactNode = (
 
 const Main: React.FC = () => {
   const textLines: string[] = [
-    "Software Engineering Student and Enthusiast",
-    "Proud Garen Main",
-    "Eager to Learn and Grow",
-    "Developer in Progress",
+    "Developer Portfolio",
+    "Nerdy website",
+    "World wide web personal site",
+    "Personal developer page",
+    "Egocentrical playground",
+    "Boring concise bibliography",
   ];
 
   const [currentLine, setCurrentLine] = useState(textLines[0]);
+  const [scrollY, setScrollY] = useState(0);
 
   const setRandomName = () => {
     const index = Math.floor(Math.random() * textLines.length);
     let newName = textLines[index];
-    if (newName == currentLine) {
+    if (newName === currentLine) {
       setRandomName();
     } else {
       setCurrentLine(newName);
     }
-    return;
   };
 
   useEffect(() => {
-    const t = setTimeout(() => {
-      setRandomName();
-    }, 3000);
-    return () => clearTimeout(t);
-  }, [currentLine]);
+    const interval = setInterval(setRandomName, 3000);
+    return () => clearInterval(interval);
+  }, []);
+
+  useEffect(() => {
+    const handleScroll = () => {
+      setScrollY(window.scrollY);
+    };
+    window.addEventListener("scroll", handleScroll, { passive: true });
+    return () => window.removeEventListener("scroll", handleScroll);
+  }, []);
+
+  const handleClickScroll = () => {
+    const offset = window.innerWidth >= 1800 ? 400 : 100;
+    window.scrollTo({
+      top: window.innerHeight - offset,
+      behavior: "smooth",
+    });
+  };
+
+  const fadeOpacity = Math.max(0, 1 - scrollY / 300);
 
   return (
-    <div className="min-h-screen relative overflow-hidden">
-      <HaloBackground />
-
-      <div className="min-h-screen flex flex-col items-center justify-center relative z-10">
-        {/* <div className="w-full p-4 absolute top-0 left-0">
-          <div className="h-10 w-10 rounded-full bg-amber-500 p-2">S</div>
-        </div> */}
-        <motion.div
-          initial={{ opacity: 0, y: 50 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          transition={{ duration: 1 }}
-          className="flex flex-col items-center justify-center p-8 rounded-lg"
-        >
-          <div className="p-2 font-bold text-slate-100 text-5xl">
-            Sami Erafii
-          </div>
-          <div className="text-slate-100 p-3 text-xl font-semibold">
-            {currentLine}
-          </div>
-        </motion.div>
-        <div className="flex flex-col items-center justify-center w-full animate-bounce absolute bottom-4 hover:cursor-pointer z-10 text-white">
-          <div className="font-semibold text-lg">View More</div>
-          {chevronDown}
-        </div>
+    <div className="min-h-screen flex flex-col items-center justify-center relative z-10 w-full">
+      <div className="absolute top-5 left-5">
+        <ChangeCursor />
       </div>
+
+      <motion.div
+        initial={{ opacity: 0, y: 50 }}
+        whileInView={{ opacity: 1, y: 0 }}
+        transition={{ duration: 1 }}
+        className="text-center p-8 rounded-lg"
+      >
+        <div className="p-2 font-bold text-slate-100 text-5xl">
+          Sami Erafii's
+        </div>
+        <WordsPullUp key={currentLine} text={currentLine} />
+      </motion.div>
+
+      <motion.div
+        style={{ opacity: fadeOpacity }}
+        className="flex flex-col items-center justify-center w-full absolute bottom-4 p-2 hover:cursor-pointer z-10 text-white"
+        onClick={handleClickScroll}
+      >
+        <div className="font-semibold text-lg">View More</div>
+        {chevronDown}
+      </motion.div>
     </div>
   );
 };
+
 export default Main;
