@@ -69,6 +69,20 @@ const skills: Skill[] = [
   },
 ];
 
+const learning: Skill[] = [
+  {
+    name: "Spring Boot",
+    src: "https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/spring/spring-original.svg",
+  },
+  {
+    name: "Redis",
+    src: "https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/redis/redis-original.svg",
+  },
+  {
+    name: "AWS",
+    src: "https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/amazonwebservices/amazonwebservices-original-wordmark.svg",
+  },
+];
 const containerVariants = {
   hidden: {},
   show: {
@@ -86,7 +100,10 @@ const skillVariants = {
 const Skills: React.FC = () => {
   return (
     <div className="w-10/12 p-16 text-center text-white relative z-10 mx-auto">
-      <h2 className="text-3xl font-bold mb-12">Skills & Technologies</h2>
+      <h2 className="text-3xl font-bold mb-6">Skills & Technologies</h2>
+      <p className="mb-12 text-2xl font-semibold">
+        What I'm comfortable with right now
+      </p>
       <motion.div
         className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-5 gap-8"
         variants={containerVariants}
@@ -97,7 +114,8 @@ const Skills: React.FC = () => {
         {skills.map((skill) => (
           <motion.div
             key={skill.name}
-            className="backdrop-blur-xl bg-white/5 rounded-lg p-6 flex flex-col items-center hover:scale-105 cursor-pointer"
+            className="backdrop-blur-xl bg-white/5 rounded-lg p-6 flex flex-col items-center cursor-pointer"
+            whileHover={{ scale: 1.05 }}
             variants={skillVariants}
           >
             <img src={skill.src} alt={skill.name} className="w-12 h-12 mb-3" />
@@ -105,6 +123,34 @@ const Skills: React.FC = () => {
           </motion.div>
         ))}
       </motion.div>
+      <p className="mt-16 mb-12 text-2xl font-semibold">
+        What I'm currently learning
+      </p>
+      <div className="w-3/5 items-center justify-center mx-auto">
+        <motion.div
+          className="grid grid-cols-2 sm:grid-cols-3 gap-8"
+          variants={containerVariants}
+          initial="hidden"
+          whileInView="show"
+          viewport={{ once: true, amount: 0.3 }}
+        >
+          {learning.map((skill) => (
+            <motion.div
+              key={skill.name}
+              className="backdrop-blur-xl bg-white/5 rounded-lg p-6 flex flex-col items-center cursor-pointer"
+              variants={skillVariants}
+              whileHover={{ scale: 1.05 }}
+            >
+              <img
+                src={skill.src}
+                alt={skill.name}
+                className="w-12 h-12 mb-3"
+              />
+              <h3 className="text-lg font-semibold">{skill.name}</h3>
+            </motion.div>
+          ))}
+        </motion.div>
+      </div>
     </div>
   );
 };
