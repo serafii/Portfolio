@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from "react";
 import { motion } from "framer-motion";
 import { WordsPullUp } from "../utils/words-pull-up";
-import ChangeCursor from "../interactive/ChangeCursor";
+// import ChangeCursor from "../interactive/ChangeCursor";
 
 const chevronDown: React.ReactNode = (
   <svg
@@ -68,10 +68,6 @@ const Main: React.FC = () => {
 
   return (
     <div className="min-h-screen flex flex-col items-center justify-center relative z-10 w-full">
-      <div className="absolute top-5 left-5">
-        <ChangeCursor />
-      </div>
-
       <motion.div
         initial={{ opacity: 0, y: 50 }}
         whileInView={{ opacity: 1, y: 0 }}
@@ -86,7 +82,7 @@ const Main: React.FC = () => {
 
       <motion.div
         style={{ opacity: fadeOpacity }}
-        className="flex flex-col items-center justify-center w-full absolute bottom-4 p-2 hover:cursor-pointer z-10 text-white"
+        className="flex flex-col items-center justify-center w-full absolute bottom-4 p-2 hover:cursor-pointer z-10 text-white animate-bounce"
         onClick={handleClickScroll}
       >
         <div className="font-semibold text-lg">View More</div>
