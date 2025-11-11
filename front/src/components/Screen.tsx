@@ -1,7 +1,6 @@
 import React, { useState, useEffect } from "react";
 import { motion } from "framer-motion";
 import { WordsPullUp } from "../utils/words-pull-up";
-// import ChangeCursor from "../interactive/ChangeCursor";
 
 const chevronDown: React.ReactNode = (
   <svg
@@ -22,12 +21,12 @@ const chevronDown: React.ReactNode = (
 
 const Main: React.FC = () => {
   const textLines: string[] = [
-    "Developer Portfolio",
+    "Aspiring Developer Portfolio",
     "Nerdy website",
-    "World wide web personal site",
-    "Personal developer page",
-    "Egocentrical playground",
-    "Boring concise bibliography",
+    "World Wide Web Personal Site",
+    "Personal Developer Page",
+    "Experimental Playground",
+    "Concise Dev Biography",
   ];
 
   const [currentLine, setCurrentLine] = useState(textLines[0]);

@@ -32,13 +32,13 @@ const Description: React.FC = () => {
                 {school}
                 Education
               </span>
-              <p className="p-2 text-center font-normal text-slate-200 md:text-left">
+              <p className="p-2 text-center font-semibold text-slate-200 md:text-left">
                 Third year student pursuing a Bachelor's Degree in Software
                 Engineering - Concordia University
               </p>
-              <p className="p-2 text-center font-normal text-slate-200 md:text-left">
-                Future exchange student at the University of Hong Kong - Winter
-                2026
+              <p className="p-2 text-center font-semibold text-slate-200 md:text-left">
+                Incoming exchange student at the University of Hong Kong -
+                Winter 2026
               </p>
             </li>
             <li className="font-bold mb-4">
@@ -46,9 +46,13 @@ const Description: React.FC = () => {
                 {lightBulb}
                 Interests
               </span>
-              <p className="p-4 text-center font-normal text-slate-200 md:text-left">
-                Web Development, Artifical Intelligence, Software as a Service
-                (SaaS)
+              <p className="p-2 text-center font-semibold text-slate-200 md:text-left">
+                Web Development, Software-as-a-Service (SaaS) and Artificial
+                Intelligence
+              </p>
+              <p className="p-2 text-center font-semibold text-slate-200 md:text-left">
+                Interested in performance optimization, system design and
+                software engineering concepts
               </p>
             </li>
             <li className="font-bold">
@@ -56,9 +60,14 @@ const Description: React.FC = () => {
                 {smile}
                 Goals
               </span>
-              <p className="p-4 text-center font-normal text-slate-200 md:text-left">
-                To learn as much as I can, contribute to exciting projects, and
-                leave my mark in the tech world.
+              <p className="p-2 text-center font-semibold text-slate-200 md:text-left">
+                Continuously grow as a software engineer
+              </p>
+              <p className="p-2 text-center font-semibold text-slate-200 md:text-left">
+                Contribute to innovative projects and impactful technologies
+              </p>
+              <p className="p-2 text-center font-semibold text-slate-200 md:text-left">
+                Build software that makes a difference
               </p>
             </li>
           </ul>
