@@ -74,7 +74,7 @@ const Contact: React.FC = () => {
             whileInView={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.3 }}
             viewport={{ once: true }}
-            className="rounded-lg p-8 flex flex-col items-center hover:scale-105 cursor-pointer ease-in-out duration-300 transition-all backdrop-blur-lg w-1/5"
+            className="rounded-lg p-8 flex flex-col items-center hover:scale-105 cursor-pointer ease-in-out duration-300 transition-all backdrop-blur-2xl w-1/5"
             href="https://www.linkedin.com/in/sami-erafii-bb618220a/"
             target="_blank"
           >
@@ -90,7 +90,7 @@ const Contact: React.FC = () => {
             whileInView={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.4 }}
             viewport={{ once: true }}
-            className="rounded-lg p-6 flex flex-col items-center hover:scale-105 cursor-pointer ease-in-out duration-300 transition-all backdrop-blur-lg w-1/5"
+            className="rounded-lg p-6 flex flex-col items-center hover:scale-105 cursor-pointer ease-in-out duration-300 transition-all backdrop-blur-2xl w-1/5"
             href="https://github.com/serafii"
             target="_blank"
           >
@@ -106,7 +106,7 @@ const Contact: React.FC = () => {
             whileInView={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.5 }}
             viewport={{ once: true }}
-            className="rounded-lg p-6 flex flex-col items-center hover:scale-105 cursor-pointer ease-in-out duration-300 transition-all backdrop-blur-lg w-1/5"
+            className="rounded-lg p-6 flex flex-col items-center hover:scale-105 cursor-pointer ease-in-out duration-300 transition-all backdrop-blur-2xl w-1/5"
             href="https://discord.com/users/serafii"
             target="_blank"
           >
@@ -118,7 +118,7 @@ const Contact: React.FC = () => {
             whileInView={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.6 }}
             viewport={{ once: true }}
-            className="rounded-lg p-6 flex flex-col items-center hover:scale-105 cursor-pointer ease-in-out duration-300 transition-all backdrop-blur-lg w-1/5"
+            className="rounded-lg p-6 flex flex-col items-center hover:scale-105 cursor-pointer ease-in-out duration-300 transition-all backdrop-blur-2xl w-1/5"
             href="mailto:sami.erafii@gmail.com"
             target="_blank"
           >

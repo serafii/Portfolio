@@ -33,7 +33,7 @@ const Home: React.FC = () => {
               cx="50"
               cy="50"
               r="45"
-              stroke="#4db68b"
+              stroke="#8affc3"
               strokeWidth="6"
               fill="none"
               strokeDasharray="1"
