@@ -82,6 +82,7 @@ const Description: React.FC = () => {
           <img
             src={nerd}
             alt="nerd"
+            draggable={false}
             onClick={handleClick}
             className={`flex h-3/4 w-3/4 items-center justify-center hover:scale-105 transition-transform duration-300 ease-in-out hover:cursor-pointer ${
               isJumping ? "jump-once" : ""

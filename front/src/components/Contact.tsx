@@ -68,12 +68,14 @@ const Contact: React.FC = () => {
         <p className="font-semibold mb-20 text-xl">
           Feel free to reach out to me via any of the following platforms:
         </p>
-        <div className="flex items-center justify-between mx-auto w-4/5">
-          <motion.a
-            initial={{ opacity: 0, y: 100 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.3 }}
-            viewport={{ once: true }}
+        <motion.div
+          initial={{ y: 100 }}
+          whileInView={{ y: 0 }}
+          transition={{ duration: 1 }}
+          viewport={{ once: true }}
+          className="flex items-center justify-between mx-auto w-4/5"
+        >
+          <a
             className="rounded-lg p-8 flex flex-col items-center hover:scale-105 cursor-pointer ease-in-out duration-300 transition-all backdrop-blur-2xl w-1/5"
             href="https://www.linkedin.com/in/sami-erafii-bb618220a/"
             target="_blank"
@@ -84,12 +86,8 @@ const Contact: React.FC = () => {
               className="w-16 h-16 mx-4 inline-block"
             />
             <p className="text-lg font-semibold mt-3">LinkedIn</p>
-          </motion.a>
-          <motion.a
-            initial={{ opacity: 0, y: 100 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.4 }}
-            viewport={{ once: true }}
+          </a>
+          <a
             className="rounded-lg p-6 flex flex-col items-center hover:scale-105 cursor-pointer ease-in-out duration-300 transition-all backdrop-blur-2xl w-1/5"
             href="https://github.com/serafii"
             target="_blank"
@@ -100,24 +98,16 @@ const Contact: React.FC = () => {
               className="w-16 h-16 mx-4 inline-block"
             />
             <p className="text-lg font-semibold mt-3">GitHub</p>
-          </motion.a>
-          <motion.a
-            initial={{ opacity: 0, y: 100 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.5 }}
-            viewport={{ once: true }}
+          </a>
+          <a
             className="rounded-lg p-6 flex flex-col items-center hover:scale-105 cursor-pointer ease-in-out duration-300 transition-all backdrop-blur-2xl w-1/5"
             href="https://discord.com/users/serafii"
             target="_blank"
           >
             {discord}
             <p className="text-lg font-semibold mt-3">Discord</p>
-          </motion.a>
-          <motion.a
-            initial={{ opacity: 0, y: 100 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.6 }}
-            viewport={{ once: true }}
+          </a>
+          <a
             className="rounded-lg p-6 flex flex-col items-center hover:scale-105 cursor-pointer ease-in-out duration-300 transition-all backdrop-blur-2xl w-1/5"
             href="mailto:sami.erafii@gmail.com"
             target="_blank"
@@ -128,8 +118,8 @@ const Contact: React.FC = () => {
               className="w-16 h-16 mx-4 inline-block"
             />
             <p className="text-lg font-semibold mt-3">Gmail</p>
-          </motion.a>
-        </div>
+          </a>
+        </motion.div>
       </div>
       <Footer />
       <span className="relative p-4 text-white py-8 justify-center pb-20 flex flex-row gap-8 font-semibold text-lg w-full bg-[#1b2b40]">
