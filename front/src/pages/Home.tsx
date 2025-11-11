@@ -1,4 +1,4 @@
-import React, { useRef } from "react";
+import React, { useRef, useState } from "react";
 import { motion, useScroll } from "motion/react";
 import Main from "../components/Screen";
 import Description from "../components/Description";
@@ -15,8 +15,20 @@ const Home: React.FC = () => {
     offset: ["start start", "end end"],
   });
 
+  const [mousePos, setMousePos] = useState({ x: 0, y: 0 });
+
+  const handleMouseMove = (e: React.MouseEvent<HTMLDivElement, MouseEvent>) => {
+    setMousePos({ x: e.clientX, y: e.clientY });
+  };
+
   return (
-    <>
+    <div onMouseMove={handleMouseMove}>
+      <div
+        className="fixed inset-0 pointer-events-none transition-all duration-100"
+        style={{
+          background: `radial-gradient(circle 150px at ${mousePos.x}px ${mousePos.y}px, rgba(138, 255, 195, 0.15), rgba(0,0,0,0.15))`,
+        }}
+      />
       <div className="fixed top-5 left-5 z-50 pointer-events-none">
         <div className="w-16 h-16 relative">
           <svg className="-rotate-90 w-full h-full" viewBox="0 0 100 100">
@@ -52,9 +64,8 @@ const Home: React.FC = () => {
           </div>
         </div>
       </div>
-
       <div
-        className="flex flex-col gap-y-32 items-center justify-center relative"
+        className="flex flex-col gap-y-32 items-center justify-center relative z-10"
         ref={ref}
       >
         <Main />
@@ -64,7 +75,7 @@ const Home: React.FC = () => {
         <Interests />
         <Contact />
       </div>
-    </>
+    </div>
   );
 };
 

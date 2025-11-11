@@ -51,7 +51,6 @@ export default function Interests() {
             whileInView={{ opacity: 1, scale: 1 }}
             whileHover={{ scale: 1.06, rotate: 2 }}
             transition={{ duration: 0.4, ease: "easeOut" }}
-            viewport={{ once: true }}
           >
             <div className="text-3xl mb-3">
               {index === 0 && <GiGamepad />}
