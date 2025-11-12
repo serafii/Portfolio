@@ -22,10 +22,8 @@ const chevronDown: React.ReactNode = (
 const Main: React.FC = () => {
   const textLines: string[] = [
     "Aspiring Developer Portfolio",
-    "Nerdy website",
     "World Wide Web Personal Site",
     "Personal Developer Page",
-    "Experimental Playground",
     "Concise Dev Biography",
   ];
 

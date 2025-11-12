@@ -1,17 +1,33 @@
 import React from "react";
+import { Card } from "antd";
+import services from "../../assets/edit_services.png";
+
+const { Meta } = Card;
 
 const BusinessTemplate: React.FC = () => {
   return (
-    <div className="backdrop-blur-xl bg-white/5 rounded-lg p-6 flex flex-col items-center hover:scale-105 cursor-pointer ease-in-out duration-300 transition-all w-1/4">
-      <h2 className="text-3xl font-bold mb-6">Business Template Project</h2>
-      <p className="mb-4">
-        The Business Template Project is a comprehensive solution designed to
-        streamline and optimize business processes across various industries. By
-        leveraging advanced technologies such as AI, machine learning, and data
-        analytics, this project aims to provide organizations with the tools
-        they need to enhance efficiency, reduce costs, and drive innovation.
-      </p>
-    </div>
+    <a href="https://soen287-project-fvxv.onrender.com" target="_blank">
+      <Card
+        hoverable
+        className="w-full h-full"
+        cover={<img draggable={false} alt="example" src={services} />}
+      >
+        <Meta
+          title="Customizable Website Business Template"
+          description={
+            <div className="text-center">
+              <p className="mb-4">www.soen287-project-fvxv.onrender.com</p>
+              <p className="text-black">
+                This project is a customizable website template designed for
+                small businesses. Admins can easily modify content and images
+                through a custom interface. Clients can view services, contact
+                the business and claim services.
+              </p>
+            </div>
+          }
+        />
+      </Card>
+    </a>
   );
 };
 

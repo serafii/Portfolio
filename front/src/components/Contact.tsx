@@ -73,7 +73,7 @@ const Contact: React.FC = () => {
           whileInView={{ y: 0 }}
           transition={{ duration: 1 }}
           viewport={{ once: true }}
-          className="flex items-center justify-between mx-auto w-4/5"
+          className="flex items-center justify-between mx-auto 3xl:w-4/5 w-full"
         >
           <a
             className="rounded-lg p-8 flex flex-col items-center hover:scale-105 cursor-pointer ease-in-out duration-300 transition-all backdrop-blur-2xl w-1/5"
@@ -122,7 +122,7 @@ const Contact: React.FC = () => {
         </motion.div>
       </div>
       <Footer />
-      <span className="relative p-4 text-white py-8 justify-center pb-20 flex flex-row gap-8 font-semibold text-lg w-full bg-[#1b2b40]">
+      <span className="relative p-4 text-white py-8 justify-center flex flex-row gap-8 font-semibold text-lg w-full bg-[#1b2b40] -mt-9 pb-20">
         <p>&copy; {year}</p>
         <p>Designed & Developed by Sami Erafii</p>
       </span>

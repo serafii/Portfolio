@@ -26,7 +26,7 @@ const Home: React.FC = () => {
       <div
         className="fixed inset-0 pointer-events-none transition-all duration-100"
         style={{
-          background: `radial-gradient(circle 150px at ${mousePos.x}px ${mousePos.y}px, rgba(138, 255, 195, 0.15), rgba(0,0,0,0.15))`,
+          background: `radial-gradient(circle 120px at ${mousePos.x}px ${mousePos.y}px, rgba(138, 255, 195, 0.1), rgba(0,0,0,0.15))`,
         }}
       />
       <div className="fixed top-5 left-5 z-50 pointer-events-none">
@@ -65,7 +65,7 @@ const Home: React.FC = () => {
         </div>
       </div>
       <div
-        className="flex flex-col gap-y-32 items-center justify-center relative z-10"
+        className="flex flex-col gap-y-24 3xl:gap-y-32 items-center justify-center relative z-10"
         ref={ref}
       >
         <Main />
