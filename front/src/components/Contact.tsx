@@ -129,7 +129,7 @@ const Contact: React.FC = () => {
         </motion.div>
       </div>
       <Footer />
-      <span className="relative p-4 text-white py-8 justify-center flex flex-row gap-8 font-semibold text-normal w-full bg-[#1b2b40] -mt-9 pb-20 3xl:py-16">
+      <span className="relative text-sm sm:text-normal p-4 text-white py-8 justify-center flex flex-row gap-2 md:gap-8 font-semibold text-normal w-full bg-[#1b2b40] -mt-9 pb-20 3xl:py-16">
         <p>&copy; {year}</p>
         <p>Designed & Developed by Sami Erafii</p>
       </span>

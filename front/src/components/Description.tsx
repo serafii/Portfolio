@@ -11,7 +11,7 @@ const Description: React.FC = () => {
       <motion.div
         initial={{ opacity: 0, y: 50 }}
         whileInView={{ opacity: 1, y: 0 }}
-        transition={{ duration: 1 }}
+        transition={{ duration: 0.6 }}
         viewport={{ once: true }}
       >
         <h2 className="text-4xl font-bold mb-4">About Me</h2>
@@ -24,7 +24,7 @@ const Description: React.FC = () => {
         <motion.div
           initial={{ opacity: 0, y: 50 }}
           whileInView={{ opacity: 1, y: 0 }}
-          transition={{ duration: 1.4 }}
+          transition={{ duration: 1 }}
           viewport={{ once: true }}
           className="font-bold lg:w-1/3 text-lg"
         >
@@ -51,7 +51,7 @@ const Description: React.FC = () => {
         <motion.div
           initial={{ opacity: 0, y: 50 }}
           whileInView={{ opacity: 1, y: 0 }}
-          transition={{ duration: 1.7 }}
+          transition={{ duration: 1.3 }}
           viewport={{ once: true }}
           className="font-bold lg:w-1/3 text-lg"
         >
@@ -78,7 +78,7 @@ const Description: React.FC = () => {
         <motion.div
           initial={{ opacity: 0, y: 50 }}
           whileInView={{ opacity: 1, y: 0 }}
-          transition={{ duration: 2 }}
+          transition={{ duration: 1.6 }}
           viewport={{ once: true }}
           className="font-bold lg:w-1/3 text-lg"
         >

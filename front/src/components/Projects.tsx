@@ -4,16 +4,18 @@ import EventHub from "../subcomponents/Projects/EventHub";
 import SmartWorld from "../subcomponents/Projects/SmartWorld";
 import NowWhat from "../subcomponents/Projects/NowWhat";
 import ThisWebsite from "../subcomponents/Projects/This";
-import { motion } from "framer-motion";
+import { motion, useReducedMotion } from "framer-motion";
 
 const Projects: React.FC = () => {
+  const shouldReduceMotion = useReducedMotion();
+
   return (
     <div className="w-full flex items-center justify-center">
       <div className="w-full sm:w-4/5 md:w-2/3 lg:w-full 2xl:w-10/12 3xl:w-2/3 p-16 text-center text-white">
         <motion.div
           initial={{ opacity: 0, y: 50 }}
           whileInView={{ opacity: 1, y: 0 }}
-          transition={{ duration: 1 }}
+          transition={{ duration: 0.6 }}
           viewport={{ once: true }}
           className="mb-10 2xl:mb-0"
         >
@@ -27,36 +29,36 @@ const Projects: React.FC = () => {
             <motion.div
               initial={{ opacity: 0, x: -100 }}
               whileInView={{ opacity: 1, x: 0 }}
-              transition={{ duration: 1 }}
+              transition={{ duration: 0.6 }}
               viewport={{ once: true }}
-              whileHover={{ scale: 1.05 }}
+              whileHover={shouldReduceMotion ? {} : { scale: 1.05 }}
             >
               <SmartWorld />
             </motion.div>
             <motion.div
               initial={{ opacity: 0, x: 100 }}
               whileInView={{ opacity: 1, x: 0 }}
-              transition={{ duration: 1 }}
+              transition={{ duration: 0.6 }}
               viewport={{ once: true }}
-              whileHover={{ scale: 1.05 }}
+              whileHover={shouldReduceMotion ? {} : { scale: 1.05 }}
             >
               <BusinessTemplate />
             </motion.div>
             <motion.div
               initial={{ opacity: 0, x: -100 }}
               whileInView={{ opacity: 1, x: 0 }}
-              transition={{ duration: 1 }}
+              transition={{ duration: 0.6 }}
               viewport={{ once: true }}
-              whileHover={{ scale: 1.05 }}
+              whileHover={shouldReduceMotion ? {} : { scale: 1.05 }}
             >
               <EventHub />
             </motion.div>
             <motion.div
               initial={{ opacity: 0, x: 100 }}
               whileInView={{ opacity: 1, x: 0 }}
-              transition={{ duration: 1 }}
+              transition={{ duration: 0.6 }}
               viewport={{ once: true }}
-              whileHover={{ scale: 1.05 }}
+              whileHover={shouldReduceMotion ? {} : { scale: 1.05 }}
             >
               <ThisWebsite />
             </motion.div>
@@ -65,9 +67,9 @@ const Projects: React.FC = () => {
             <motion.div
               initial={{ y: 100 }}
               whileInView={{ y: 0 }}
-              transition={{ duration: 1 }}
+              transition={{ duration: 0.6 }}
               viewport={{ once: true }}
-              whileHover={{ scale: 1.05 }}
+              whileHover={shouldReduceMotion ? {} : { scale: 1.05 }}
             >
               <NowWhat />
             </motion.div>

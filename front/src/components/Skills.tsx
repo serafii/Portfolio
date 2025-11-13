@@ -1,5 +1,5 @@
 import React from "react";
-import { motion } from "framer-motion";
+import { motion, useReducedMotion } from "framer-motion";
 
 interface Skill {
   name: string;
@@ -94,16 +94,18 @@ const containerVariants = {
 
 const skillVariants = {
   hidden: { opacity: 0, scale: 0.8 },
-  show: { opacity: 1, scale: 1, transition: { duration: 0.3 } },
+  show: { opacity: 1, scale: 1, transition: { duration: 0.2 } },
 };
 
 const Skills: React.FC = () => {
+  const shouldReduceMotion = useReducedMotion();
+
   return (
-    <div className="w-full md:w-11/12 lg:w-10/12 p-16 text-center text-white relative z-10 mx-auto">
+    <div className="w-full md:w-11/12 lg:w-10/12 p-6 sm:p-16 text-center text-white relative z-10 mx-auto">
       <motion.div
         initial={{ opacity: 0, y: 50 }}
         whileInView={{ opacity: 1, y: 0 }}
-        transition={{ duration: 1 }}
+        transition={{ duration: 0.6 }}
         viewport={{ once: true }}
       >
         <h2 className="text-3xl font-bold mb-6">Skills & Technologies</h2>
@@ -112,11 +114,11 @@ const Skills: React.FC = () => {
         </p>
       </motion.div>
       <motion.div
-        className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 xl:grid-cols-5 gap-8"
+        className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 xl:grid-cols-5 gap-8 w-full"
         variants={containerVariants}
         initial="hidden"
         whileInView="show"
-        viewport={{ once: true, amount: 0.3 }}
+        viewport={{ once: true, amount: 0.1 }}
       >
         {skills.map((skill) => (
           <a
@@ -127,7 +129,7 @@ const Skills: React.FC = () => {
           >
             <motion.div
               className="backdrop-blur-xl bg-white/15 rounded-lg p-6 flex flex-col items-center cursor-pointer"
-              whileHover={{ scale: 1.05 }}
+              whileHover={shouldReduceMotion ? {} : { scale: 1.05 }}
               variants={skillVariants}
             >
               <img
@@ -145,7 +147,7 @@ const Skills: React.FC = () => {
       <motion.p
         initial={{ opacity: 0, y: 50 }}
         whileInView={{ opacity: 1, y: 0 }}
-        transition={{ duration: 1 }}
+        transition={{ duration: 0.6 }}
         viewport={{ once: true }}
         className="mt-16 mb-12 text-2xl font-semibold"
       >
@@ -153,7 +155,7 @@ const Skills: React.FC = () => {
       </motion.p>
       <div className="w-full xl:w-3/5 items-center justify-center mx-auto">
         <motion.div
-          className="grid grid-cols-2 sm:grid-cols-3 gap-8"
+          className="grid grid-cols-1 xs:grid-cols-2 sm:grid-cols-3 gap-8"
           variants={containerVariants}
           initial="hidden"
           whileInView="show"
@@ -169,7 +171,7 @@ const Skills: React.FC = () => {
               <motion.div
                 className="backdrop-blur-xl bg-white/5 rounded-lg p-6 flex flex-col items-center cursor-pointer"
                 variants={skillVariants}
-                whileHover={{ scale: 1.05 }}
+                whileHover={shouldReduceMotion ? {} : { scale: 1.05 }}
               >
                 <img
                   src={skill.src}
