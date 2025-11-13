@@ -1,16 +1,27 @@
 import React from "react";
+import rocket from "../../assets/nowwhat.png";
 
 const NowWhat: React.FC = () => {
   return (
-    <div className="backdrop-blur-xl bg-white/5 rounded-lg p-6 flex flex-col items-center hover:scale-105 cursor-pointer ease-in-out duration-300 transition-all w-1/4">
-      <h2 className="text-3xl font-bold mb-6">Now What Project</h2>
-      <p className="mb-4">
-        The Now What Project is a comprehensive solution designed to streamline
-        and optimize business processes across various industries. By leveraging
-        advanced technologies such as AI, machine learning, and data analytics,
-        this project aims to provide organizations with the tools they need to
-        enhance efficiency, reduce costs, and drive innovation.
-      </p>
+    <div className="hover:cursor-pointer h-full w-full hover:shadow-2xl transition-shadow duration-300 ">
+      <img
+        draggable={false}
+        alt="NowWhat Project Screenshot"
+        src={rocket}
+        className="object-contain w-auto mx-auto rounded-t-xl shadow-lg"
+      />
+      <div className="rounded-b-xl bg-white p-6 shadow-md -mt-1">
+        <div className="text-center">
+          <p className="mb-2 text-black font-semibold">NowWhat</p>
+          <p className="mb-4 text-gray-500">In Progress</p>
+          <p className="text-black text-sm">
+            This project is currently under development. NowWhat is a mobile
+            application that suggests activities based on user preferences and
+            location, within a few clicks. Technologies used include React
+            Native, Expo and GoogleMaps API.
+          </p>
+        </div>
+      </div>
     </div>
   );
 };

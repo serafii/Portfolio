@@ -63,20 +63,27 @@ const Contact: React.FC = () => {
 
   return (
     <div className="w-full">
-      <div className="w-10/12 p-16 text-center text-white relative z-10 mx-auto mb-32 2xl:mb-48">
-        <h2 className="text-3xl font-bold mb-6">Contact Me</h2>
-        <p className="font-semibold mb-20 text-xl">
-          Feel free to reach out to me via any of the following platforms:
-        </p>
+      <div className="w-10/12 p-16 text-center text-white z-10 mx-auto mb-48 2xl:mb-80">
+        <motion.div
+          initial={{ opacity: 0, y: 50 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          transition={{ duration: 1 }}
+          viewport={{ once: true }}
+        >
+          <h2 className="text-3xl font-bold mb-6">Contact Me</h2>
+          <p className="font-semibold mb-20 text-xl">
+            Feel free to reach out to me via any of the following platforms:
+          </p>
+        </motion.div>
         <motion.div
           initial={{ y: 100 }}
           whileInView={{ y: 0 }}
           transition={{ duration: 1 }}
           viewport={{ once: true }}
-          className="flex items-center justify-between mx-auto w-4/5"
+          className="flex items-center justify-between mx-auto 3xl:w-4/5 w-full"
         >
           <a
-            className="rounded-lg p-8 flex flex-col items-center hover:scale-105 cursor-pointer ease-in-out duration-300 transition-all backdrop-blur-2xl w-1/5"
+            className="rounded-lg p-8 flex flex-col items-center hover:scale-105 cursor-pointer ease-in-out duration-300 transition-all backdrop-blur-3xl w-1/5 bg-blue-300/20"
             href="https://www.linkedin.com/in/sami-erafii-bb618220a/"
             target="_blank"
           >
@@ -88,7 +95,7 @@ const Contact: React.FC = () => {
             <p className="text-lg font-semibold mt-3">LinkedIn</p>
           </a>
           <a
-            className="rounded-lg p-6 flex flex-col items-center hover:scale-105 cursor-pointer ease-in-out duration-300 transition-all backdrop-blur-2xl w-1/5"
+            className="rounded-lg p-6 flex flex-col items-center hover:scale-105 cursor-pointer ease-in-out duration-300 transition-all backdrop-blur-3xl w-1/5 bg-black/6"
             href="https://github.com/serafii"
             target="_blank"
           >
@@ -100,7 +107,7 @@ const Contact: React.FC = () => {
             <p className="text-lg font-semibold mt-3">GitHub</p>
           </a>
           <a
-            className="rounded-lg p-6 flex flex-col items-center hover:scale-105 cursor-pointer ease-in-out duration-300 transition-all backdrop-blur-2xl w-1/5"
+            className="rounded-lg p-6 flex flex-col items-center hover:scale-105 cursor-pointer ease-in-out duration-300 transition-all backdrop-blur-3xl w-1/5 bg-blue-500/10"
             href="https://discord.com/users/serafii"
             target="_blank"
           >
@@ -108,7 +115,7 @@ const Contact: React.FC = () => {
             <p className="text-lg font-semibold mt-3">Discord</p>
           </a>
           <a
-            className="rounded-lg p-6 flex flex-col items-center hover:scale-105 cursor-pointer ease-in-out duration-300 transition-all backdrop-blur-2xl w-1/5"
+            className="rounded-lg p-6 flex flex-col items-center hover:scale-105 cursor-pointer ease-in-out duration-300 transition-all backdrop-blur-3xl w-1/5 bg-red-500/6"
             href="mailto:sami.erafii@gmail.com"
             target="_blank"
           >
@@ -122,7 +129,7 @@ const Contact: React.FC = () => {
         </motion.div>
       </div>
       <Footer />
-      <span className="relative p-4 text-white py-8 justify-center pb-20 flex flex-row gap-8 font-semibold text-lg w-full bg-[#1b2b40]">
+      <span className="relative p-4 text-white py-8 justify-center flex flex-row gap-8 font-semibold text-normal w-full bg-[#1b2b40] -mt-9 pb-20 3xl:py-16">
         <p>&copy; {year}</p>
         <p>Designed & Developed by Sami Erafii</p>
       </span>
