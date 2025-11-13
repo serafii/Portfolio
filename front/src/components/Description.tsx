@@ -7,7 +7,7 @@ import { motion } from "framer-motion";
 
 const Description: React.FC = () => {
   return (
-    <div className="w-full md:w-5/6 xl:w-3/4 3xl:w-3/4 mx-auto p-16 text-center text-white z-10">
+    <div className="w-full md:w-5/6 lg:w-full xl:w-3/4 3xl:w-3/4 mx-auto p-16 text-center text-white z-10">
       <motion.div
         initial={{ opacity: 0, y: 50 }}
         whileInView={{ opacity: 1, y: 0 }}
