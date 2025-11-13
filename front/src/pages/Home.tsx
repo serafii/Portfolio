@@ -35,7 +35,10 @@ const Home: React.FC = () => {
   };
 
   return (
-    <div onMouseMove={handleMouseMove} className="bg-[#dce2ea] relative">
+    <div
+      onMouseMove={handleMouseMove}
+      className="bg-slate-200 relative overflow-hidden"
+    >
       <div
         className="absolute inset-0 opacity-30"
         style={{
