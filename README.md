@@ -3,7 +3,7 @@
 This project showcases my work, skills, and projects in a responsive web interface.
 
 You can visit the live site here:  
-**[View Portfolio](https://portfolio-coral-rho-17.vercel.app/)**  
+**[View Portfolio](https://www.serafii.com/)**  
 
 ---
 
@@ -18,7 +18,7 @@ You can visit the live site here:
 - **React**  
 - **TypeScript**  
 - **Framer Motion**  
-- **Ant Design **  
+- **Ant Design**  
 - Other third-party libraries  
 
 ---
