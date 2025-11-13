@@ -99,7 +99,7 @@ const skillVariants = {
 
 const Skills: React.FC = () => {
   return (
-    <div className="w-10/12 p-16 text-center text-white relative z-10 mx-auto">
+    <div className="w-full md:w-11/12 lg:w-10/12 p-16 text-center text-white relative z-10 mx-auto">
       <motion.div
         initial={{ opacity: 0, y: 50 }}
         whileInView={{ opacity: 1, y: 0 }}
@@ -112,7 +112,7 @@ const Skills: React.FC = () => {
         </p>
       </motion.div>
       <motion.div
-        className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-5 gap-8"
+        className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 xl:grid-cols-5 gap-8"
         variants={containerVariants}
         initial="hidden"
         whileInView="show"
@@ -135,7 +135,9 @@ const Skills: React.FC = () => {
                 alt={skill.name}
                 className="w-12 h-12 mb-3"
               />
-              <h3 className="text-lg font-semibold">{skill.name}</h3>
+              <h3 className="text-lg font-semibold whitespace-nowrap">
+                {skill.name}
+              </h3>
             </motion.div>
           </a>
         ))}
@@ -149,7 +151,7 @@ const Skills: React.FC = () => {
       >
         What I'm currently learning
       </motion.p>
-      <div className="w-3/5 items-center justify-center mx-auto">
+      <div className="w-full xl:w-3/5 items-center justify-center mx-auto">
         <motion.div
           className="grid grid-cols-2 sm:grid-cols-3 gap-8"
           variants={containerVariants}

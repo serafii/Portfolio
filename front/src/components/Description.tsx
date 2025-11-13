@@ -7,7 +7,7 @@ import { motion } from "framer-motion";
 
 const Description: React.FC = () => {
   return (
-    <div className="w-2/3 3xl:w-3/4 mx-auto p-16 text-center text-white relative z-10">
+    <div className="w-full md:w-5/6 xl:w-3/4 3xl:w-3/4 mx-auto p-16 text-center text-white z-10">
       <motion.div
         initial={{ opacity: 0, y: 50 }}
         whileInView={{ opacity: 1, y: 0 }}
@@ -20,13 +20,13 @@ const Description: React.FC = () => {
           a love for coding and problem-solving.
         </p>
       </motion.div>
-      <div className="py-12 flex justify-center">
+      <div className="py-12 flex justify-center flex-col lg:flex-row gap-y-12">
         <motion.div
           initial={{ opacity: 0, y: 50 }}
           whileInView={{ opacity: 1, y: 0 }}
           transition={{ duration: 1.4 }}
           viewport={{ once: true }}
-          className="font-bold w-1/3 text-lg"
+          className="font-bold lg:w-1/3 text-lg"
         >
           <img
             src={education}
@@ -37,7 +37,7 @@ const Description: React.FC = () => {
             {school}
             Education
           </span>
-          <div className="p-2">
+          <div className="lg:p-2">
             <p className="p-2 text-center font-semibold  md:text-left">
               Third year student pursuing a Bachelor's Degree in Software
               Engineering - Concordia University
@@ -53,7 +53,7 @@ const Description: React.FC = () => {
           whileInView={{ opacity: 1, y: 0 }}
           transition={{ duration: 1.7 }}
           viewport={{ once: true }}
-          className="font-bold w-1/3 text-lg"
+          className="font-bold lg:w-1/3 text-lg"
         >
           <img
             src={server}
@@ -64,7 +64,7 @@ const Description: React.FC = () => {
             {lightBulb}
             Interests
           </span>
-          <div className="p-2">
+          <div className="lg:p-2">
             <p className="p-2 text-center font-semibold md:text-left">
               Web Development, Software-as-a-Service (SaaS) and Artificial
               Intelligence
@@ -80,7 +80,7 @@ const Description: React.FC = () => {
           whileInView={{ opacity: 1, y: 0 }}
           transition={{ duration: 2 }}
           viewport={{ once: true }}
-          className="font-bold w-1/3 text-lg"
+          className="font-bold lg:w-1/3 text-lg"
         >
           <img
             src={goals}
@@ -91,7 +91,7 @@ const Description: React.FC = () => {
             {smile}
             Goals
           </span>
-          <div className="p-2">
+          <div className="lg:p-2">
             <p className="p-2 text-center font-semibold md:text-left">
               Continuously grow as a software engineer
             </p>
