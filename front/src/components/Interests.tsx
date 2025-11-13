@@ -7,12 +7,12 @@ export default function Interests() {
   const hobbies = [
     {
       title: "Gaming",
-      desc: "Multiplayer or single-player campaigns",
+      desc: "Enjoying multiplayer or single-player campaigns",
       gradient: "from-[#1B2A49]/40 to-[#A79FFF]/30",
     },
     {
       title: "Nature",
-      desc: "Hiking and walking outdoors",
+      desc: "Hiking, exploring, and spending time outdoors",
       gradient: "from-[#A79FFF]/30 to-[#1B2A49]/20",
     },
     {
@@ -27,13 +27,13 @@ export default function Interests() {
     },
     {
       title: "Music",
-      desc: "Listening to diverse genres and artists",
+      desc: "Listening to diverse music genres and artists",
       gradient: "from-[#1B2A49]/20 to-[#A79FFF]/30",
     },
   ];
 
   return (
-    <div className="w-10/12 p-8 text-center text-white relative z-10 mx-auto">
+    <div className="w-10/12 p-8 text-center text-white z-10 mx-auto">
       <motion.div
         initial={{ opacity: 0, y: 50 }}
         whileInView={{ opacity: 1, y: 0 }}
@@ -52,9 +52,9 @@ export default function Interests() {
           <motion.div
             key={index}
             className={`flex flex-col items-center justify-center rounded-full p-4 aspect-square 
-              bg-linear-to-br ${hobby.gradient} backdrop-blur-2xl 
-              border border-[#8affc3]/10 
-              transition-transform duration-300 hover:cursor-default`}
+                bg-linear-to-br ${hobby.gradient} backdrop-blur-2xl 
+                border border-[#8affc3]/10 
+                transition-transform duration-300 hover:cursor-default`}
             initial={{ opacity: 0, scale: 0.85 }}
             whileInView={{ opacity: 1, scale: 1 }}
             whileHover={{ scale: 1.06, rotate: 2 }}

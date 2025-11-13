@@ -80,10 +80,10 @@ const Contact: React.FC = () => {
           whileInView={{ y: 0 }}
           transition={{ duration: 1 }}
           viewport={{ once: true }}
-          className="flex items-center justify-between mx-auto 3xl:w-4/5 w-full"
+          className="flex items-center justify-between mx-auto 3xl:w-4/5 w-full flex-col gap-y-10 lg:flex-row"
         >
           <a
-            className="rounded-lg p-8 flex flex-col items-center hover:scale-105 cursor-pointer ease-in-out duration-300 transition-all backdrop-blur-3xl w-1/5 bg-blue-300/20"
+            className="rounded-lg p-8 flex flex-col items-center hover:scale-105 cursor-pointer ease-in-out duration-300 transition-all backdrop-blur-3xl w-full md:w-3/4 lg:w-1/5 bg-blue-300/20"
             href="https://www.linkedin.com/in/sami-erafii-bb618220a/"
             target="_blank"
           >
@@ -95,7 +95,7 @@ const Contact: React.FC = () => {
             <p className="text-lg font-semibold mt-3">LinkedIn</p>
           </a>
           <a
-            className="rounded-lg p-6 flex flex-col items-center hover:scale-105 cursor-pointer ease-in-out duration-300 transition-all backdrop-blur-3xl w-1/5 bg-black/6"
+            className="rounded-lg p-6 flex flex-col items-center hover:scale-105 cursor-pointer ease-in-out duration-300 transition-all backdrop-blur-3xl w-full md:w-3/4 lg:w-1/5 bg-black/6"
             href="https://github.com/serafii"
             target="_blank"
           >
@@ -107,7 +107,7 @@ const Contact: React.FC = () => {
             <p className="text-lg font-semibold mt-3">GitHub</p>
           </a>
           <a
-            className="rounded-lg p-6 flex flex-col items-center hover:scale-105 cursor-pointer ease-in-out duration-300 transition-all backdrop-blur-3xl w-1/5 bg-blue-500/10"
+            className="rounded-lg p-6 flex flex-col items-center hover:scale-105 cursor-pointer ease-in-out duration-300 transition-all backdrop-blur-3xl w-full md:w-3/4 lg:w-1/5 bg-blue-500/10"
             href="https://discord.com/users/serafii"
             target="_blank"
           >
@@ -115,7 +115,7 @@ const Contact: React.FC = () => {
             <p className="text-lg font-semibold mt-3">Discord</p>
           </a>
           <a
-            className="rounded-lg p-6 flex flex-col items-center hover:scale-105 cursor-pointer ease-in-out duration-300 transition-all backdrop-blur-3xl w-1/5 bg-red-500/6"
+            className="rounded-lg p-6 flex flex-col items-center hover:scale-105 cursor-pointer ease-in-out duration-300 transition-all backdrop-blur-3xl w-full md:w-3/4 lg:w-1/5 bg-red-500/6"
             href="mailto:sami.erafii@gmail.com"
             target="_blank"
           >
