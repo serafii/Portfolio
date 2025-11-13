@@ -20,7 +20,7 @@ const ThisWebsite: React.FC = () => {
               <p className="text-black">
                 Obviously, this website you're currently on. Built using React,
                 TypeScript and third party libraries such as Framer Motion and
-                Ant Design. Deployed using GitHub Pages.
+                Ant Design. Deployed on Vercel.
               </p>
             </div>
           }
