@@ -1,6 +1,6 @@
 import React from "react";
 import { Card } from "antd";
-import dashboard from "../../assets/portfolio.png";
+import portfolio from "../../assets/this.png";
 
 const { Meta } = Card;
 
@@ -10,7 +10,7 @@ const ThisWebsite: React.FC = () => {
       <Card
         hoverable
         className="w-full h-full"
-        cover={<img draggable={false} alt="example" src={dashboard} />}
+        cover={<img draggable={false} alt="example" src={portfolio} />}
       >
         <Meta
           title="This Website"

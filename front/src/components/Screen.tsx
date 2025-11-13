@@ -1,6 +1,9 @@
 import React, { useState, useEffect } from "react";
 import { motion } from "framer-motion";
 import { WordsPullUp } from "../utils/words-pull-up";
+import Aurora from "../utils/Aurora.tsx";
+import { arrow } from "../subcomponents/Icons.tsx";
+import { Popover } from "antd";
 
 const chevronDown: React.ReactNode = (
   <svg
@@ -9,7 +12,7 @@ const chevronDown: React.ReactNode = (
     viewBox="0 0 24 24"
     strokeWidth={1.5}
     stroke="currentColor"
-    className="size-6"
+    className="size-6 text-[#A79FFF]/60"
   >
     <path
       strokeLinecap="round"
@@ -61,10 +64,42 @@ const Main: React.FC = () => {
     });
   };
 
+  const handleBackToTop = () => {
+    window.scrollTo({
+      top: 0,
+      behavior: "smooth",
+    });
+  };
+
   const fadeOpacity = Math.max(0, 1 - scrollY / 300);
 
   return (
     <div className="min-h-screen flex flex-col items-center justify-center relative z-10 w-full">
+      <div className="absolute top-0 left-0 w-full h-1/2 z-0">
+        <Aurora
+          colorStops={["#1B2A49", "#A79FFF", "#D3C0FF"]}
+          blend={0.5}
+          amplitude={1.8}
+          speed={0.5}
+        />
+        {scrollY > 200 && (
+          <Popover
+            content={<p className="text-white">Back to Top</p>}
+            placement="top"
+            color="#A79FFF"
+          >
+            <motion.button
+              initial={{ opacity: 0 }}
+              animate={{ opacity: 1 }}
+              exit={{ opacity: 0 }}
+              onClick={handleBackToTop}
+              className="fixed bottom-6 w-16 h-16 right-6 bg-[#A79FFF]/80 hover:bg-[#A79FFF] text-white p-3 rounded-full shadow-lg z-50 transition-colors duration-300 hover:cursor-pointer flex items-center justify-center text-2xl"
+            >
+              {arrow}
+            </motion.button>
+          </Popover>
+        )}
+      </div>
       <motion.div
         initial={{ opacity: 0, y: 50 }}
         whileInView={{ opacity: 1, y: 0 }}
@@ -79,7 +114,7 @@ const Main: React.FC = () => {
 
       <motion.div
         style={{ opacity: fadeOpacity }}
-        className="flex flex-col items-center justify-center w-full absolute bottom-4 p-2 hover:cursor-pointer z-10 text-white animate-bounce"
+        className="flex flex-col items-center justify-center w-full absolute bottom-4 p-2 hover:cursor-pointer z-10 text-white"
         onClick={handleClickScroll}
       >
         <div className="font-semibold text-lg">View More</div>
