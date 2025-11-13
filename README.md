@@ -18,7 +18,7 @@ You can visit the live site here:
 - **React**  
 - **TypeScript**  
 - **Framer Motion**  
-- **Ant Design **  
+- **Ant Design**  
 - Other third-party libraries  
 
 ---
