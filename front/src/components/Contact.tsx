@@ -63,29 +63,51 @@ const Contact: React.FC = () => {
 
   return (
     <div className="w-full">
-      <div className="w-10/12 p-16 text-center text-white z-10 mx-auto mb-48 2xl:mb-80">
+      <div className="w-10/12 p-16 text-center text-slate-700 dark:text-white z-10 mx-auto mb-48 2xl:mb-80">
         <motion.div
-          initial={{ opacity: 0, y: 50 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          transition={{ duration: 1 }}
-          viewport={{ once: true }}
+          initial={{
+            opacity: 0,
+            y: 50,
+          }}
+          whileInView={{
+            opacity: 1,
+            y: 0,
+          }}
+          transition={{
+            duration: 1,
+          }}
+          viewport={{
+            once: true,
+          }}
         >
-          <h2 className="text-3xl font-bold mb-6">Contact Me</h2>
-          <p className="font-semibold mb-20 text-xl">
+          <h2 className="text-4xl font-bold mb-6 bg-clip-text text-transparent bg-linear-to-r from-indigo-600 to-purple-600 dark:from-indigo-400 dark:to-purple-400">
+            Contact Me
+          </h2>
+          <p className="mb-12 text-xl font-medium text-slate-600 dark:text-slate-300 max-w-2xl mx-auto">
             Feel free to reach out to me via any of the following platforms:
           </p>
         </motion.div>
+
         <motion.div
-          initial={{ y: 100 }}
-          whileInView={{ y: 0 }}
-          transition={{ duration: 1 }}
-          viewport={{ once: true }}
+          initial={{
+            y: 100,
+          }}
+          whileInView={{
+            y: 0,
+          }}
+          transition={{
+            duration: 1,
+          }}
+          viewport={{
+            once: true,
+          }}
           className="flex items-center justify-between mx-auto 3xl:w-4/5 w-full flex-col gap-y-10 lg:flex-row"
         >
           <a
-            className="rounded-lg p-8 flex flex-col items-center hover:scale-105 cursor-pointer ease-in-out duration-300 transition-all backdrop-blur-3xl w-full md:w-3/4 lg:w-1/5 bg-blue-300/20"
+            className="rounded-2xl p-8 flex flex-col items-center hover:scale-105 cursor-pointer ease-in-out duration-300 transition-all backdrop-blur-3xl w-full md:w-3/4 lg:w-1/5 bg-linear-to-br from-blue-500/30 to-blue-600/20 border border-blue-400/20 shadow-lg hover:shadow-xl"
             href="https://www.linkedin.com/in/sami-erafii-bb618220a/"
             target="_blank"
+            rel="noopener noreferrer"
           >
             <img
               src={linkedin}
@@ -94,10 +116,12 @@ const Contact: React.FC = () => {
             />
             <p className="text-lg font-semibold mt-3">LinkedIn</p>
           </a>
+
           <a
-            className="rounded-lg p-6 flex flex-col items-center hover:scale-105 cursor-pointer ease-in-out duration-300 transition-all backdrop-blur-3xl w-full md:w-3/4 lg:w-1/5 bg-black/6"
+            className="rounded-2xl p-8 flex flex-col items-center hover:scale-105 cursor-pointer ease-in-out duration-300 transition-all backdrop-blur-3xl w-full md:w-3/4 lg:w-1/5 bg-linear-to-br from-slate-600/20 to-slate-700/10 dark:from-slate-400/20 dark:to-slate-500/10 border border-slate-500/20 shadow-lg hover:shadow-xl"
             href="https://github.com/serafii"
             target="_blank"
+            rel="noopener noreferrer"
           >
             <img
               src={github}
@@ -106,18 +130,22 @@ const Contact: React.FC = () => {
             />
             <p className="text-lg font-semibold mt-3">GitHub</p>
           </a>
+
           <a
-            className="rounded-lg p-6 flex flex-col items-center hover:scale-105 cursor-pointer ease-in-out duration-300 transition-all backdrop-blur-3xl w-full md:w-3/4 lg:w-1/5 bg-blue-500/10"
+            className="rounded-2xl p-8 flex flex-col items-center hover:scale-105 cursor-pointer ease-in-out duration-300 transition-all backdrop-blur-3xl w-full md:w-3/4 lg:w-1/5 bg-linear-to-br from-indigo-500/20 to-purple-500/10 border border-indigo-400/20 shadow-lg hover:shadow-xl"
             href="https://discord.com/users/serafii"
             target="_blank"
+            rel="noopener noreferrer"
           >
             {discord}
             <p className="text-lg font-semibold mt-3">Discord</p>
           </a>
+
           <a
-            className="rounded-lg p-6 flex flex-col items-center hover:scale-105 cursor-pointer ease-in-out duration-300 transition-all backdrop-blur-3xl w-full md:w-3/4 lg:w-1/5 bg-red-500/6"
+            className="rounded-2xl p-8 flex flex-col items-center hover:scale-105 cursor-pointer ease-in-out duration-300 transition-all backdrop-blur-3xl w-full md:w-3/4 lg:w-1/5 bg-linear-to-br from-red-500/20 to-rose-500/10 border border-red-400/20 shadow-lg hover:shadow-xl"
             href="mailto:sami.erafii@gmail.com"
             target="_blank"
+            rel="noopener noreferrer"
           >
             <img
               src={gmail}

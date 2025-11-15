@@ -7,6 +7,8 @@ import Projects from "../components/Projects";
 import Interests from "../components/Interests";
 import Contact from "../components/Contact";
 import garen from "../assets/garenDance_nobg.gif";
+import DarkModeToggle from "../utils/DarkMode.tsx";
+import useIsDark from "../utils/IsDark.tsx";
 
 const Home: React.FC = () => {
   const ref = useRef(null);
@@ -14,6 +16,7 @@ const Home: React.FC = () => {
     target: ref,
     offset: ["start start", "end end"],
   });
+  const isDark = useIsDark();
 
   const [mousePos, setMousePos] = useState({ x: 0, y: 0 });
 
@@ -37,12 +40,14 @@ const Home: React.FC = () => {
   return (
     <div
       onMouseMove={handleMouseMove}
-      className="bg-slate-200 relative overflow-hidden"
+      className="bg-slate-200 dark:bg-[#1B2A49] relative overflow-hidden transition-all duration-500"
     >
       <div
         className="absolute inset-0 opacity-30"
         style={{
-          backgroundImage: `radial-gradient(circle, rgba(0,0,0,0.4) 1px, transparent 1px)`,
+          backgroundImage: `radial-gradient(circle, ${
+            isDark ? "rgba(255,255,255,0.3)" : "rgba(0,0,0,0.4)"
+          } 1px, transparent 1px)`,
           backgroundSize: "20px 20px",
           backgroundPosition: `${bgOffset.x * 8}px ${bgOffset.y * 8}px`,
           maskImage:
@@ -64,6 +69,9 @@ const Home: React.FC = () => {
           background: `radial-gradient(circle 120px at ${mousePos.x}px ${mousePos.y}px, rgba(138, 255, 195, 0.1), rgba(0,0,0,0.15))`,
         }}
       />
+      <div className="top-5 right-5 z-50 fixed">
+        <DarkModeToggle />
+      </div>
       <div className="fixed top-5 left-5 z-50 ">
         <div className="w-16 h-16 relative">
           <svg className="-rotate-90 w-full h-full" viewBox="0 0 100 100">
