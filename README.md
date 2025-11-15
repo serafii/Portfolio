@@ -9,7 +9,7 @@ You can visit the live site here:
 
 ## Preview
 
-<img width="100%" alt="Portfolio Preview" src="https://github.com/user-attachments/assets/ad7c19fe-9d35-4906-93a9-c3fcf44884e2" />
+<img width="2539" height="1264" alt="image" src="https://github.com/user-attachments/assets/913eb96e-6a17-44e7-859e-3a1bc873e1bc" />
 
 ---
 
