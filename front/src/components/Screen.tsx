@@ -4,23 +4,7 @@ import { WordsPullUp } from "../utils/words-pull-up";
 import Aurora from "../utils/Aurora.tsx";
 import { arrow } from "../subcomponents/Icons.tsx";
 import { Popover } from "antd";
-
-const chevronDown: React.ReactNode = (
-  <svg
-    xmlns="http://www.w3.org/2000/svg"
-    fill="none"
-    viewBox="0 0 24 24"
-    strokeWidth={1.5}
-    stroke="currentColor"
-    className="size-6 text-[#A79FFF]/60"
-  >
-    <path
-      strokeLinecap="round"
-      strokeLinejoin="round"
-      d="m19.5 8.25-7.5 7.5-7.5-7.5"
-    />
-  </svg>
-);
+import { chevronDown } from "../subcomponents/Icons.tsx";
 
 const Main: React.FC = () => {
   const textLines: string[] = [
@@ -79,8 +63,8 @@ const Main: React.FC = () => {
         <Aurora
           colorStops={["#1B2A49", "#A79FFF", "#D3C0FF"]}
           blend={0.5}
-          amplitude={1.8}
-          speed={0.5}
+          amplitude={0.8}
+          speed={0.4}
         />
         {scrollY > 200 && (
           <Popover
@@ -93,7 +77,7 @@ const Main: React.FC = () => {
               animate={{ opacity: 1 }}
               exit={{ opacity: 0 }}
               onClick={handleBackToTop}
-              className="fixed bottom-6 w-16 h-16 right-6 bg-[#A79FFF]/80 hover:bg-[#A79FFF] text-white p-3 rounded-full shadow-lg z-50 transition-colors duration-300 hover:cursor-pointer flex items-center justify-center text-2xl"
+              className="fixed bottom-6 w-16 h-16 right-6 bg-[#A79FFF]/80 hover:bg-[#A79FFF] text-white p-3 rounded-full shadow-lg z-50 transition-colors duration-300 hover:cursor-pointer flex items-center justify-center text-2xl invisible sm:visible"
             >
               {arrow}
             </motion.button>
@@ -106,7 +90,7 @@ const Main: React.FC = () => {
         transition={{ duration: 1 }}
         className="text-center p-8 rounded-lg"
       >
-        <div className="p-2 font-bold text-slate-100 text-5xl">
+        <div className="p-2 font-bold bg-clip-text text-transparent bg-linear-to-r from-indigo-600 to-purple-600 dark:from-indigo-400 dark:to-purple-400 text-5xl">
           Sami Erafii's
         </div>
         <WordsPullUp key={currentLine} text={currentLine} />
@@ -114,10 +98,12 @@ const Main: React.FC = () => {
 
       <motion.div
         style={{ opacity: fadeOpacity }}
-        className="flex flex-col items-center justify-center w-full absolute bottom-4 p-2 hover:cursor-pointer z-10 text-white"
+        className="flex flex-col items-center justify-center w-full absolute bottom-4 p-2 hover:cursor-pointer z-10 text-slate-600 dark:text-slate-300 invisible md:visible"
         onClick={handleClickScroll}
       >
-        <div className="font-semibold text-lg">View More</div>
+        <div className="font-semibold text-lg bg-clip-text text-transparent bg-linear-to-r from-indigo-600 to-purple-600 dark:from-indigo-400 dark:to-purple-400">
+          View More
+        </div>
         {chevronDown}
       </motion.div>
     </div>

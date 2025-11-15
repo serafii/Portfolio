@@ -5,7 +5,7 @@ const school: React.ReactNode = (
     viewBox="0 0 24 24"
     strokeWidth={2}
     stroke="currentColor"
-    className="size-6 text-blue-400"
+    className="size-6 text-indigo-600"
   >
     <path
       strokeLinecap="round"
@@ -22,7 +22,7 @@ const lightBulb: React.ReactNode = (
     viewBox="0 0 24 24"
     strokeWidth={2}
     stroke="currentColor"
-    className="size-6 text-amber-100"
+    className="size-6 text-indigo-600"
   >
     <path
       strokeLinecap="round"
@@ -39,7 +39,7 @@ const smile: React.ReactNode = (
     viewBox="0 0 24 24"
     strokeWidth={2}
     stroke="currentColor"
-    className="size-6 text-amber-300"
+    className="size-6 text-indigo-600"
   >
     <path
       strokeLinecap="round"
@@ -66,4 +66,21 @@ const arrow: React.ReactNode = (
   </svg>
 );
 
-export { school, lightBulb, smile, arrow };
+const chevronDown: React.ReactNode = (
+  <svg
+    xmlns="http://www.w3.org/2000/svg"
+    fill="none"
+    viewBox="0 0 24 24"
+    strokeWidth={1.5}
+    stroke="currentColor"
+    className="size-6"
+  >
+    <path
+      strokeLinecap="round"
+      strokeLinejoin="round"
+      d="m19.5 8.25-7.5 7.5-7.5-7.5"
+    />
+  </svg>
+);
+
+export { school, lightBulb, smile, arrow, chevronDown };

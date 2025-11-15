@@ -101,15 +101,17 @@ const Skills: React.FC = () => {
   const shouldReduceMotion = useReducedMotion();
 
   return (
-    <div className="w-full md:w-11/12 lg:w-10/12 p-6 sm:p-16 text-center text-white relative z-10 mx-auto">
+    <div className="w-full md:w-11/12 lg:w-10/12 p-6 sm:p-16 text-center text-slate-700 dark:text-white relative z-10 mx-auto transition-colors duration-500">
       <motion.div
         initial={{ opacity: 0, y: 50 }}
         whileInView={{ opacity: 1, y: 0 }}
         transition={{ duration: 0.6 }}
         viewport={{ once: true }}
       >
-        <h2 className="text-3xl font-bold mb-6">Skills & Technologies</h2>
-        <p className="mb-12 text-2xl font-semibold">
+        <h2 className="text-4xl font-bold mb-6 bg-clip-text text-transparent bg-linear-to-r from-indigo-600 to-purple-600 dark:from-indigo-400 dark:to-purple-400">
+          Skills & Technologies
+        </h2>
+        <p className="mb-12 text-2xl font-semibold text-slate-600 dark:text-slate-300">
           What I'm comfortable with right now
         </p>
       </motion.div>
@@ -128,16 +130,14 @@ const Skills: React.FC = () => {
             key={skill.name}
           >
             <motion.div
-              className="backdrop-blur-xl bg-white/15 rounded-lg p-6 flex flex-col items-center cursor-pointer"
+              className="h-full bg-slate-200 dark:bg-slate-800 rounded-xl shadow-lg p-6 flex flex-col items-center justify-center cursor-pointer border border-gray-100 dark:border-slate-700"
               whileHover={shouldReduceMotion ? {} : { scale: 1.05 }}
               variants={skillVariants}
             >
-              <img
-                src={skill.src}
-                alt={skill.name}
-                className="w-12 h-12 mb-3"
-              />
-              <h3 className="text-lg font-semibold whitespace-nowrap">
+              <div className="p-3 mb-4 flex items-center justify-center">
+                <img src={skill.src} alt={skill.name} className="w-12 h-12" />
+              </div>
+              <h3 className="text-lg font-semibold text-gray-800 dark:text-white">
                 {skill.name}
               </h3>
             </motion.div>
@@ -153,7 +153,7 @@ const Skills: React.FC = () => {
       >
         What I'm currently learning
       </motion.p>
-      <div className="w-full xl:w-3/5 items-center justify-center mx-auto">
+      <div className="w-full xl:w-3/5 items-center justify-center mx-auto ">
         <motion.div
           className="grid grid-cols-1 xs:grid-cols-2 sm:grid-cols-3 gap-8"
           variants={containerVariants}
@@ -169,16 +169,16 @@ const Skills: React.FC = () => {
               key={skill.name}
             >
               <motion.div
-                className="backdrop-blur-xl bg-white/5 rounded-lg p-6 flex flex-col items-center cursor-pointer"
+                className="h-full bg-slate-200 dark:bg-slate-800 rounded-xl shadow-lg p-6 flex flex-col items-center justify-center cursor-pointer border border-gray-100 dark:border-slate-700"
                 variants={skillVariants}
                 whileHover={shouldReduceMotion ? {} : { scale: 1.05 }}
               >
-                <img
-                  src={skill.src}
-                  alt={skill.name}
-                  className="w-12 h-12 mb-3"
-                />
-                <h3 className="text-lg font-semibold">{skill.name}</h3>
+                <div className="p-3 mb-4 flex items-center justify-center">
+                  <img src={skill.src} alt={skill.name} className="w-12 h-12" />
+                </div>
+                <h3 className="text-lg font-semibold text-gray-800 dark:text-white">
+                  {skill.name}
+                </h3>
               </motion.div>
             </a>
           ))}
