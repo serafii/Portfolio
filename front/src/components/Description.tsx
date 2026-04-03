@@ -1,6 +1,7 @@
 import React from "react";
 import { motion } from "framer-motion";
-import EducationTimeline from "../subcomponents/EducationTimeline";
+import EducationTimeline from "../subcomponents/About/EducationTimeline";
+import TechnicalInterests from "../subcomponents/About/TechnicalInterests";
 
 const Description: React.FC = () => {
   return (
@@ -16,13 +17,12 @@ const Description: React.FC = () => {
         </h2>
         <p className="font-semibold mb-8 text-xl text-slate-600 dark:text-slate-300 text-left">
           Hello! I'm Sami Erafii, a software engineering student passionate
-          about developing software. I'm interested in full-stack web
-          development, software-as-a-service (SaaS) and artificial intelligence.
-          I enjoy working on projects that make a difference and always ready to
-          learn.
+          about developing software. I enjoy working on projects that make a
+          difference and always ready to learn.
         </p>
       </motion.div>
       <EducationTimeline />
+      <TechnicalInterests />
     </div>
   );
 };
