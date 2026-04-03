@@ -98,11 +98,8 @@ const Contact: React.FC = () => {
   ];
 
   const containerVariants = {
-    hidden: {
-      opacity: 0,
-    },
+    hidden: {},
     visible: {
-      opacity: 1,
       transition: {
         staggerChildren: 0.12,
       },
@@ -110,11 +107,9 @@ const Contact: React.FC = () => {
   };
   const cardVariants = {
     hidden: {
-      opacity: 0,
       y: 25,
     },
     visible: {
-      opacity: 1,
       y: 0,
       transition: {
         duration: 0.5,
