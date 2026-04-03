@@ -30,7 +30,7 @@ const ThisWebsite: React.FC = () => {
           title={<p className="text-black dark:text-white">This Website</p>}
           description={
             <div className="text-center">
-              <p className="mb-4 dark:text-gray-300">GitHub Repository</p>
+              <p className="mb-4 dark:text-gray-300">🔗 GitHub Repository</p>
               <p className={isDark ? "text-gray-200" : "text-black"}>
                 Obviously, this website you're currently on. Built using React,
                 TypeScript and third party libraries such as Framer Motion and

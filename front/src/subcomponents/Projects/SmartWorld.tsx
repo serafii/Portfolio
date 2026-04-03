@@ -17,15 +17,12 @@ const SmartWorld: React.FC = () => {
           description={
             <div className="text-center">
               <p className="mb-4 dark:text-gray-300">
-                www.smartworldsignals.com
+                🔗 www.smartworldsignals.com
               </p>
               <p className="text-black dark:text-gray-200">
                 Web based trading bot providing real-time RSI, MACD, and
                 Stochastic notifications, approved by a custom trained
-                TensorFlow model. Included features such as a functional UI,
-                web-push/email notification system, and real-time market data
-                via third-party APIs. Users can save stocks to their watchlist
-                and enable custom alerts for specific technical indicators.
+                TensorFlow model.
               </p>
             </div>
           }

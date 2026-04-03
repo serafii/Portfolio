@@ -19,16 +19,12 @@ const EventHub: React.FC = () => {
           title={<p className="text-black dark:text-white">EventHub</p>}
           description={
             <div className="text-center">
-              <p className="mb-4 dark:text-gray-300">Github Repository</p>
+              <p className="mb-4 dark:text-gray-300">🔗 Github Repository</p>
               <p className="text-black dark:text-gray-200">
-                This project was built as a part of a team for the SOEN341
-                course at Concordia University. EventHub is a web application
-                that allows students to browse and register for events. Managers
-                can register new events, view registered participants, and
-                manage event details. Admins moderate the platform by managing
-                users and overseeing event activities. Development process
-                included CI integration, unit testing, and followed Agile
-                methodologies.
+                Web application that allows students to register for events.
+                Managers can register new events, view registered participants,
+                and manage event details. Admins moderate the platform and
+                oversees event activities.
               </p>
             </div>
           }

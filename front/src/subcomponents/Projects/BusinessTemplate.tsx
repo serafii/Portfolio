@@ -21,13 +21,13 @@ const BusinessTemplate: React.FC = () => {
           description={
             <div className="text-center">
               <p className="mb-4 dark:text-gray-300">
-                www.soen287-project-fvxv.onrender.com
+                🔗 www.soen287-project-fvxv.onrender.com
               </p>
               <p className="text-black dark:text-gray-200">
                 This project is a customizable website template designed for
-                small businesses. Admins can easily modify content and images
-                through a custom interface. Clients can view services, contact
-                the business and claim services.
+                small businesses. Admins can modify content and images through a
+                custom interface. Clients can view services, contact the
+                business and claim services.
               </p>
             </div>
           }
