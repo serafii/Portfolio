@@ -32,46 +32,30 @@ const Projects: React.FC = () => {
           <p className="mb-4 text-xl font-semibold text-slate-600 dark:text-slate-300">
             Generative AI and data science
           </p>
-          <div className="grid grid-cols-1 lg:grid-cols-2 gap-10 lg:w-6/7 2xl:w-5/6">
-            <motion.div
-              initial={{ opacity: 0, x: -100 }}
-              whileInView={{ opacity: 1, x: 0 }}
-              transition={{ duration: 0.6 }}
-              whileHover={disableMotion ? undefined : { scale: 1.05 }}
-            >
-              <SmartWorld />
-            </motion.div>
-            <motion.div
-              initial={{ y: 100 }}
-              whileInView={{ y: 0 }}
-              transition={{ duration: 0.6 }}
-              whileHover={disableMotion ? undefined : { scale: 1.05 }}
-            >
-              <Vize />
-            </motion.div>
-          </div>
+          <motion.div
+            whileInView={{ opacity: 1, x: 0 }}
+            initial={{ opacity: 0, x: -100 }}
+            transition={{ duration: 0.6 }}
+            whileHover={disableMotion ? undefined : { scale: 1.05 }}
+            className="grid grid-cols-1 lg:grid-cols-2 gap-10 lg:w-6/7 2xl:w-5/6"
+          >
+            <SmartWorld />
+            <Vize />
+          </motion.div>
           {/* {"Section 2: Full Stack Web Development and Database Projects"} */}
           <p className="mb-4 text-xl font-semibold text-slate-600 dark:text-slate-300">
             Full Stack Web Development and Database Projects
           </p>
-          <div className="grid grid-cols-1 lg:grid-cols-2 gap-10 lg:w-6/7 2xl:w-5/6">
-            <motion.div
-              initial={{ opacity: 0, x: -100 }}
-              whileInView={{ opacity: 1, x: 0 }}
-              transition={{ duration: 0.6 }}
-              whileHover={disableMotion ? undefined : { scale: 1.05 }}
-            >
-              <EventHub />
-            </motion.div>
-            <motion.div
-              initial={{ opacity: 0, x: 100 }}
-              whileInView={{ opacity: 1, x: 0 }}
-              transition={{ duration: 0.6 }}
-              whileHover={disableMotion ? undefined : { scale: 1.05 }}
-            >
-              <BusinessTemplate />
-            </motion.div>
-          </div>
+          <motion.div
+            whileInView={{ opacity: 1, x: 0 }}
+            initial={{ opacity: 0, x: 100 }}
+            transition={{ duration: 0.6 }}
+            whileHover={disableMotion ? undefined : { scale: 1.05 }}
+            className="grid grid-cols-1 lg:grid-cols-2 gap-10 lg:w-6/7 2xl:w-5/6"
+          >
+            <EventHub />
+            <BusinessTemplate />
+          </motion.div>
           {/* {"Section 3: Other Projects"} */}
           <p className="mb-4 text-xl font-semibold text-slate-600 dark:text-slate-300">
             Other Projects
