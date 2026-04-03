@@ -2,6 +2,7 @@ import React from "react";
 import Wave from "react-wavify";
 import gmail from "../assets/gmail.svg";
 import { motion } from "framer-motion";
+import { ArrowUpRight } from "lucide-react";
 
 const Footer: React.FC = () => {
   return (
@@ -61,6 +62,67 @@ const Contact: React.FC = () => {
     </svg>
   );
 
+  const contacts = [
+    {
+      name: "LinkedIn",
+      url: "https://www.linkedin.com/in/sami-erafii-bb618220a/",
+      icon: linkedin,
+      gradient: "from-blue-500/40 to-blue-400/20",
+      hoverBorder: "hover:border-blue-400/50",
+      iconColor: "text-blue-500",
+    },
+    {
+      name: "GitHub",
+      url: "https://github.com/serafii",
+      icon: github,
+      gradient: "from-slate-500/30 to-slate-400/15",
+      hoverBorder: "hover:border-slate-400/50",
+      iconColor: "text-gray-700 dark:text-gray-300",
+    },
+    {
+      name: "Discord",
+      url: "https://discord.com/users/serafii",
+      icon: discord,
+      gradient: "from-indigo-500/35 to-purple-400/20",
+      hoverBorder: "hover:border-indigo-400/50",
+      iconColor: "text-indigo-500",
+    },
+    {
+      name: "Email",
+      url: "mailto:sami.erafii@gmail.com",
+      icon: gmail,
+      gradient: "from-rose-500/35 to-pink-400/20",
+      hoverBorder: "hover:border-rose-400/50",
+      iconColor: "text-rose-500",
+    },
+  ];
+
+  const containerVariants = {
+    hidden: {
+      opacity: 0,
+    },
+    visible: {
+      opacity: 1,
+      transition: {
+        staggerChildren: 0.12,
+      },
+    },
+  };
+  const cardVariants = {
+    hidden: {
+      opacity: 0,
+      y: 25,
+    },
+    visible: {
+      opacity: 1,
+      y: 0,
+      transition: {
+        duration: 0.5,
+        ease: "easeOut" as const,
+      },
+    },
+  };
+
   return (
     <div className="w-full">
       <div className="w-10/12 p-16 text-center text-slate-700 dark:text-white z-10 mx-auto mb-48 2xl:mb-80">
@@ -81,10 +143,10 @@ const Contact: React.FC = () => {
           }}
         >
           <h2 className="text-4xl font-bold mb-6 bg-clip-text text-transparent bg-linear-to-r from-indigo-600 to-purple-600 dark:from-indigo-400 dark:to-purple-400">
-            Contact Me
+            Get in Touch
           </h2>
           <p className="mb-12 text-xl font-medium text-slate-600 dark:text-slate-300 max-w-2xl mx-auto">
-            Feel free to reach out to me via any of the following platforms:
+            Feel free to reach out through any of these platforms.
           </p>
         </motion.div>
 
@@ -101,59 +163,54 @@ const Contact: React.FC = () => {
           viewport={{
             once: true,
           }}
-          className="flex items-center justify-between mx-auto 3xl:w-4/5 w-full flex-col gap-y-10 lg:flex-row"
+          className="w-full flex items-center justify-center mx-auto"
         >
-          <a
-            className="rounded-2xl p-8 flex flex-col items-center hover:scale-105 cursor-pointer ease-in-out duration-300 transition-all backdrop-blur-3xl w-full md:w-3/4 lg:w-1/5 bg-linear-to-br from-blue-500/30 to-blue-600/20 border border-blue-400/20 shadow-lg hover:shadow-xl"
-            href="https://www.linkedin.com/in/sami-erafii-bb618220a/"
-            target="_blank"
-            rel="noopener noreferrer"
+          <motion.div
+            className="grid w-full max-w-5xl grid-cols-2 md:grid-cols-4 gap-4 mb-16 mx-auto"
+            variants={containerVariants}
+            initial="hidden"
+            whileInView="visible"
+            viewport={{
+              once: true,
+              margin: "-50px",
+            }}
           >
-            <img
-              src={linkedin}
-              alt="LinkedIn"
-              className="w-16 h-16 mx-4 inline-block"
-            />
-            <p className="text-lg font-semibold mt-3">LinkedIn</p>
-          </a>
+            {contacts.map((contact) => {
+              return (
+                <motion.a
+                  key={contact.name}
+                  href={contact.url}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  variants={cardVariants}
+                  className={`group relative flex flex-col items-center justify-center gap-4 p-6 md:p-8 rounded-2xl bg-linear-to-br ${contact.gradient} backdrop-blur-sm border border-gray-200/50 dark:border-slate-700/50 ${contact.hoverBorder} shadow-sm hover:shadow-lg hover:-translate-y-1 transition-all duration-300`}
+                >
+                  <div className="absolute top-3 right-3 opacity-0 group-hover:opacity-100 -translate-x-1 group-hover:translate-x-0 translate-y-1 group-hover:translate-y-0 transition-all duration-300">
+                    <ArrowUpRight className="w-4 h-4 text-gray-400 dark:text-gray-500" />
+                  </div>
 
-          <a
-            className="rounded-2xl p-8 flex flex-col items-center hover:scale-105 cursor-pointer ease-in-out duration-300 transition-all backdrop-blur-3xl w-full md:w-3/4 lg:w-1/5 bg-linear-to-br from-slate-600/20 to-slate-700/10 dark:from-slate-400/20 dark:to-slate-500/10 border border-slate-500/20 shadow-lg hover:shadow-xl"
-            href="https://github.com/serafii"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            <img
-              src={github}
-              alt="GitHub"
-              className="w-16 h-16 mx-4 inline-block"
-            />
-            <p className="text-lg font-semibold mt-3">GitHub</p>
-          </a>
-
-          <a
-            className="rounded-2xl p-8 flex flex-col items-center hover:scale-105 cursor-pointer ease-in-out duration-300 transition-all backdrop-blur-3xl w-full md:w-3/4 lg:w-1/5 bg-linear-to-br from-indigo-500/20 to-purple-500/10 border border-indigo-400/20 shadow-lg hover:shadow-xl"
-            href="https://discord.com/users/serafii"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            {discord}
-            <p className="text-lg font-semibold mt-3">Discord</p>
-          </a>
-
-          <a
-            className="rounded-2xl p-8 flex flex-col items-center hover:scale-105 cursor-pointer ease-in-out duration-300 transition-all backdrop-blur-3xl w-full md:w-3/4 lg:w-1/5 bg-linear-to-br from-red-500/20 to-rose-500/10 border border-red-400/20 shadow-lg hover:shadow-xl"
-            href="mailto:sami.erafii@gmail.com"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            <img
-              src={gmail}
-              alt="Gmail"
-              className="w-16 h-16 mx-4 inline-block"
-            />
-            <p className="text-lg font-semibold mt-3">Gmail</p>
-          </a>
+                  <div
+                    className={`${contact.iconColor} group-hover:scale-110 transition-transform duration-300`}
+                  >
+                    {typeof contact.icon === "string" ? (
+                      <img
+                        src={contact.icon}
+                        alt={`${contact.name} icon`}
+                        className="w-10 h-10 md:w-12 md:h-12"
+                      />
+                    ) : (
+                      <span className="w-10 h-10 md:w-12 md:h-12 flex items-center justify-center [&>svg]:w-full [&>svg]:h-full">
+                        {contact.icon}
+                      </span>
+                    )}
+                  </div>
+                  <span className="text-sm md:text-base font-semibold text-gray-700 dark:text-gray-200">
+                    {contact.name}
+                  </span>
+                </motion.a>
+              );
+            })}
+          </motion.div>
         </motion.div>
       </div>
       <Footer />
