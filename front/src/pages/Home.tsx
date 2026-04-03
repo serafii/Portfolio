@@ -112,7 +112,7 @@ const Home: React.FC = () => {
         </div>
       </div>
       <div
-        className="flex flex-col gap-y-24 3xl:gap-y-32 items-center justify-center relative z-10"
+        className="flex flex-col gap-y-18 3xl:gap-y-24 items-center justify-center relative z-10"
         ref={ref}
       >
         <Main />

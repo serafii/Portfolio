@@ -157,10 +157,21 @@ const Contact: React.FC = () => {
         </motion.div>
       </div>
       <Footer />
-      <span className="relative text-sm sm:text-normal p-4 text-white py-8 justify-center flex flex-row gap-2 md:gap-8 font-semibold text-normal w-full bg-[#1b2b40] -mt-9 pb-20 3xl:py-16">
-        <p>&copy; {year}</p>
-        <p>Designed & Developed by Sami Erafii</p>
-      </span>
+      <div className="relative text-sm sm:text-normal p-4 text-white py-8 justify-center flex flex-col gap-2 md:gap-8 font-semibold text-normal w-full bg-[#1b2b40] -mt-9 pb-20 3xl:py-16">
+        <span className="justify-center flex flex-row gap-2 md:gap-4">
+          <p>&copy; {year}</p>
+          <p>Designed & Developed by Sami 😼</p>
+        </span>
+        <span className="justify-center flex flex-row gap-2">
+          Have any questions? Email me at :{" "}
+          <a
+            href="mailto:sami.erafii@gmail.com"
+            className="hover:underline text-blue-500 hover:text-blue-600 transition-colors duration-300"
+          >
+            sami.erafii@gmail.com
+          </a>
+        </span>
+      </div>
     </div>
   );
 };
