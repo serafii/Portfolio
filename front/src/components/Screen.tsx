@@ -8,10 +8,10 @@ import { chevronDown } from "../subcomponents/Icons.tsx";
 
 const Main: React.FC = () => {
   const textLines: string[] = [
-    "Aspiring Developer Portfolio",
-    "World Wide Web Personal Site",
-    "Personal Developer Page",
-    "Concise Dev Biography",
+    "Dev Portfolio",
+    "Selected Work",
+    "Builds and Projects",
+    "Web Work",
   ];
 
   const [currentLine, setCurrentLine] = useState(textLines[0]);

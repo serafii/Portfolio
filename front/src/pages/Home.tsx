@@ -9,6 +9,8 @@ import Contact from "../components/Contact";
 import garen from "../assets/garenDance_nobg.gif";
 import DarkModeToggle from "../utils/DarkMode.tsx";
 import useIsDark from "../utils/IsDark.tsx";
+import cat from "../assets/spin_cat.gif";
+import cat2 from "../assets/sideway_cat.gif";
 
 const Home: React.FC = () => {
   const ref = useRef(null);
@@ -118,7 +120,23 @@ const Home: React.FC = () => {
         <Main />
         <Description />
         <Skills />
+        <div className="w-full flex items-center justify-center">
+          <img
+            src={cat2}
+            alt="Spinning Cat"
+            draggable={false}
+            className="w-32 h-32 object-contain"
+          />
+        </div>
         <Projects />
+        <div className="w-full flex items-center justify-center">
+          <img
+            src={cat}
+            alt="Spinning Cat"
+            draggable={false}
+            className="w-32 h-32 object-contain"
+          />
+        </div>
         <Interests />
         <Contact />
       </div>
