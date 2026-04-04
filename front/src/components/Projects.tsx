@@ -136,7 +136,7 @@ const ProjectsSection: React.FC = () => {
                   once: true,
                 }}
                 transition={{
-                  duration: 0.4,
+                  duration: 0.6,
                 }}
                 className="flex items-center gap-3 mb-6"
               >

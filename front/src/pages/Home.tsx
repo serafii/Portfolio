@@ -42,7 +42,7 @@ const Home: React.FC = () => {
   return (
     <div
       onMouseMove={handleMouseMove}
-      className="bg-slate-200 dark:bg-[#1B2A49] relative overflow-hidden transition-all duration-500"
+      className="min-h-dvh bg-slate-200 dark:bg-[#1B2A49] relative overflow-hidden transition-all duration-500"
     >
       <div
         className="absolute inset-0 opacity-30"
@@ -125,7 +125,7 @@ const Home: React.FC = () => {
             src={cat2}
             alt="Spinning Cat"
             draggable={false}
-            className="w-32 h-32 object-contain"
+            className="w-30 h-30 object-contain"
           />
         </div>
         <Projects />

@@ -71,7 +71,7 @@ const Interests: React.FC = () => {
   };
 
   return (
-    <div className="w-full py-8 px-16">
+    <div className="w-full py-8 sm:px-6 lg:px-8 2xl:px-16">
       <div className="max-w-400 p-10 text-center text-slate-700 dark:text-white z-10 mx-auto">
         <motion.div
           initial={{
