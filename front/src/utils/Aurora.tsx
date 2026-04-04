@@ -130,10 +130,21 @@ export default function Aurora(props: AuroraProps) {
     const ctn = ctnDom.current;
     if (!ctn) return;
 
+    const isMobileViewport = window.matchMedia("(max-width: 768px)").matches;
+    const prefersReducedMotion = window.matchMedia(
+      "(prefers-reduced-motion: reduce)",
+    ).matches;
+    const isLowPowerMode = isMobileViewport || prefersReducedMotion;
+    const targetFrameMs = isLowPowerMode ? 33 : 16;
+    const rendererDpr = isLowPowerMode
+      ? 1
+      : Math.min(window.devicePixelRatio || 1, 2);
+
     const renderer = new Renderer({
       alpha: true,
       premultipliedAlpha: true,
-      antialias: true,
+      antialias: !isLowPowerMode,
+      dpr: rendererDpr,
     });
     const gl = renderer.gl;
     gl.clearColor(0, 0, 0, 0);
@@ -180,18 +191,30 @@ export default function Aurora(props: AuroraProps) {
     ctn.appendChild(gl.canvas);
 
     let animateId = 0;
+    let lastFrameTime = 0;
+    let lastColorStopsKey = colorStops.join("|");
+
     const update = (t: number) => {
       animateId = requestAnimationFrame(update);
+      if (t - lastFrameTime < targetFrameMs) return;
+      lastFrameTime = t;
+
       const { time = t * 0.01, speed = 1.0 } = propsRef.current;
       if (program) {
         program.uniforms.uTime.value = time * speed * 0.1;
         program.uniforms.uAmplitude.value = propsRef.current.amplitude ?? 1.0;
         program.uniforms.uBlend.value = propsRef.current.blend ?? blend;
+
         const stops = propsRef.current.colorStops ?? colorStops;
-        program.uniforms.uColorStops.value = stops.map((hex: string) => {
-          const c = new Color(hex);
-          return [c.r, c.g, c.b];
-        });
+        const nextColorStopsKey = stops.join("|");
+        if (nextColorStopsKey !== lastColorStopsKey) {
+          program.uniforms.uColorStops.value = stops.map((hex: string) => {
+            const c = new Color(hex);
+            return [c.r, c.g, c.b];
+          });
+          lastColorStopsKey = nextColorStopsKey;
+        }
+
         renderer.render({ scene: mesh });
       }
     };

@@ -101,7 +101,7 @@ const Main: React.FC = () => {
       </motion.div>
 
       <motion.div
-        style={{ opacity: fadeOpacity }}
+        style={{ opacity: isMobile ? 1 : fadeOpacity }}
         className="flex flex-col items-center justify-center w-full absolute bottom-4 p-2 hover:cursor-pointer z-10 text-slate-600 dark:text-slate-300 invisible md:visible"
         onClick={handleClickScroll}
       >
