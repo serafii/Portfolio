@@ -3,8 +3,12 @@ import Wave from "react-wavify";
 import gmail from "../assets/gmail.svg";
 import { motion } from "framer-motion";
 import { ArrowUpRight } from "lucide-react";
+import { useIsMobile } from "../utils/IsMobile";
 
 const Footer: React.FC = () => {
+  const isMobile = useIsMobile();
+  const amplitudes = isMobile ? [20, 10, 15] : [50, 30, 40];
+
   return (
     <div className="relative w-full">
       <Wave
@@ -12,7 +16,7 @@ const Footer: React.FC = () => {
         paused={false}
         options={{
           height: 10,
-          amplitude: 50,
+          amplitude: amplitudes[0],
           speed: 0.15,
           points: 3,
         }}
@@ -23,7 +27,7 @@ const Footer: React.FC = () => {
         paused={false}
         options={{
           height: 20,
-          amplitude: 30,
+          amplitude: amplitudes[1],
           speed: 0.1,
           points: 4,
         }}
@@ -34,7 +38,7 @@ const Footer: React.FC = () => {
         paused={false}
         options={{
           height: 30,
-          amplitude: 40,
+          amplitude: amplitudes[2],
           speed: 0.2,
           points: 5,
         }}
@@ -120,7 +124,7 @@ const Contact: React.FC = () => {
 
   return (
     <div className="w-full">
-      <div className="w-10/12 p-16 text-center text-slate-700 dark:text-white z-10 mx-auto mb-48 2xl:mb-80">
+      <div className="w-10/12 py-16 sm:px-2 lg:px-8 2xl:px-16 text-center text-slate-700 dark:text-white z-10 mx-auto mb-48 2xl:mb-80">
         <motion.div
           initial={{
             opacity: 0,
@@ -209,12 +213,12 @@ const Contact: React.FC = () => {
         </motion.div>
       </div>
       <Footer />
-      <div className="relative text-sm sm:text-normal p-4 text-white py-8 justify-center flex flex-col gap-2 md:gap-8 font-semibold text-normal w-full bg-[#1b2b40] -mt-9 pb-20 3xl:py-16">
+      <div className="relative text-xs sm:text-sm md:text-normal p-4 text-white py-8 justify-center flex flex-col gap-2 md:gap-8 font-semibold text-normal w-full bg-[#1b2b40] -mt-9 pb-20 3xl:py-16">
         <span className="justify-center flex flex-row gap-2 md:gap-4">
           <p>&copy; {year}</p>
           <p>Designed & Developed by Sami 😼</p>
         </span>
-        <span className="justify-center flex flex-row gap-2">
+        <span className="justify-center items-center mt-2 flex flex-col sm:flex-row gap-2 text-wrap">
           Have any questions? Email me at :{" "}
           <a
             href="mailto:sami.erafii@gmail.com"

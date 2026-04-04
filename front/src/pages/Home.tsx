@@ -125,7 +125,7 @@ const Home: React.FC = () => {
             src={cat2}
             alt="Spinning Cat"
             draggable={false}
-            className="w-32 h-32 object-contain"
+            className="w-30 h-30 object-contain"
           />
         </div>
         <Projects />

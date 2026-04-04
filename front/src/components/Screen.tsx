@@ -5,6 +5,7 @@ import Aurora from "../utils/Aurora.tsx";
 import { arrow } from "../subcomponents/Icons.tsx";
 import { Popover } from "antd";
 import { chevronDown } from "../subcomponents/Icons.tsx";
+import { useIsMobile } from "../utils/IsMobile.tsx";
 
 const Main: React.FC = () => {
   const textLines: string[] = [
@@ -16,6 +17,7 @@ const Main: React.FC = () => {
 
   const [currentLine, setCurrentLine] = useState(textLines[0]);
   const [scrollY, setScrollY] = useState(0);
+  const isMobile = useIsMobile();
 
   const setRandomName = () => {
     const index = Math.floor(Math.random() * textLines.length);
@@ -57,13 +59,15 @@ const Main: React.FC = () => {
 
   const fadeOpacity = Math.max(0, 1 - scrollY / 300);
 
+  const amplitude = isMobile ? 0.2 : 0.8;
+
   return (
     <div className="min-h-screen flex flex-col items-center justify-center relative z-10 w-full">
       <div className="absolute top-0 left-0 w-full h-1/2 z-0">
         <Aurora
           colorStops={["#1B2A49", "#A79FFF", "#D3C0FF"]}
           blend={0.5}
-          amplitude={0.8}
+          amplitude={amplitude}
           speed={0.4}
         />
         {scrollY > 200 && (

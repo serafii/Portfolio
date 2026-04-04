@@ -80,7 +80,7 @@ const EducationTimeline: React.FC = () => {
       </motion.div>
 
       <motion.div
-        className="relative border-l-2 border-indigo-200 dark:border-indigo-900/50 ml-4 md:ml-6"
+        className="relative border-l-2 border-indigo-200 dark:border-indigo-900/50 sm:ml-4 md:ml-6"
         variants={containerVariants}
         initial="hidden"
         whileInView="visible"
@@ -93,10 +93,10 @@ const EducationTimeline: React.FC = () => {
           <motion.div
             key={item.id}
             variants={itemVariants}
-            className="mb-12 ml-8 md:ml-12 relative group"
+            className="mb-12 ml-3 sm:ml-8 md:ml-12 relative group"
           >
             {/* Timeline Dot */}
-            <div className="absolute -left-[41px] md:-left-[57px] top-1.5 w-5 h-5 rounded-full bg-slate-100 dark:bg-slate-900 border-4 border-indigo-500 dark:border-indigo-400 group-hover:scale-125 transition-transform duration-300" />
+            <div className="absolute -left-[21px] sm:-left-[41px] md:-left-[57px] top-1.5 w-5 h-5 rounded-full bg-slate-100 dark:bg-slate-900 border-4 border-indigo-500 dark:border-indigo-400 group-hover:scale-125 transition-transform duration-300" />
             <div className="bg-slate-200 dark:bg-slate-800 rounded-2xl p-6 shadow-lg border border-gray-100 dark:border-slate-700 hover:shadow-xl transition-shadow duration-300">
               <div className="flex flex-col sm:flex-row gap-6 items-start text-left">
                 <img
