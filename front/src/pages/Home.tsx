@@ -6,11 +6,13 @@ import Skills from "../components/Skills";
 import Projects from "../components/Projects";
 import Interests from "../components/Interests";
 import Contact from "../components/Contact";
+import TravelMap from "../components/TravelMap.tsx";
 import garen from "../assets/garenDance_nobg.gif";
 import DarkModeToggle from "../utils/DarkMode.tsx";
 import useIsDark from "../utils/IsDark.tsx";
 import cat from "../assets/spin_cat.gif";
 import cat2 from "../assets/sideway_cat.gif";
+import { useIsMobile } from "../utils/IsMobile";
 
 const Home: React.FC = () => {
   const ref = useRef(null);
@@ -19,12 +21,14 @@ const Home: React.FC = () => {
     offset: ["start start", "end end"],
   });
   const isDark = useIsDark();
+  const isMobile = useIsMobile();
 
   const [mousePos, setMousePos] = useState({ x: 0, y: 0 });
 
   const [bgOffset, setBgOffset] = useState({ x: 0, y: 0 });
 
   const handleMouseMove = (e: React.MouseEvent<HTMLDivElement, MouseEvent>) => {
+    if (isMobile) return;
     const x = e.clientX / window.innerWidth;
     const y = e.clientY / window.innerHeight;
     setBgOffset({ x, y });
@@ -41,8 +45,8 @@ const Home: React.FC = () => {
 
   return (
     <div
-      onMouseMove={handleMouseMove}
-      className="min-h-dvh bg-slate-200 dark:bg-[#1B2A49] relative overflow-hidden transition-all duration-500"
+      onMouseMove={isMobile ? undefined : handleMouseMove}
+      className="min-h-dvh bg-slate-200 dark:bg-[#1B2A49] relative overflow-hidden transition-colors duration-500"
     >
       <div
         className="absolute inset-0 opacity-30"
@@ -65,12 +69,14 @@ const Home: React.FC = () => {
         <div className="absolute right-0 bottom-0 h-2/3 w-64 bg-linear-to-t from-blue-600/25 to-transparent -rotate-6 blur-3xl" />
         <div className="absolute left-1/2 -top-32 -translate-x-1/2 h-96 w-96 bg-linear-to-b from-cyan-400/10 to-transparent blur-3xl" />
       </div>
-      <div
-        className="fixed inset-0 pointer-events-none transition-all duration-100"
-        style={{
-          background: `radial-gradient(circle 120px at ${mousePos.x}px ${mousePos.y}px, rgba(138, 255, 195, 0.1), rgba(0,0,0,0.15))`,
-        }}
-      />
+      {!isMobile && (
+        <div
+          className="fixed inset-0 pointer-events-none transition-all duration-100"
+          style={{
+            background: `radial-gradient(circle 120px at ${mousePos.x}px ${mousePos.y}px, rgba(138, 255, 195, 0.1), rgba(0,0,0,0.15))`,
+          }}
+        />
+      )}
       <div className="top-5 right-5 z-50 fixed">
         <DarkModeToggle />
       </div>
@@ -138,6 +144,7 @@ const Home: React.FC = () => {
           />
         </div>
         <Interests />
+        <TravelMap />
         <Contact />
       </div>
     </div>

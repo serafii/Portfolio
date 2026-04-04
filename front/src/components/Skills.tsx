@@ -1,6 +1,5 @@
 import React from "react";
-import { motion, useReducedMotion } from "framer-motion";
-import { useIsMobile } from "../utils/IsMobile";
+import { motion } from "framer-motion";
 
 interface Skill {
   name: string;
@@ -99,10 +98,6 @@ const skillVariants = {
 };
 
 const Skills: React.FC = () => {
-  const shouldReduceMotion = useReducedMotion();
-  const isMobile = useIsMobile();
-  const shouldAnimate = !shouldReduceMotion && !isMobile;
-
   return (
     <div className="w-full md:w-11/12 lg:w-10/12 p-6 sm:p-16 text-center text-slate-700 dark:text-white relative z-10 mx-auto transition-colors duration-500">
       <motion.div
@@ -133,29 +128,18 @@ const Skills: React.FC = () => {
             href={`https://www.google.com/search?q=${skill.name}`}
             key={skill.name}
           >
-            {shouldAnimate ? (
-              <motion.div
-                className="h-full bg-slate-200 dark:bg-slate-800 rounded-xl shadow-lg p-6 flex flex-col items-center justify-center cursor-pointer border border-gray-100 dark:border-slate-700"
-                whileHover={{ scale: 1.05 }}
-                variants={skillVariants}
-              >
-                <div className="p-3 mb-4 flex items-center justify-center">
-                  <img src={skill.src} alt={skill.name} className="w-12 h-12" />
-                </div>
-                <h3 className="text-lg font-semibold text-gray-800 dark:text-white">
-                  {skill.name}
-                </h3>
-              </motion.div>
-            ) : (
-              <div className="h-full bg-slate-200 dark:bg-slate-800 rounded-xl shadow-lg p-6 flex flex-col items-center justify-center cursor-pointer border border-gray-100 dark:border-slate-700">
-                <div className="p-3 mb-4 flex items-center justify-center">
-                  <img src={skill.src} alt={skill.name} className="w-12 h-12" />
-                </div>
-                <h3 className="text-lg font-semibold text-gray-800 dark:text-white">
-                  {skill.name}
-                </h3>
+            <motion.div
+              className="h-full bg-slate-200 dark:bg-slate-800 rounded-xl shadow-lg p-6 flex flex-col items-center justify-center cursor-pointer border border-gray-100 dark:border-slate-700"
+              whileHover={{ scale: 1.05 }}
+              variants={skillVariants}
+            >
+              <div className="p-3 mb-4 flex items-center justify-center">
+                <img src={skill.src} alt={skill.name} className="w-12 h-12" />
               </div>
-            )}
+              <h3 className="text-lg font-semibold text-gray-800 dark:text-white">
+                {skill.name}
+              </h3>
+            </motion.div>
           </a>
         ))}
       </motion.div>
@@ -183,37 +167,18 @@ const Skills: React.FC = () => {
               href={`https://www.google.com/search?q=${skill.name}`}
               key={skill.name}
             >
-              {shouldAnimate ? (
-                <motion.div
-                  className="h-full bg-slate-200 dark:bg-slate-800 rounded-xl shadow-lg p-6 flex flex-col items-center justify-center cursor-pointer border border-gray-100 dark:border-slate-700"
-                  variants={skillVariants}
-                  whileHover={{ scale: 1.05 }}
-                >
-                  <div className="p-3 mb-4 flex items-center justify-center">
-                    <img
-                      src={skill.src}
-                      alt={skill.name}
-                      className="w-12 h-12"
-                    />
-                  </div>
-                  <h3 className="text-lg font-semibold text-gray-800 dark:text-white">
-                    {skill.name}
-                  </h3>
-                </motion.div>
-              ) : (
-                <div className="h-full bg-slate-200 dark:bg-slate-800 rounded-xl shadow-lg p-6 flex flex-col items-center justify-center cursor-pointer border border-gray-100 dark:border-slate-700">
-                  <div className="p-3 mb-4 flex items-center justify-center">
-                    <img
-                      src={skill.src}
-                      alt={skill.name}
-                      className="w-12 h-12"
-                    />
-                  </div>
-                  <h3 className="text-lg font-semibold text-gray-800 dark:text-white">
-                    {skill.name}
-                  </h3>
+              <motion.div
+                className="h-full bg-slate-200 dark:bg-slate-800 rounded-xl shadow-lg p-6 flex flex-col items-center justify-center cursor-pointer border border-gray-100 dark:border-slate-700"
+                variants={skillVariants}
+                whileHover={{ scale: 1.05 }}
+              >
+                <div className="p-3 mb-4 flex items-center justify-center">
+                  <img src={skill.src} alt={skill.name} className="w-12 h-12" />
                 </div>
-              )}
+                <h3 className="text-lg font-semibold text-gray-800 dark:text-white">
+                  {skill.name}
+                </h3>
+              </motion.div>
             </a>
           ))}
         </motion.div>
