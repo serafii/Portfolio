@@ -175,6 +175,12 @@ const cities: City[] = [
     region: "East Asia",
   },
   {
+    name: "Shanghai",
+    lat: 31.23,
+    lon: 121.47,
+    region: "East Asia",
+  },
+  {
     name: "Tianjin",
     lat: 39.08,
     lon: 117.2,
@@ -190,6 +196,12 @@ const cities: City[] = [
     name: "Taipei",
     lat: 25.03,
     lon: 121.57,
+    region: "East Asia",
+  },
+  {
+    name: "Seoul",
+    lat: 37.57,
+    lon: 126.98,
     region: "East Asia",
   },
   // Southeast Asia

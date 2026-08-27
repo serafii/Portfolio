@@ -2,6 +2,7 @@ import React, { useRef, useState } from "react";
 import { motion, useScroll } from "motion/react";
 import Main from "../components/Screen";
 import Description from "../components/Description";
+import Experience from "../components/Experience";
 import Skills from "../components/Skills";
 import Projects from "../components/Projects";
 import Interests from "../components/Interests";
@@ -125,6 +126,7 @@ const Home: React.FC = () => {
       >
         <Main />
         <Description />
+        <Experience />
         <Skills />
         <div className="w-full flex items-center justify-center">
           <img
