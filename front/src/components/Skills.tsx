@@ -87,19 +87,19 @@ const containerVariants = {
   hidden: {},
   show: {
     transition: {
-      staggerChildren: 0.1,
+      staggerChildren: 0.06,
     },
   },
 };
 
 const skillVariants = {
   hidden: { opacity: 0, scale: 0.8 },
-  show: { opacity: 1, scale: 1, transition: { duration: 0.2 } },
+  show: { opacity: 1, scale: 1, transition: { duration: 0.25 } },
 };
 
 const Skills: React.FC = () => {
   return (
-    <div className="w-full md:w-11/12 lg:w-10/12 p-6 sm:p-16 text-center text-slate-700 dark:text-white relative z-10 mx-auto transition-colors duration-500">
+    <div className="deferred-section w-full md:w-11/12 lg:w-10/12 p-6 sm:p-16 text-center text-slate-700 dark:text-white relative z-10 mx-auto transition-colors duration-500">
       <motion.div
         initial={{ opacity: 0, y: 50 }}
         whileInView={{ opacity: 1, y: 0 }}
@@ -129,12 +129,12 @@ const Skills: React.FC = () => {
             key={skill.name}
           >
             <motion.div
-              className="h-full bg-slate-200 dark:bg-slate-800 rounded-xl shadow-lg p-6 flex flex-col items-center justify-center cursor-pointer border border-gray-100 dark:border-slate-700"
+              className="h-full transform-gpu bg-slate-200 dark:bg-[#160c23] rounded-xl shadow-lg p-6 flex flex-col items-center justify-center cursor-pointer border border-gray-100 dark:border-violet-300/15 transition-transform duration-200"
               whileHover={{ scale: 1.05 }}
               variants={skillVariants}
             >
               <div className="p-3 mb-4 flex items-center justify-center">
-                <img src={skill.src} alt={skill.name} className="w-12 h-12" />
+                <img src={skill.src} alt={skill.name} loading="lazy" decoding="async" className="w-12 h-12" />
               </div>
               <h3 className="text-lg font-semibold text-gray-800 dark:text-white">
                 {skill.name}
@@ -168,12 +168,12 @@ const Skills: React.FC = () => {
               key={skill.name}
             >
               <motion.div
-                className="h-full bg-slate-200 dark:bg-slate-800 rounded-xl shadow-lg p-6 flex flex-col items-center justify-center cursor-pointer border border-gray-100 dark:border-slate-700"
+                className="h-full transform-gpu bg-slate-200 dark:bg-[#160c23] rounded-xl shadow-lg p-6 flex flex-col items-center justify-center cursor-pointer border border-gray-100 dark:border-violet-300/15 transition-transform duration-200"
                 variants={skillVariants}
                 whileHover={{ scale: 1.05 }}
               >
                 <div className="p-3 mb-4 flex items-center justify-center">
-                  <img src={skill.src} alt={skill.name} className="w-12 h-12" />
+                  <img src={skill.src} alt={skill.name} loading="lazy" decoding="async" className="w-12 h-12" />
                 </div>
                 <h3 className="text-lg font-semibold text-gray-800 dark:text-white">
                   {skill.name}

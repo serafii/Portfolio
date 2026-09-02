@@ -72,12 +72,12 @@ const Experience: React.FC = () => {
             variants={itemVariants}
             className="mb-12 ml-3 sm:ml-8 md:ml-12 relative group"
           >
-            <div className="bg-slate-200 dark:bg-slate-800 rounded-2xl p-6 shadow-lg border border-gray-100 dark:border-slate-700 hover:shadow-xl transition-shadow duration-300">
+            <div className="bg-slate-200 dark:bg-[#160c23] rounded-2xl p-6 shadow-lg border border-gray-100 dark:border-violet-300/15 hover:shadow-xl transition-shadow duration-300">
               <div className="flex flex-col sm:flex-row gap-6 items-start text-left">
                 <img
                   src={must}
                   alt="Must Societe"
-                  className="w-20 h-20 rounded-xl object-cover shadow-sm border border-gray-100 dark:border-slate-700"
+                  className="w-20 h-20 rounded-xl object-cover shadow-sm border border-gray-100 dark:border-violet-300/15"
                 />
                 <div className="flex-1">
                   <h3 className="text-xl font-bold text-gray-800 dark:text-white">

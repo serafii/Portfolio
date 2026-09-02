@@ -53,7 +53,7 @@ const Interests: React.FC = () => {
     hidden: {},
     visible: {
       transition: {
-        staggerChildren: 0.15,
+        staggerChildren: 0.08,
       },
     },
   };
@@ -64,7 +64,7 @@ const Interests: React.FC = () => {
     visible: {
       y: 0,
       transition: {
-        duration: 0.5,
+            duration: 0.35,
         ease: "easeOut" as const,
       },
     },
@@ -72,7 +72,7 @@ const Interests: React.FC = () => {
 
   return (
     <div className="w-full py-8 sm:px-6 lg:px-8 2xl:px-16">
-      <div className="max-w-400 p-10 text-center text-slate-700 dark:text-white z-10 mx-auto">
+      <div className="deferred-section max-w-400 p-10 text-center text-slate-700 dark:text-white z-10 mx-auto">
         <motion.div
           initial={{
             opacity: 0,
@@ -112,7 +112,7 @@ const Interests: React.FC = () => {
             <motion.div
               key={hobby.title}
               variants={cardVariants}
-              className="group bg-slate-200/95 dark:bg-slate-800/50 rounded-2xl p-6 shadow-sm border border-gray-100 dark:border-slate-700/50 hover:-translate-y-1 hover:shadow-md transition-all duration-300 cursor-default"
+              className="group transform-gpu bg-slate-200/95 dark:bg-[#160c23]/85 rounded-2xl p-6 shadow-sm border border-gray-100 dark:border-violet-300/15 hover:-translate-y-1 hover:shadow-md transition-transform transition-shadow duration-300 cursor-default"
             >
               <div
                 className={`w-14 h-14 rounded-xl flex items-center justify-center mb-4 bg-linear-to-br ${hobby.gradient} text-white group-hover:scale-110 transition-transform duration-300`}
