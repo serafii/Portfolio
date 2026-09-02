@@ -4,9 +4,11 @@ import * as React from "react";
 export function WordsPullUp({
   text,
   className = "",
+  containerClassName = "",
 }: {
   text: string;
   className?: string;
+  containerClassName?: string;
 }) {
   const splittedText = text.split(" ");
 
@@ -24,7 +26,7 @@ export function WordsPullUp({
   const isInView = useInView(ref, { once: true });
 
   return (
-    <div className="flex justify-center">
+    <div className={`flex justify-center ${containerClassName}`}>
       {splittedText.map((current, i) => (
         <motion.div
           key={i}

@@ -43,6 +43,12 @@ const cities: City[] = [
     lon: -75.7,
     region: "Canada",
   },
+  {
+    name: "Vancouver",
+    lat: 49.28,
+    lon: -123.12,
+    region: "Canada",
+  },
   // USA
   {
     name: "Miami",

@@ -1,36 +1,28 @@
 import React, { useState, useEffect } from "react";
 import { motion } from "framer-motion";
 import { WordsPullUp } from "../utils/words-pull-up";
-import Aurora from "../utils/Aurora.tsx";
 import { arrow } from "../subcomponents/Icons.tsx";
 import { Popover } from "antd";
-import { chevronDown } from "../subcomponents/Icons.tsx";
-import { useIsMobile } from "../utils/IsMobile.tsx";
 
 const Main: React.FC = () => {
   const textLines: string[] = [
-    "Dev Portfolio",
-    "Selected Work",
-    "Builds and Projects",
-    "Web Work",
+    "Hello! I'm",
+    "Nice to meet you! I'm",
+    "The person who typed this is",
+    "Get to know",
   ];
 
   const [currentLine, setCurrentLine] = useState(textLines[0]);
   const [scrollY, setScrollY] = useState(0);
-  const isMobile = useIsMobile();
-
-  const setRandomName = () => {
-    const index = Math.floor(Math.random() * textLines.length);
-    let newName = textLines[index];
-    if (newName === currentLine) {
-      setRandomName();
-    } else {
-      setCurrentLine(newName);
-    }
-  };
 
   useEffect(() => {
-    const interval = setInterval(setRandomName, 3000);
+    const interval = setInterval(() => {
+      setCurrentLine((current) => {
+        const alternatives = textLines.filter((line) => line !== current);
+        return alternatives[Math.floor(Math.random() * alternatives.length)];
+      });
+    }, 3000);
+
     return () => clearInterval(interval);
   }, []);
 
@@ -42,14 +34,6 @@ const Main: React.FC = () => {
     return () => window.removeEventListener("scroll", handleScroll);
   }, []);
 
-  const handleClickScroll = () => {
-    const offset = window.innerWidth >= 1800 ? 400 : 100;
-    window.scrollTo({
-      top: window.innerHeight - offset,
-      behavior: "smooth",
-    });
-  };
-
   const handleBackToTop = () => {
     window.scrollTo({
       top: 0,
@@ -57,19 +41,9 @@ const Main: React.FC = () => {
     });
   };
 
-  const fadeOpacity = Math.max(0, 1 - scrollY / 300);
-
-  const amplitude = isMobile ? 0.2 : 0.8;
-
   return (
-    <div className="min-h-screen flex flex-col items-center justify-center relative z-10 w-full">
+    <div className="flex min-h-screen w-full items-center justify-center">
       <div className="absolute top-0 left-0 w-full h-1/2 z-0">
-        <Aurora
-          colorStops={["#1B2A49", "#A79FFF", "#D3C0FF"]}
-          blend={0.5}
-          amplitude={amplitude}
-          speed={0.4}
-        />
         {scrollY > 200 && (
           <Popover
             content={<p className="text-white">Back to Top</p>}
@@ -92,23 +66,17 @@ const Main: React.FC = () => {
         initial={{ opacity: 0, y: 50 }}
         whileInView={{ opacity: 1, y: 0 }}
         transition={{ duration: 1 }}
-        className="text-center p-8 rounded-lg"
+        className="rounded-lg p-8 text-center"
       >
-        <div className="p-2 font-bold bg-clip-text text-transparent bg-linear-to-r from-indigo-600 to-purple-600 dark:from-indigo-400 dark:to-purple-400 text-5xl">
-          Sami Erafii's
-        </div>
         <WordsPullUp key={currentLine} text={currentLine} />
-      </motion.div>
-
-      <motion.div
-        style={{ opacity: isMobile ? 1 : fadeOpacity }}
-        className="flex flex-col items-center justify-center w-full absolute bottom-4 p-2 hover:cursor-pointer z-10 text-slate-600 dark:text-slate-300 invisible md:visible"
-        onClick={handleClickScroll}
-      >
-        <div className="font-semibold text-lg bg-clip-text text-transparent bg-linear-to-r from-indigo-600 to-purple-600 dark:from-indigo-400 dark:to-purple-400">
-          View More
+        <div className="bg-linear-to-r from-indigo-600 to-purple-600 bg-clip-text pt-1 text-5xl font-bold text-transparent dark:from-indigo-400 dark:to-purple-400">
+          Sami Erafii.
         </div>
-        {chevronDown}
+        <p className="pt-4">
+          <span className="text-lg  text-slate-700 dark:text-slate-300">
+            Software Engineering Student | Web Developer | AI Enthusiast
+          </span>
+        </p>
       </motion.div>
     </div>
   );
