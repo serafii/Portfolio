@@ -9,7 +9,7 @@ const Main: React.FC = () => {
     "Hello! I'm",
     "Nice to meet you! I'm",
     "The person who typed this is",
-    "Get to know",
+    "Get to know me! I'm",
   ];
 
   const [currentLine, setCurrentLine] = useState(textLines[0]);
@@ -42,7 +42,7 @@ const Main: React.FC = () => {
   };
 
   return (
-    <div className="flex min-h-screen w-full items-center justify-center">
+    <div className="relative flex min-h-screen w-full items-center justify-center overflow-hidden">
       <div className="absolute top-0 left-0 w-full h-1/2 z-0">
         {scrollY > 200 && (
           <Popover
@@ -66,15 +66,16 @@ const Main: React.FC = () => {
         initial={{ opacity: 0, y: 50 }}
         whileInView={{ opacity: 1, y: 0 }}
         transition={{ duration: 1 }}
-        className="rounded-lg p-8 text-center"
+        className="relative z-10 rounded-lg p-8 text-center"
       >
         <WordsPullUp key={currentLine} text={currentLine} />
         <div className="bg-linear-to-r from-indigo-600 to-purple-600 bg-clip-text pt-1 text-5xl font-bold text-transparent dark:from-indigo-400 dark:to-purple-400">
           Sami Erafii.
         </div>
-        <p className="pt-4">
+        <p className="pt-8">
           <span className="text-lg  text-slate-700 dark:text-slate-300">
-            Software Engineering Student | Web Developer | AI Enthusiast
+            Software Engineering Student | Full Stack Developer | AI &
+            Automation
           </span>
         </p>
       </motion.div>

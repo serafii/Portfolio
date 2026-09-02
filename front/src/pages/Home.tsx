@@ -14,7 +14,7 @@ import DarkModeToggle from "../utils/DarkMode.tsx";
 import useIsDark from "../utils/IsDark.tsx";
 import cat from "../assets/spin_cat.gif";
 import cat2 from "../assets/sideway_cat.gif";
-import { useIsMobile } from "../utils/IsMobile";
+import DotField from "../../components/DotField.jsx";
 
 const navigationItems = [
   { id: "home", label: "Home" },
@@ -30,26 +30,12 @@ const observedSectionIds = [
 ];
 
 const Home: React.FC = () => {
+  const isDark = useIsDark();
   const ref = useRef(null);
   const { scrollYProgress } = useScroll({
     target: ref,
     offset: ["start start", "end end"],
   });
-  const isDark = useIsDark();
-  const isMobile = useIsMobile();
-
-  // For mouse position tracking
-  const [mousePos, setMousePos] = useState({ x: 0, y: 0 });
-  const [bgOffset, setBgOffset] = useState({ x: 0, y: 0 });
-
-  const handleMouseMove = (e: React.MouseEvent<HTMLDivElement, MouseEvent>) => {
-    if (isMobile) return;
-    const x = e.clientX / window.innerWidth;
-    const y = e.clientY / window.innerHeight;
-    setBgOffset({ x, y });
-    setMousePos({ x: e.clientX, y: e.clientY });
-  };
-
   // For Garen jump animation
   const [isJumping, setIsJumping] = useState<boolean>(false);
   const [activeSection, setActiveSection] = useState("home");
@@ -93,33 +79,28 @@ const Home: React.FC = () => {
   };
 
   return (
-    <div
-      onMouseMove={isMobile ? undefined : handleMouseMove}
-      className="min-h-dvh bg-slate-200 dark:bg-[#1B2A49] relative overflow-hidden transition-colors duration-500"
-    >
-      <div
-        className="absolute inset-0 opacity-30"
-        style={{
-          backgroundImage: `radial-gradient(circle, ${
-            isDark ? "rgba(255,255,255,0.3)" : "rgba(0,0,0,0.4)"
-          } 1px, transparent 1px)`,
-          backgroundSize: "20px 20px",
-          backgroundPosition: `${bgOffset.x * 8}px ${bgOffset.y * 8}px`,
-          maskImage:
-            "radial-gradient(ellipse at center, black 85%, transparent 85%)",
-          WebkitMaskImage:
-            "radial-gradient(ellipse at center, black 80%, transparent 85%)",
-        }}
+    <div className="portfolio-page relative min-h-dvh overflow-hidden transition-colors duration-500">
+      <DotField
+        className="pointer-events-none absolute z-0 inset-0"
+        dotRadius={1.5}
+        dotSpacing={14}
+        bulgeStrength={80}
+        glowRadius={100}
+        sparkle={false}
+        waveAmplitude={0}
+        cursorRadius={500}
+        cursorForce={0.1}
+        bulgeOnly
+        gradientFrom={
+          isDark ? "rgba(196, 181, 253, 0.42)" : "rgba(67, 56, 202, 0.5)"
+        }
+        gradientTo={
+          isDark ? "rgba(168, 85, 247, 0.3)" : "rgba(109, 40, 217, 0.36)"
+        }
+        glowColor={
+          isDark ? "rgba(168, 85, 247, 0.1)" : "rgba(109, 40, 217, 0.16)"
+        }
       />
-
-      {!isMobile && (
-        <div
-          className="fixed inset-0 pointer-events-none transition-all duration-100"
-          style={{
-            background: `radial-gradient(circle 120px at ${mousePos.x}px ${mousePos.y}px, rgba(138, 255, 195, 0.1), rgba(0,0,0,0.15))`,
-          }}
-        />
-      )}
       {/* Fixed Top Elements */}
       <div className="fixed top-5 left-5 z-50 ">
         <div className="w-16 h-16 relative">
@@ -165,7 +146,7 @@ const Home: React.FC = () => {
         <button
           type="button"
           onClick={() => scrollToSection("contact")}
-          className="hidden hover:cursor-pointer items-center gap-2 rounded-full border border-indigo-500/30 bg-indigo-600 px-4 py-2.5 text-sm font-semibold text-white shadow-sm transition-all duration-300 hover:bg-indigo-700 hover:shadow-md sm:inline-flex dark:border-indigo-200/30 dark:bg-indigo-300 dark:text-slate-950 dark:hover:bg-indigo-200"
+          className="hidden hover:cursor-pointer items-center gap-2 rounded-full border border-indigo-500/30 bg-indigo-600 px-4 py-2.5 text-sm font-semibold text-white shadow-sm transition-all duration-300 hover:bg-indigo-700 hover:shadow-md sm:inline-flex dark:border-fuchsia-300/25 dark:bg-violet-500 dark:text-white dark:shadow-fuchsia-950/50 dark:hover:bg-violet-400"
         >
           <CircleUserRound className="h-4 w-4" aria-hidden="true" />
           Contact Me
@@ -174,7 +155,7 @@ const Home: React.FC = () => {
 
       <nav
         aria-label="Page sections"
-        className="fixed top-5 left-1/2 z-50 hidden max-w-max -translate-x-1/2 overflow-x-auto rounded-full border border-slate-300/70 bg-slate-100/85 p-1 shadow-lg shadow-slate-900/10 backdrop-blur-md sm:block dark:border-indigo-300/20 dark:bg-slate-900/75 dark:shadow-black/25"
+        className="fixed top-5 left-1/2 z-50 hidden max-w-max -translate-x-1/2 overflow-x-auto rounded-full border border-slate-300/70 bg-slate-100/85 p-1 shadow-lg shadow-slate-900/10 backdrop-blur-md sm:block dark:border-violet-300/15 dark:bg-[#120a20]/75 dark:shadow-black/40"
       >
         <div className="flex w-max items-center gap-1">
           {navigationItems.map(({ id, label }) => {
@@ -187,8 +168,8 @@ const Home: React.FC = () => {
                 aria-current={isActive ? "page" : undefined}
                 className={`rounded-full hover:cursor-pointer px-3 py-2 text-xs font-semibold transition-all duration-300 sm:text-sm ${
                   isActive
-                    ? "bg-indigo-600 text-white shadow-sm dark:bg-indigo-300 dark:text-slate-950"
-                    : "text-slate-600 hover:bg-slate-200 hover:text-slate-950 dark:text-slate-300 dark:hover:bg-slate-700/80 dark:hover:text-white"
+                    ? "bg-indigo-600 text-white shadow-sm dark:bg-violet-500 dark:text-white dark:shadow-violet-950/50"
+                    : "text-slate-600 hover:bg-slate-200 hover:text-slate-950 dark:text-violet-100/70 dark:hover:bg-violet-400/15 dark:hover:text-white"
                 }`}
               >
                 {label}
@@ -202,7 +183,7 @@ const Home: React.FC = () => {
         className="flex flex-col gap-y-18 3xl:gap-y-24 items-center justify-center relative z-10"
         ref={ref}
       >
-        <div className="relative isolate w-full overflow-hidden pb-28">
+        <div className="w-full">
           <div className="relative z-10 flex flex-col items-center gap-y-18 3xl:gap-y-24">
             <div id="home" className="w-full">
               <Main />
