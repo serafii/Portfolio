@@ -4,15 +4,20 @@ import gmail from "../assets/gmail.svg";
 import { motion } from "framer-motion";
 import { ArrowUpRight } from "lucide-react";
 import { useIsMobile } from "../utils/IsMobile";
+import useIsDark from "../utils/IsDark";
 
 const Footer: React.FC = () => {
   const isMobile = useIsMobile();
+  const isDark = useIsDark();
   const amplitudes = isMobile ? [20, 10, 15] : [50, 30, 40];
+  const waveColors = isDark
+    ? ["#0c0813", "#120a1e", "#180c26"]
+    : ["#0d1b2a", "#112240", "#1b2b40"];
 
   return (
     <div className="relative w-full">
       <Wave
-        fill="#0d1b2a"
+        fill={waveColors[0]}
         paused={false}
         options={{
           height: 10,
@@ -23,7 +28,7 @@ const Footer: React.FC = () => {
         className="absolute bottom-0 w-full"
       />
       <Wave
-        fill="#112240"
+        fill={waveColors[1]}
         paused={false}
         options={{
           height: 20,
@@ -34,7 +39,7 @@ const Footer: React.FC = () => {
         className="absolute bottom-0 w-full opacity-60"
       />
       <Wave
-        fill="#1b2b40"
+        fill={waveColors[2]}
         paused={false}
         options={{
           height: 30,
@@ -182,7 +187,7 @@ const Contact: React.FC = () => {
                   target="_blank"
                   rel="noopener noreferrer"
                   variants={cardVariants}
-                  className={`group relative flex flex-col items-center justify-center gap-4 p-6 md:p-8 rounded-2xl bg-linear-to-br ${contact.gradient} backdrop-blur-sm border border-gray-200/50 dark:border-slate-700/50 ${contact.hoverBorder} shadow-sm hover:shadow-lg hover:-translate-y-1 transition-all duration-300`}
+                  className={`group relative flex flex-col items-center justify-center gap-4 p-6 md:p-8 rounded-2xl bg-linear-to-br ${contact.gradient} dark:from-[#160c23]/95 dark:to-[#1d0e2d]/90 backdrop-blur-sm border border-gray-200/50 dark:border-violet-300/15 ${contact.hoverBorder} shadow-sm hover:shadow-lg hover:-translate-y-1 transition-all duration-300`}
                 >
                   <div className="absolute top-3 right-3 opacity-0 group-hover:opacity-100 -translate-x-1 group-hover:translate-x-0 translate-y-1 group-hover:translate-y-0 transition-all duration-300">
                     <ArrowUpRight className="w-4 h-4 text-gray-400 dark:text-gray-500" />
@@ -213,10 +218,10 @@ const Contact: React.FC = () => {
         </motion.div>
       </div>
       <Footer />
-      <div className="relative text-xs sm:text-sm md:text-normal p-4 text-white py-8 justify-center flex flex-col gap-2 md:gap-8 font-semibold text-normal w-full bg-[#1b2b40] -mt-9 pb-20 3xl:py-16">
+      <div className="relative text-xs sm:text-sm md:text-normal p-4 text-white py-8 justify-center flex flex-col gap-2 md:gap-8 font-semibold text-normal w-full bg-[#1b2b40] dark:bg-[#180c26] -mt-9 pb-20 3xl:py-16">
         <span className="justify-center flex flex-row gap-2 md:gap-4">
           <p>&copy; {year}</p>
-          <p>Designed & Developed by Sami 😼</p>
+          <p>Designed & Developed by Sami</p>
         </span>
         <span className="justify-center items-center mt-2 flex flex-col sm:flex-row gap-2 text-wrap">
           Have any questions? Email me at :{" "}

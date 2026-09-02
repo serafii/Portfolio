@@ -96,13 +96,13 @@ const EducationTimeline: React.FC = () => {
             className="mb-12 ml-3 sm:ml-8 md:ml-12 relative group"
           >
             {/* Timeline Dot */}
-            <div className="absolute -left-[21px] sm:-left-[41px] md:-left-[57px] top-1.5 w-5 h-5 rounded-full bg-slate-100 dark:bg-slate-900 border-4 border-indigo-500 dark:border-indigo-400 group-hover:scale-125 transition-transform duration-300" />
-            <div className="bg-slate-200 dark:bg-slate-800 rounded-2xl p-6 shadow-lg border border-gray-100 dark:border-slate-700 hover:shadow-xl transition-shadow duration-300">
+            <div className="absolute -left-[21px] sm:-left-[41px] md:-left-[57px] top-1.5 w-5 h-5 rounded-full bg-slate-100 dark:bg-[#0d0815] border-4 border-indigo-500 dark:border-indigo-400 group-hover:scale-125 transition-transform duration-300" />
+            <div className="bg-slate-200 dark:bg-[#160c23] rounded-2xl p-6 shadow-lg border border-gray-100 dark:border-violet-300/15 hover:shadow-xl transition-shadow duration-300">
               <div className="flex flex-col sm:flex-row gap-6 items-start text-left">
                 <img
                   src={item.image}
                   alt={item.school}
-                  className="w-20 h-20 rounded-xl object-cover shadow-sm border border-gray-100 dark:border-slate-700"
+                  className="w-20 h-20 rounded-xl object-cover shadow-sm border border-gray-100 dark:border-violet-300/15"
                 />
                 <div className="flex-1">
                   <h3 className="text-xl font-bold text-gray-800 dark:text-white">

@@ -93,7 +93,7 @@ const TechnicalInterests: React.FC = () => {
             <motion.div
               key={item.label}
               variants={chipVariants}
-              className="group flex items-center gap-2.5 px-4 py-2.5 rounded-full bg-white dark:bg-slate-800/60 border border-gray-200 dark:border-slate-700/50 shadow-sm hover:border-violet-300 dark:hover:border-violet-500/40 hover:shadow-md transition-all duration-300 cursor-default"
+              className="group flex items-center gap-2.5 px-4 py-2.5 rounded-full bg-white dark:bg-[#160c23]/80 border border-gray-200 dark:border-violet-300/15 shadow-sm hover:border-violet-300 dark:hover:border-violet-400/40 hover:shadow-md transition-all duration-300 cursor-default"
             >
               <Icon className="w-4.5 h-4.5 text-violet-500 dark:text-violet-400 group-hover:scale-110 transition-transform duration-300" />
               <span className="text-sm font-medium text-gray-700 dark:text-gray-300">

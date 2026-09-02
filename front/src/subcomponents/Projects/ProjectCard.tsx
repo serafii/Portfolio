@@ -18,7 +18,7 @@ const cardVariants: Variants = {
   visible: {
     y: 0,
     transition: {
-      duration: 0.5,
+      duration: 0.35,
       ease: "easeOut" as const,
     },
   },
@@ -34,12 +34,14 @@ const ProjectCard: React.FC<ProjectCardProps> = ({
   return (
     <motion.div
       variants={cardVariants}
-      className="group bg-slate-100 dark:bg-slate-800 rounded-2xl overflow-hidden border border-gray-100 dark:border-slate-700 shadow-lg hover:shadow-xl transition-all duration-400"
+      className="group transform-gpu bg-slate-100 dark:bg-[#160c23] rounded-2xl overflow-hidden border border-gray-100 dark:border-violet-300/15 shadow-lg hover:shadow-xl transition-transform transition-shadow duration-300"
     >
       <div className="relative overflow-hidden h-48">
         <img
           src={image}
           alt={title}
+          loading="lazy"
+          decoding="async"
           className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"
         />
         <div className="absolute inset-0 bg-linear-to-t from-black/50 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
@@ -49,7 +51,7 @@ const ProjectCard: React.FC<ProjectCardProps> = ({
               href={githubUrl}
               target="_blank"
               rel="noopener noreferrer"
-              className="p-2 rounded-full bg-white/90 dark:bg-slate-900/90 text-gray-700 dark:text-gray-200 hover:bg-indigo-500 hover:text-white transition-colors duration-200"
+              className="p-2 rounded-full bg-white/90 dark:bg-[#0d0815]/90 text-gray-700 dark:text-gray-200 hover:bg-indigo-500 hover:text-white transition-colors duration-200"
               aria-label={`${title} GitHub`}
             >
               {GithubIcon}
@@ -60,7 +62,7 @@ const ProjectCard: React.FC<ProjectCardProps> = ({
               href={liveUrl}
               target="_blank"
               rel="noopener noreferrer"
-              className="p-2 rounded-full bg-white/90 dark:bg-slate-900/90 text-gray-700 dark:text-gray-200 hover:bg-indigo-500 hover:text-white transition-colors duration-200"
+              className="p-2 rounded-full bg-white/90 dark:bg-[#0d0815]/90 text-gray-700 dark:text-gray-200 hover:bg-indigo-500 hover:text-white transition-colors duration-200"
               aria-label={`${title} live demo`}
             >
               <ExternalLink className="w-4 h-4" />

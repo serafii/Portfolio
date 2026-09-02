@@ -26,7 +26,7 @@ const sectionVariants: Variants = {
   hidden: {},
   visible: {
     transition: {
-      staggerChildren: 0.2,
+      staggerChildren: 0.08,
     },
   },
 };
@@ -105,7 +105,7 @@ const ProjectsSection: React.FC = () => {
 
   return (
     <div className="w-full flex items-center justify-center">
-      <div className="w-full sm:w-4/5 md:w-2/3 lg:w-full 2xl:w-10/12 3xl:w-2/3 p-6 text-center text-slate-700 dark:text-white">
+      <div className="deferred-section w-full sm:w-4/5 md:w-2/3 lg:w-full 2xl:w-10/12 3xl:w-2/3 p-6 text-center text-slate-700 dark:text-white">
         <motion.div
           initial={{ opacity: 0, y: 50 }}
           whileInView={{ opacity: 1, y: 0 }}

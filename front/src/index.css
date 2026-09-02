@@ -28,6 +28,12 @@ body {
   background: #e2e8f0;
 }
 
+/* Skip painting off-screen animated sections until they approach the viewport. */
+.deferred-section {
+  content-visibility: auto;
+  contain-intrinsic-size: auto 900px;
+}
+
 .dark .portfolio-page {
   background-color: #0b0714;
   background-image:
