@@ -2,7 +2,10 @@ import { useState, useEffect } from "react";
 import { Moon, Sun } from "lucide-react";
 
 const DarkModeToggle = () => {
-  const [darkMode, setDarkMode] = useState<boolean>(false);
+  const [darkMode, setDarkMode] = useState<boolean>(() =>
+    typeof window !== "undefined" &&
+    window.matchMedia("(prefers-color-scheme: dark)").matches,
+  );
 
   useEffect(() => {
     const root = window.document.documentElement;

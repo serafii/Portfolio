@@ -36,7 +36,7 @@ const Contact: React.FC = () => {
       icon: github,
       gradient: "from-slate-500/30 to-slate-400/15",
       hoverBorder: "hover:border-slate-400/50",
-      iconColor: "text-gray-700 dark:text-gray-300",
+      iconColor: "text-gray-700 dark:invert dark:brightness-200",
     },
     {
       name: "Discord",
@@ -167,20 +167,24 @@ const Contact: React.FC = () => {
           </motion.div>
         </motion.div>
       </div>
-      <footer className="relative isolate mt-12 flex w-full flex-col items-center gap-2 bg-[#1b2b40] px-4 py-8 pb-20 text-center text-xs font-semibold text-white dark:bg-[#180c26] sm:text-sm md:gap-8 md:text-base 3xl:py-16">
+      <footer className="relative isolate mt-14 flex min-h-52 w-full flex-col items-center justify-center gap-4 bg-[#3d4264] px-4 py-14 text-center dark:bg-[#180c26] sm:text-sm md:gap-9 md:py-16 3xl:py-20">
         <div
           aria-hidden="true"
-          className="pointer-events-none absolute inset-x-0 -top-18 -z-10 h-18 bg-linear-to-b from-transparent via-[#1b2b40]/55 to-[#1b2b40] dark:via-[#180c26]/55 dark:to-[#180c26]"
+          className="pointer-events-none absolute inset-x-0 -top-18 -z-10 h-18 bg-linear-to-b from-transparent via-[#3d4264]/55 to-[#3d4264] dark:via-[#180c26]/55 dark:to-[#180c26]"
         />
-        <span className="flex flex-wrap justify-center gap-x-2 gap-y-1 md:gap-x-4">
+        <span className="flex flex-wrap items-center justify-center gap-x-3 gap-y-1 text-sm font-medium tracking-wide text-slate-100/90 dark:text-violet-100/85 md:gap-x-5 md:text-base">
           <p>&copy; {year}</p>
-          <p>Designed & Developed by Sami</p>
+          <span
+            aria-hidden="true"
+            className="hidden h-1 w-1 rounded-full bg-violet-300/70 sm:block"
+          />
+          <p>Designed &amp; Developed by Sami Erafii</p>
         </span>
-        <span className="mt-2 flex flex-col items-center justify-center gap-1 sm:flex-row sm:gap-2">
-          Have any questions? Email me at :{" "}
+        <span className="flex flex-col items-center justify-center gap-1 text-xs font-medium text-slate-200/75 sm:flex-row sm:gap-2 md:text-sm dark:text-violet-100/65">
+          Have a question? Reach out at
           <a
             href="mailto:sami.erafii@gmail.com"
-            className="hover:underline text-blue-500 hover:text-blue-600 transition-colors duration-300"
+            className="font-semibold text-violet-200 transition-colors duration-300 hover:text-white hover:underline"
           >
             sami.erafii@gmail.com
           </a>

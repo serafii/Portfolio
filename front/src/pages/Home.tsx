@@ -80,6 +80,86 @@ const DeferredTravelMap: React.FC = () => {
   );
 };
 
+type HoverFreezeGifProps = {
+  src: string;
+  alt: string;
+  className: string;
+  imageClassName?: string;
+  loading?: "eager" | "lazy";
+  fetchPriority?: "high" | "low" | "auto";
+  onClick?: () => void;
+};
+
+const HoverFreezeGif: React.FC<HoverFreezeGifProps> = ({
+  src,
+  alt,
+  className,
+  imageClassName = "",
+  loading,
+  fetchPriority,
+  onClick,
+}) => {
+  const imageRef = useRef<HTMLImageElement>(null);
+  const canvasRef = useRef<HTMLCanvasElement>(null);
+  const [isFrozen, setIsFrozen] = useState(false);
+
+  const freezeFrame = () => {
+    const image = imageRef.current;
+    const canvas = canvasRef.current;
+    if (!image || !canvas || !image.complete || !image.naturalWidth) return;
+
+    const { width, height } = image.getBoundingClientRect();
+    const pixelRatio = Math.min(window.devicePixelRatio || 1, 2);
+    canvas.width = width * pixelRatio;
+    canvas.height = height * pixelRatio;
+
+    const context = canvas.getContext("2d");
+    if (!context) return;
+    context.setTransform(pixelRatio, 0, 0, pixelRatio, 0, 0);
+    context.clearRect(0, 0, width, height);
+
+    const scale = Math.min(
+      width / image.naturalWidth,
+      height / image.naturalHeight,
+    );
+    const drawWidth = image.naturalWidth * scale;
+    const drawHeight = image.naturalHeight * scale;
+    context.drawImage(
+      image,
+      (width - drawWidth) / 2,
+      (height - drawHeight) / 2,
+      drawWidth,
+      drawHeight,
+    );
+    setIsFrozen(true);
+  };
+
+  return (
+    <div
+      className={`relative ${className}`}
+      onMouseEnter={freezeFrame}
+      onMouseLeave={() => setIsFrozen(false)}
+      onClick={onClick}
+    >
+      <img
+        ref={imageRef}
+        src={src}
+        alt={alt}
+        draggable={false}
+        loading={loading}
+        decoding="async"
+        fetchPriority={fetchPriority}
+        className={`h-full w-full object-contain ${imageClassName} ${isFrozen ? "opacity-0" : ""}`}
+      />
+      <canvas
+        ref={canvasRef}
+        aria-hidden="true"
+        className={`pointer-events-none absolute inset-0 h-full w-full ${isFrozen ? "block" : "hidden"}`}
+      />
+    </div>
+  );
+};
+
 const Home: React.FC = () => {
   const isDark = useIsDark();
   const isMobile = useIsMobile();
@@ -189,7 +269,7 @@ const Home: React.FC = () => {
               src={garen}
               draggable={false}
               decoding="async"
-              className={`w-10 h-10 object-contain hover:cursor-pointer hover:scale-110 transition-transform duration-300 ease-in-out ${
+              className={`h-10 w-10 object-contain hover:cursor-pointer hover:scale-110 transition-transform duration-300 ease-in-out ${
                 isJumping ? "jump-once" : ""
               }`}
               alt="Dancing Garen"
@@ -258,14 +338,12 @@ const Home: React.FC = () => {
           <Skills />
         </div>
         <div className="w-full flex items-center justify-center">
-          <img
+          <HoverFreezeGif
             src={cat2}
             alt="Spinning Cat"
-            draggable={false}
             loading="lazy"
-            decoding="async"
             fetchPriority="low"
-            className="w-30 h-30 object-contain"
+            className="h-30 w-30"
           />
         </div>
         <div id="projects" className="w-full">
@@ -275,14 +353,12 @@ const Home: React.FC = () => {
           id="after-projects"
           className="w-full flex items-center justify-center"
         >
-          <img
+          <HoverFreezeGif
             src={cat}
             alt="Spinning Cat"
-            draggable={false}
             loading="lazy"
-            decoding="async"
             fetchPriority="low"
-            className="w-32 h-32 object-contain"
+            className="h-32 w-32"
           />
         </div>
         <div id="interests" className="w-full">
