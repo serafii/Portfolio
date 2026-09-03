@@ -1,57 +1,7 @@
 import React from "react";
-import Wave from "react-wavify";
 import gmail from "../assets/gmail.svg";
 import { motion } from "framer-motion";
 import { ArrowUpRight } from "lucide-react";
-import { useIsMobile } from "../utils/IsMobile";
-import useIsDark from "../utils/IsDark";
-
-const Footer: React.FC = () => {
-  const isMobile = useIsMobile();
-  const isDark = useIsDark();
-  const amplitudes = isMobile ? [20, 10, 15] : [50, 30, 40];
-  const waveColors = isDark
-    ? ["#0c0813", "#120a1e", "#180c26"]
-    : ["#0d1b2a", "#112240", "#1b2b40"];
-
-  return (
-    <div className="relative w-full">
-      <Wave
-        fill={waveColors[0]}
-        paused={false}
-        options={{
-          height: 10,
-          amplitude: amplitudes[0],
-          speed: 0.15,
-          points: 3,
-        }}
-        className="absolute bottom-0 w-full"
-      />
-      <Wave
-        fill={waveColors[1]}
-        paused={false}
-        options={{
-          height: 20,
-          amplitude: amplitudes[1],
-          speed: 0.1,
-          points: 4,
-        }}
-        className="absolute bottom-0 w-full opacity-60"
-      />
-      <Wave
-        fill={waveColors[2]}
-        paused={false}
-        options={{
-          height: 30,
-          amplitude: amplitudes[2],
-          speed: 0.2,
-          points: 5,
-        }}
-        className="absolute bottom-0 w-full"
-      />
-    </div>
-  );
-};
 
 const Contact: React.FC = () => {
   const year = new Date().getFullYear();
@@ -217,13 +167,16 @@ const Contact: React.FC = () => {
           </motion.div>
         </motion.div>
       </div>
-      <Footer />
-      <div className="relative text-xs sm:text-sm md:text-normal p-4 text-white py-8 justify-center flex flex-col gap-2 md:gap-8 font-semibold text-normal w-full bg-[#1b2b40] dark:bg-[#180c26] -mt-9 pb-20 3xl:py-16">
-        <span className="justify-center flex flex-row gap-2 md:gap-4">
+      <footer className="relative isolate mt-12 flex w-full flex-col items-center gap-2 bg-[#1b2b40] px-4 py-8 pb-20 text-center text-xs font-semibold text-white dark:bg-[#180c26] sm:text-sm md:gap-8 md:text-base 3xl:py-16">
+        <div
+          aria-hidden="true"
+          className="pointer-events-none absolute inset-x-0 -top-18 -z-10 h-18 bg-linear-to-b from-transparent via-[#1b2b40]/55 to-[#1b2b40] dark:via-[#180c26]/55 dark:to-[#180c26]"
+        />
+        <span className="flex flex-wrap justify-center gap-x-2 gap-y-1 md:gap-x-4">
           <p>&copy; {year}</p>
           <p>Designed & Developed by Sami</p>
         </span>
-        <span className="justify-center items-center mt-2 flex flex-col sm:flex-row gap-2 text-wrap">
+        <span className="mt-2 flex flex-col items-center justify-center gap-1 sm:flex-row sm:gap-2">
           Have any questions? Email me at :{" "}
           <a
             href="mailto:sami.erafii@gmail.com"
@@ -232,7 +185,7 @@ const Contact: React.FC = () => {
             sami.erafii@gmail.com
           </a>
         </span>
-      </div>
+      </footer>
     </div>
   );
 };

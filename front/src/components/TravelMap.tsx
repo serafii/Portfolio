@@ -1523,27 +1523,6 @@ const TravelMap: React.FC = () => {
             )}
           </AnimatePresence>
         </div>
-
-        {/* Region legend */}
-        <div className="mt-6 flex flex-wrap gap-3 justify-center md:justify-start">
-          {[
-            "Canada",
-            "USA",
-            "Caribbean",
-            "Europe",
-            "Morocco",
-            "East Asia",
-            "Southeast Asia",
-          ].map((region) => (
-            <span
-              key={region}
-              className="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-full text-xs font-medium bg-slate-100/80 dark:bg-[#160c23]/80 text-slate-600 dark:text-slate-300 border border-indigo-100/70 dark:border-violet-300/15"
-            >
-              <span className="w-1.5 h-1.5 rounded-full bg-indigo-500 dark:bg-indigo-400" />
-              {region}
-            </span>
-          ))}
-        </div>
       </div>
     </section>
   );
