@@ -28,6 +28,19 @@ body {
   background: #e2e8f0;
 }
 
+.mobile-dot-field {
+  position: absolute;
+  inset: 0;
+  z-index: 0;
+  pointer-events: none;
+  background-image: radial-gradient(rgb(67 56 202 / 45%) 0.75px, transparent 0.75px);
+  background-size: 18px 18px;
+}
+
+.dark .mobile-dot-field {
+  background-image: radial-gradient(rgb(196 181 253 / 32%) 0.75px, transparent 0.75px);
+}
+
 /* Skip painting off-screen animated sections until they approach the viewport. */
 .deferred-section {
   content-visibility: auto;
@@ -36,9 +49,12 @@ body {
 
 .dark .portfolio-page {
   background-color: #0b0714;
-  background-image:
-    linear-gradient(180deg, #0a0712 0%, #0c0813 45%, #0b0711 100%);
-  background-attachment: fixed;
+  background-image: linear-gradient(
+    180deg,
+    #0a0712 0%,
+    #0c0813 45%,
+    #0b0711 100%
+  );
 }
 
 @keyframes jump-once {
@@ -65,7 +81,7 @@ body {
 
 @theme inline {
   --font-heading: var(--font-sans);
-  --font-sans: 'Geist Variable', sans-serif;
+  --font-sans: "Geist Variable", sans-serif;
   --color-sidebar-ring: var(--sidebar-ring);
   --color-sidebar-border: var(--sidebar-border);
   --color-sidebar-accent-foreground: var(--sidebar-accent-foreground);

@@ -48,14 +48,14 @@ const Main: React.FC = () => {
           <Popover
             content={<p className="text-white">Back to Top</p>}
             placement="top"
-            color="#A79FFF"
+            color="oklch(58.5% 0.233 277.117) "
           >
             <motion.button
               initial={{ opacity: 0 }}
               animate={{ opacity: 1 }}
               exit={{ opacity: 0 }}
               onClick={handleBackToTop}
-              className="fixed bottom-6 w-16 h-16 right-6 bg-[#A79FFF]/80 hover:bg-[#A79FFF] text-white p-3 rounded-full shadow-lg z-50 transition-colors duration-300 hover:cursor-pointer flex items-center justify-center text-2xl invisible sm:visible"
+              className="fixed bottom-6 w-16 h-16 right-6 bg-indigo-600 hover:bg-indigo-500 text-white p-3 rounded-full shadow-lg z-50 transition-colors duration-300 hover:cursor-pointer flex items-center justify-center text-2xl invisible sm:visible"
             >
               {arrow}
             </motion.button>
@@ -66,6 +66,7 @@ const Main: React.FC = () => {
         initial={{ opacity: 0, y: 50 }}
         whileInView={{ opacity: 1, y: 0 }}
         transition={{ duration: 1 }}
+        viewport={{ once: true }}
         className="relative z-10 rounded-lg p-8 text-center"
       >
         <WordsPullUp key={currentLine} text={currentLine} />

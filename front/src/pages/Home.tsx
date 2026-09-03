@@ -8,10 +8,10 @@ import Skills from "../components/Skills";
 import Projects from "../components/Projects";
 import Interests from "../components/Interests";
 import Contact from "../components/Contact";
-import TravelMap from "../components/TravelMap.tsx";
 import garen from "../assets/garenDance_nobg.gif";
 import DarkModeToggle from "../utils/DarkMode.tsx";
 import useIsDark from "../utils/IsDark.tsx";
+import { useIsMobile } from "../utils/IsMobile";
 import cat from "../assets/spin_cat.gif";
 import cat2 from "../assets/sideway_cat.gif";
 import DotField from "../../components/DotField.jsx";
@@ -29,8 +29,59 @@ const observedSectionIds = [
   "after-projects",
 ];
 
+const LazyTravelMap = React.lazy(() => import("../components/TravelMap.tsx"));
+
+const TravelMapPlaceholder: React.FC = () => (
+  <section
+    aria-busy="true"
+    aria-label="Loading travel map"
+    className="w-full min-h-[550px] px-4 py-16 md:px-8"
+  >
+    <div className="mx-auto max-w-6xl">
+      <div className="mb-10 h-16 w-56 animate-pulse rounded-lg bg-slate-300/40 dark:bg-violet-200/5" />
+      <div className="aspect-2/1 rounded-2xl border border-indigo-300/40 bg-slate-200/35 dark:border-violet-300/10 dark:bg-[#160c23]/35" />
+    </div>
+  </section>
+);
+
+const DeferredTravelMap: React.FC = () => {
+  const sectionRef = useRef<HTMLDivElement>(null);
+  const [shouldRender, setShouldRender] = useState(false);
+
+  useEffect(() => {
+    const section = sectionRef.current;
+    if (!section) return;
+
+    const observer = new IntersectionObserver(
+      ([entry]) => {
+        if (entry.isIntersecting) {
+          setShouldRender(true);
+          observer.disconnect();
+        }
+      },
+      { rootMargin: "600px 0px" },
+    );
+
+    observer.observe(section);
+    return () => observer.disconnect();
+  }, []);
+
+  return (
+    <div ref={sectionRef}>
+      {shouldRender ? (
+        <React.Suspense fallback={<TravelMapPlaceholder />}>
+          <LazyTravelMap />
+        </React.Suspense>
+      ) : (
+        <TravelMapPlaceholder />
+      )}
+    </div>
+  );
+};
+
 const Home: React.FC = () => {
   const isDark = useIsDark();
+  const isMobile = useIsMobile();
   const ref = useRef(null);
   const { scrollYProgress } = useScroll({
     target: ref,
@@ -80,27 +131,31 @@ const Home: React.FC = () => {
 
   return (
     <div className="portfolio-page relative min-h-dvh overflow-hidden transition-colors duration-500">
-      <DotField
-        className="pointer-events-none absolute z-0 inset-0"
-        dotRadius={1.5}
-        dotSpacing={14}
-        bulgeStrength={80}
-        glowRadius={100}
-        sparkle={false}
-        waveAmplitude={0}
-        cursorRadius={500}
-        cursorForce={0.1}
-        bulgeOnly
-        gradientFrom={
-          isDark ? "rgba(196, 181, 253, 0.42)" : "rgba(67, 56, 202, 0.5)"
-        }
-        gradientTo={
-          isDark ? "rgba(168, 85, 247, 0.3)" : "rgba(109, 40, 217, 0.36)"
-        }
-        glowColor={
-          isDark ? "rgba(168, 85, 247, 0.1)" : "rgba(109, 40, 217, 0.16)"
-        }
-      />
+      {isMobile ? (
+        <div aria-hidden="true" className="mobile-dot-field" />
+      ) : (
+        <DotField
+          className="pointer-events-none absolute inset-0 z-0"
+          dotRadius={1.5}
+          dotSpacing={14}
+          bulgeStrength={80}
+          glowRadius={100}
+          sparkle={false}
+          waveAmplitude={0}
+          cursorRadius={500}
+          cursorForce={0.1}
+          bulgeOnly
+          gradientFrom={
+            isDark ? "rgba(196, 181, 253, 0.42)" : "rgba(67, 56, 202, 0.5)"
+          }
+          gradientTo={
+            isDark ? "rgba(168, 85, 247, 0.3)" : "rgba(109, 40, 217, 0.36)"
+          }
+          glowColor={
+            isDark ? "rgba(168, 85, 247, 0.1)" : "rgba(109, 40, 217, 0.16)"
+          }
+        />
+      )}
       {/* Fixed Top Elements */}
       <div className="fixed top-5 left-5 z-50 ">
         <div className="w-16 h-16 relative">
@@ -132,6 +187,7 @@ const Home: React.FC = () => {
             <img
               src={garen}
               draggable={false}
+              decoding="async"
               className={`w-10 h-10 object-contain hover:cursor-pointer hover:scale-110 transition-transform duration-300 ease-in-out ${
                 isJumping ? "jump-once" : ""
               }`}
@@ -204,6 +260,9 @@ const Home: React.FC = () => {
             src={cat2}
             alt="Spinning Cat"
             draggable={false}
+            loading="lazy"
+            decoding="async"
+            fetchPriority="low"
             className="w-30 h-30 object-contain"
           />
         </div>
@@ -218,6 +277,9 @@ const Home: React.FC = () => {
             src={cat}
             alt="Spinning Cat"
             draggable={false}
+            loading="lazy"
+            decoding="async"
+            fetchPriority="low"
             className="w-32 h-32 object-contain"
           />
         </div>
@@ -225,7 +287,7 @@ const Home: React.FC = () => {
           <Interests />
         </div>
         <div id="travel" className="w-full">
-          <TravelMap />
+          <DeferredTravelMap />
         </div>
         <div id="contact" className="w-full">
           <Contact />
