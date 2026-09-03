@@ -36,7 +36,7 @@ const ProjectsSection: React.FC = () => {
 
   const categories: ProjectCategory[] = [
     {
-      title: "Generative AI & Data Science",
+      title: "AI-Powered Full Stack Applications",
       projects: [
         {
           title: "SmartWorld",
@@ -44,7 +44,7 @@ const ProjectsSection: React.FC = () => {
             "Web based trading bot providing real-time RSI, MACD, and Stochastic notifications, approved by a custom trained TensorFlow model.",
           image: dashboard,
           tags: [
-            "Full Stack",
+            "Full Stack Development",
             "TypeScript",
             "Authentication",
             "Python",
@@ -58,21 +58,33 @@ const ProjectsSection: React.FC = () => {
           description:
             "AI-powered web application that takes in a zip file or public repository URL and analyzes the codebase providing insights into its structure and functionality.",
           image: vize,
-          tags: ["React", "Python", "GenAI", "Data pipelines", "Data Science"],
+          tags: [
+            "Full Stack Development",
+            "React",
+            "Python",
+            "Generative AI",
+            "Data Pipelines",
+          ],
           liveUrl: "https://vize-qzbg.onrender.com/",
           githubUrl: "https://github.com/serafii/Vize",
         },
       ],
     },
     {
-      title: "Full Stack & Database",
+      title: "Web Platforms & Business Applications",
       projects: [
         {
           title: "EventHub",
           description:
             "Web application that allows students to register for events. Managers can register new events, view registered participants, and manage event details. Admins moderate the platform and oversees event activities.",
           image: events,
-          tags: ["React", "Node.js", "TypeScript", "MySQL", "REST API"],
+          tags: [
+            "Full Stack Development",
+            "React",
+            "Node.js",
+            "TypeScript",
+            "MySQL",
+          ],
           githubUrl:
             "https://github.com/AbderrahmaneBoulmalf/Group_A-SOEN341_Project_F25",
         },
@@ -81,14 +93,20 @@ const ProjectsSection: React.FC = () => {
           description:
             "This project is a customizable website template designed for small businesses. Admins can modify content and images through a custom interface. Clients can view services, contact the business and claim services.",
           image: services,
-          tags: ["Node.js", "MySQL", "EJS", "Bootstrap"],
+          tags: [
+            "Full Stack Development",
+            "Node.js",
+            "MySQL",
+            "EJS",
+            "Bootstrap",
+          ],
           githubUrl: "https://github.com/serafii/SOEN287_Project",
           liveUrl: "https://soen287-project-fvxv.onrender.com",
         },
       ],
     },
     {
-      title: "Other Projects",
+      title: "Portfolio Project",
       projects: [
         {
           title: "This Website",
@@ -105,7 +123,7 @@ const ProjectsSection: React.FC = () => {
 
   return (
     <div className="w-full flex items-center justify-center">
-      <div className="deferred-section w-full sm:w-4/5 md:w-2/3 lg:w-full 2xl:w-10/12 3xl:w-2/3 p-6 text-center text-slate-700 dark:text-white">
+      <div className="deferred-section w-full max-w-6xl p-6 text-center text-slate-700 dark:text-white">
         <motion.div
           initial={{ opacity: 0, y: 50 }}
           whileInView={{ opacity: 1, y: 0 }}
@@ -121,47 +139,57 @@ const ProjectsSection: React.FC = () => {
           </p>
         </motion.div>
         <div className="space-y-14">
-          {categories.map((category) => (
-            <div key={category.title}>
-              <motion.div
-                initial={{
-                  opacity: 0,
-                  x: -15,
-                }}
-                whileInView={{
-                  opacity: 1,
-                  x: 0,
-                }}
-                viewport={{
-                  once: true,
-                }}
-                transition={{
-                  duration: 0.6,
-                }}
-                className="flex items-center gap-3 mb-6"
-              >
-                <div className="w-1.5 h-6 rounded-full bg-violet-500 dark:bg-violet-400" />
-                <h3 className="text-lg font-semibold text-gray-800 dark:text-gray-200">
-                  {category.title}
-                </h3>
-              </motion.div>
+          {categories.map((category) => {
+            const isSingleProject = category.projects.length === 1;
 
-              <motion.div
-                className={`grid gap-6 ${category.projects.length === 1 ? "grid-cols-1 max-w-md" : "grid-cols-1 md:grid-cols-2"}`}
-                variants={sectionVariants}
-                initial="hidden"
-                whileInView="visible"
-                viewport={{
-                  once: true,
-                  margin: "-80px",
-                }}
-              >
-                {category.projects.map((project) => (
-                  <ProjectCard key={project.title} {...project} />
-                ))}
-              </motion.div>
-            </div>
-          ))}
+            return (
+              <div key={category.title}>
+                <motion.div
+                  initial={{
+                    opacity: 0,
+                    x: -15,
+                  }}
+                  whileInView={{
+                    opacity: 1,
+                    x: 0,
+                  }}
+                  viewport={{
+                    once: true,
+                  }}
+                  transition={{
+                    duration: 0.6,
+                  }}
+                  className={`mb-6 flex items-center gap-3 ${
+                    isSingleProject ? "justify-center" : ""
+                  }`}
+                >
+                  <div className="w-1.5 h-6 rounded-full bg-violet-500 dark:bg-violet-400" />
+                  <h3 className="text-lg font-semibold text-gray-800 dark:text-gray-200">
+                    {category.title}
+                  </h3>
+                </motion.div>
+
+                <motion.div
+                  className={`mx-auto grid gap-6 md:gap-x-10 ${
+                    isSingleProject
+                      ? "max-w-xl grid-cols-1"
+                      : "max-w-272 grid-cols-1 md:grid-cols-2"
+                  }`}
+                  variants={sectionVariants}
+                  initial="hidden"
+                  whileInView="visible"
+                  viewport={{
+                    once: true,
+                    margin: "-80px",
+                  }}
+                >
+                  {category.projects.map((project) => (
+                    <ProjectCard key={project.title} {...project} />
+                  ))}
+                </motion.div>
+              </div>
+            );
+          })}
         </div>
       </div>
     </div>

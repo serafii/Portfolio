@@ -32,6 +32,14 @@ const skills: Skill[] = [
     src: "https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/nodejs/nodejs-original-wordmark.svg",
   },
   {
+    name: "n8n",
+    src: "https://cdn.simpleicons.org/n8n/EA4B71",
+  },
+  {
+    name: "GraphQL",
+    src: "https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/graphql/graphql-plain.svg",
+  },
+  {
     name: "Git",
     src: "https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/git/git-original.svg",
   },
@@ -69,20 +77,6 @@ const skills: Skill[] = [
   },
 ];
 
-const learning: Skill[] = [
-  {
-    name: "Spring Boot",
-    src: "https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/spring/spring-original.svg",
-  },
-  {
-    name: "Redis",
-    src: "https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/redis/redis-original.svg",
-  },
-  {
-    name: "AWS",
-    src: "https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/amazonwebservices/amazonwebservices-original-wordmark.svg",
-  },
-];
 const containerVariants = {
   hidden: {},
   show: {
@@ -99,7 +93,7 @@ const skillVariants = {
 
 const Skills: React.FC = () => {
   return (
-    <div className="deferred-section w-full md:w-11/12 lg:w-10/12 p-6 sm:p-16 text-center text-slate-700 dark:text-white relative z-10 mx-auto transition-colors duration-500">
+    <div className="deferred-section relative z-10 mx-auto w-full p-6 text-center text-slate-700 transition-colors duration-500 dark:text-white sm:p-16 md:w-11/12 lg:w-10/12">
       <motion.div
         initial={{ opacity: 0, y: 50 }}
         whileInView={{ opacity: 1, y: 0 }}
@@ -115,7 +109,7 @@ const Skills: React.FC = () => {
       </motion.div>
 
       <motion.div
-        className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 xl:grid-cols-5 gap-8 w-full"
+        className="flex w-full flex-wrap justify-center gap-4 sm:gap-5 lg:gap-6"
         variants={containerVariants}
         initial="hidden"
         whileInView="show"
@@ -127,62 +121,24 @@ const Skills: React.FC = () => {
             rel="noreferrer"
             href={`https://www.google.com/search?q=${skill.name}`}
             key={skill.name}
+            className="w-[calc((100%-1rem)/2)] sm:w-[calc((100%-2.5rem)/3)] lg:w-[calc((100%-4.5rem)/4)] xl:w-[calc((100%-6rem)/5)]"
           >
             <motion.div
-              className="h-full transform-gpu bg-slate-200 dark:bg-[#160c23] rounded-xl shadow-lg p-6 flex flex-col items-center justify-center cursor-pointer border border-gray-100 dark:border-violet-300/15 transition-transform duration-200"
-              whileHover={{ scale: 1.05 }}
+              className="group relative flex min-h-40 h-full transform-gpu flex-col items-center justify-center overflow-hidden rounded-[1.75rem] border border-indigo-200/70 bg-slate-100/85 p-5 shadow-lg shadow-indigo-950/5 backdrop-blur-sm transition-[border-color,box-shadow] duration-300 hover:border-violet-400/70 hover:shadow-xl dark:border-violet-300/15 dark:bg-[#160c23]/90 dark:shadow-black/25 dark:hover:border-violet-300/45 sm:min-h-44 sm:p-6"
+              whileHover={{ y: -5 }}
               variants={skillVariants}
             >
-              <div className="p-3 mb-4 flex items-center justify-center">
-                <img src={skill.src} alt={skill.name} loading="lazy" decoding="async" className="w-12 h-12" />
+              <div className="absolute inset-x-0 top-0 h-20 bg-linear-to-b from-violet-500/10 to-transparent opacity-0 transition-opacity duration-300 group-hover:opacity-100" />
+              <div className="relative mb-4 flex h-16 w-16 items-center justify-center rounded-2xl border border-indigo-100 bg-white/70 p-3 shadow-sm transition-transform duration-300 group-hover:scale-110 dark:border-violet-300/15 dark:bg-[#0d0815]/70">
+                <img src={skill.src} alt="" loading="lazy" decoding="async" className="h-10 w-10 object-contain" />
               </div>
-              <h3 className="text-lg font-semibold text-gray-800 dark:text-white">
+              <h3 className="relative text-base font-semibold text-gray-800 dark:text-white sm:text-lg">
                 {skill.name}
               </h3>
             </motion.div>
           </a>
         ))}
       </motion.div>
-      <motion.p
-        initial={{ opacity: 0, y: 50 }}
-        whileInView={{ opacity: 1, y: 0 }}
-        transition={{ duration: 0.6 }}
-        viewport={{ once: true }}
-        className="mt-16 mb-12 text-2xl font-semibold"
-      >
-        What I'm currently learning
-      </motion.p>
-      <div className="w-full xl:w-3/5 items-center justify-center mx-auto ">
-        <motion.div
-          className="grid grid-cols-1 xs:grid-cols-2 sm:grid-cols-3 gap-8"
-          variants={containerVariants}
-          initial="hidden"
-          whileInView="show"
-          viewport={{ once: true, amount: 0.3 }}
-        >
-          {learning.map((skill) => (
-            <a
-              target="_blank"
-              rel="noreferrer"
-              href={`https://www.google.com/search?q=${skill.name}`}
-              key={skill.name}
-            >
-              <motion.div
-                className="h-full transform-gpu bg-slate-200 dark:bg-[#160c23] rounded-xl shadow-lg p-6 flex flex-col items-center justify-center cursor-pointer border border-gray-100 dark:border-violet-300/15 transition-transform duration-200"
-                variants={skillVariants}
-                whileHover={{ scale: 1.05 }}
-              >
-                <div className="p-3 mb-4 flex items-center justify-center">
-                  <img src={skill.src} alt={skill.name} loading="lazy" decoding="async" className="w-12 h-12" />
-                </div>
-                <h3 className="text-lg font-semibold text-gray-800 dark:text-white">
-                  {skill.name}
-                </h3>
-              </motion.div>
-            </a>
-          ))}
-        </motion.div>
-      </div>
     </div>
   );
 };

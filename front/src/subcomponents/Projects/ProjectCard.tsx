@@ -34,7 +34,7 @@ const ProjectCard: React.FC<ProjectCardProps> = ({
   return (
     <motion.div
       variants={cardVariants}
-      className="group transform-gpu bg-slate-100 dark:bg-[#160c23] rounded-2xl overflow-hidden border border-gray-100 dark:border-violet-300/15 shadow-lg hover:shadow-xl transition-transform transition-shadow duration-300"
+      className="group flex h-full transform-gpu flex-col overflow-hidden rounded-2xl border border-gray-100 bg-slate-100 shadow-lg transition-transform transition-shadow duration-300 hover:shadow-xl dark:border-violet-300/15 dark:bg-[#160c23]"
     >
       <div className="relative overflow-hidden h-48">
         <img
@@ -71,14 +71,14 @@ const ProjectCard: React.FC<ProjectCardProps> = ({
         </div>
       </div>
 
-      <div className="p-5">
+      <div className="flex flex-1 flex-col p-5">
         <h3 className="text-lg font-bold text-gray-900 dark:text-white mb-2 group-hover:text-indigo-600 dark:group-hover:text-indigo-400 transition-colors duration-300">
           {title}
         </h3>
         <p className="text-sm text-gray-600 dark:text-gray-400 leading-relaxed mb-4">
           {description}
         </p>
-        <div className="flex flex-wrap gap-2">
+        <div className="mt-auto flex flex-wrap gap-2 pt-2">
           {tags.map((tag) => (
             <span
               key={tag}

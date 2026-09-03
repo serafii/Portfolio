@@ -1,12 +1,6 @@
 import React from "react";
 import { motion, type Variants } from "framer-motion";
-import {
-  Layers,
-  BrainCircuit,
-  BarChart3,
-  Cloud,
-  ShieldCheck,
-} from "lucide-react";
+import { Layers, BrainCircuit, BarChart3, Cloud, Workflow } from "lucide-react";
 const interests = [
   {
     label: "Full Stack Development",
@@ -25,8 +19,8 @@ const interests = [
     icon: Cloud,
   },
   {
-    label: "Cybersecurity",
-    icon: ShieldCheck,
+    label: "Automation",
+    icon: Workflow,
   },
 ];
 const containerVariants: Variants = {
