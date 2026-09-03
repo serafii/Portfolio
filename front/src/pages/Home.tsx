@@ -2,7 +2,8 @@ import React, { useEffect, useRef, useState } from "react";
 import { motion, useScroll } from "motion/react";
 import { CircleUserRound } from "lucide-react";
 import Main from "../components/Screen";
-import Description from "../components/Description";
+import About from "../components/About";
+import Education from "../components/Education";
 import Experience from "../components/Experience";
 import Skills from "../components/Skills";
 import Projects from "../components/Projects";
@@ -245,12 +246,13 @@ const Home: React.FC = () => {
               <Main />
             </div>
             <div id="about" className="w-full">
-              <Description />
+              <About />
             </div>
           </div>
         </div>
-        <div id="experience" className="w-full">
+        <div id="experience" className="w-full flex flex-col items-center ">
           <Experience />
+          <Education />
         </div>
         <div id="skills" className="w-full">
           <Skills />

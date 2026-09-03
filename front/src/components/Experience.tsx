@@ -33,7 +33,7 @@ const containerVariants: Variants = {
 const Experience: React.FC = () => {
   return (
     <div className="w-full md:w-5/6 lg:w-full xl:w-3/4 3xl:w-3/4 mx-auto px-10 text-center text-slate-700 dark:text-white z-10">
-      <section className="w-full py-12">
+      <section className="w-full pb-4 pt-12">
         <motion.div
           initial={{
             opacity: 0,
@@ -66,13 +66,20 @@ const Experience: React.FC = () => {
             once: true,
             margin: "-100px",
           }}
-          className="relative border-l-2 border-indigo-200 dark:border-indigo-900/50 sm:ml-4 md:ml-6"
+          className="relative"
         >
+          <div
+            aria-hidden="true"
+            className="pointer-events-none absolute bottom-6 left-5 top-4 w-px bg-linear-to-b from-indigo-300 via-violet-400 to-indigo-200 dark:from-violet-300/25 dark:via-violet-400/80 dark:to-violet-300/10"
+          />
           <motion.div
             variants={itemVariants}
-            className="mb-12 ml-3 sm:ml-8 md:ml-12 relative group"
+            className="relative mb-0 pl-12 group"
           >
-            <div className="bg-slate-200 dark:bg-[#160c23] rounded-2xl p-6 shadow-lg border border-gray-100 dark:border-violet-300/15 hover:shadow-xl transition-shadow duration-300">
+            <div className="absolute left-3 top-7 flex h-4 w-4 items-center justify-center rounded-full border-2 border-indigo-500 bg-slate-100 shadow-sm shadow-indigo-500/30 transition-transform duration-300 group-hover:scale-125 dark:border-violet-300 dark:bg-[#0d0815] dark:shadow-violet-500/40">
+              <span className="h-1.5 w-1.5 rounded-full bg-indigo-500 dark:bg-violet-300" />
+            </div>
+            <div className="rounded-[2rem] border border-indigo-200/70 bg-slate-100/85 p-7 shadow-xl shadow-indigo-950/5 backdrop-blur-sm transition-[border-color,box-shadow,transform] duration-300 hover:border-violet-400/70 hover:shadow-2xl dark:border-violet-300/15 dark:bg-[#160c23]/90 dark:shadow-black/25 dark:hover:border-violet-300/45 md:p-8">
               <div className="flex flex-col sm:flex-row gap-6 items-start text-left">
                 <img
                   src={must}
