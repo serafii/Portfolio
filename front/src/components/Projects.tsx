@@ -1,14 +1,14 @@
 import React from "react";
-import { motion, type Variants } from "framer-motion";
+import { motion } from "framer-motion";
 import ProjectCard from "../subcomponents/Projects/ProjectCard.tsx";
 
 // {Images}
-import dashboard from "../assets/dashboard_smartworld.png";
-import vize from "../assets/Vize.png";
-import events from "../assets/eventhub.png";
-import services from "../assets/edit_services.png";
-import portfolio from "../assets/this_website.png";
-import dark from "../assets/this_dark.png";
+import dashboard from "../assets/dashboard_smartworld.jpg";
+import vize from "../assets/Vize.jpg";
+import events from "../assets/eventhub.jpg";
+import services from "../assets/edit_services.jpg";
+import portfolio from "../assets/this_website.jpg";
+import dark from "../assets/this_dark.jpg";
 import useIsDark from "../utils/IsDark.tsx";
 
 interface ProjectCategory {
@@ -22,15 +22,6 @@ interface ProjectCategory {
     githubUrl?: string;
   }[];
 }
-const sectionVariants: Variants = {
-  hidden: {},
-  visible: {
-    transition: {
-      staggerChildren: 0.08,
-    },
-  },
-};
-
 const ProjectsSection: React.FC = () => {
   const isDark = useIsDark();
 
@@ -144,21 +135,7 @@ const ProjectsSection: React.FC = () => {
 
             return (
               <div key={category.title}>
-                <motion.div
-                  initial={{
-                    opacity: 0,
-                    x: -15,
-                  }}
-                  whileInView={{
-                    opacity: 1,
-                    x: 0,
-                  }}
-                  viewport={{
-                    once: true,
-                  }}
-                  transition={{
-                    duration: 0.6,
-                  }}
+                <div
                   className={`mb-6 flex items-center gap-3 ${
                     isSingleProject ? "justify-center" : ""
                   }`}
@@ -167,26 +144,19 @@ const ProjectsSection: React.FC = () => {
                   <h3 className="text-lg font-semibold text-gray-800 dark:text-gray-200">
                     {category.title}
                   </h3>
-                </motion.div>
+                </div>
 
-                <motion.div
+                <div
                   className={`mx-auto grid gap-6 md:gap-x-10 ${
                     isSingleProject
                       ? "max-w-xl grid-cols-1"
                       : "max-w-272 grid-cols-1 md:grid-cols-2"
                   }`}
-                  variants={sectionVariants}
-                  initial="hidden"
-                  whileInView="visible"
-                  viewport={{
-                    once: true,
-                    margin: "-80px",
-                  }}
                 >
                   {category.projects.map((project) => (
                     <ProjectCard key={project.title} {...project} />
                   ))}
-                </motion.div>
+                </div>
               </div>
             );
           })}

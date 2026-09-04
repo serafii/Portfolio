@@ -11,7 +11,7 @@ const About: React.FC = () => {
         whileInView={{ opacity: 1, y: 0 }}
         viewport={{ once: true, amount: 0.2 }}
         transition={{ duration: 0.55, ease: "easeOut" }}
-        className="mx-auto grid w-full max-w-6xl items-center gap-10 rounded-[2.25rem] border border-indigo-200/70 bg-slate-100/85 p-7 shadow-xl shadow-indigo-950/5 backdrop-blur-sm transition-colors duration-300 hover:border-violet-400/70 dark:border-violet-300/15 dark:bg-[#160c23]/90 dark:shadow-black/25 dark:hover:border-violet-300/45 md:grid-cols-[minmax(12rem,0.65fr)_minmax(0,1.35fr)] md:gap-12 md:rounded-[3rem] md:p-12"
+        className="mx-auto grid w-full max-w-6xl items-center gap-10 rounded-[2.25rem] border border-indigo-200/70 bg-slate-100/85 p-7 shadow-xl shadow-indigo-950/5 transition-colors duration-300 hover:border-violet-400/70 dark:border-violet-300/15 dark:bg-[#160c23]/90 dark:shadow-black/25 dark:hover:border-violet-300/45 md:grid-cols-[minmax(12rem,0.65fr)_minmax(0,1.35fr)] md:gap-12 md:rounded-[3rem] md:p-12"
       >
         <div className="flex justify-center md:justify-start">
           <div className="relative aspect-square w-44 overflow-hidden rounded-full border-4 border-white/80 bg-violet-100 p-1 shadow-xl shadow-violet-950/20 dark:border-violet-300/20 dark:bg-[#0d0815] sm:w-52 md:w-full md:max-w-64">

@@ -77,20 +77,6 @@ const skills: Skill[] = [
   },
 ];
 
-const containerVariants = {
-  hidden: {},
-  show: {
-    transition: {
-      staggerChildren: 0.06,
-    },
-  },
-};
-
-const skillVariants = {
-  hidden: { opacity: 0, scale: 0.8 },
-  show: { opacity: 1, scale: 1, transition: { duration: 0.25 } },
-};
-
 const Skills: React.FC = () => {
   return (
     <div className="deferred-section relative z-10 mx-auto w-full p-6 text-center text-slate-700 transition-colors duration-500 dark:text-white sm:p-16 md:w-11/12 lg:w-10/12">
@@ -108,12 +94,8 @@ const Skills: React.FC = () => {
         </p>
       </motion.div>
 
-      <motion.div
+      <div
         className="flex w-full flex-wrap justify-center gap-4 sm:gap-5 lg:gap-6"
-        variants={containerVariants}
-        initial="hidden"
-        whileInView="show"
-        viewport={{ once: true, amount: 0.1 }}
       >
         {skills.map((skill) => (
           <a
@@ -123,10 +105,8 @@ const Skills: React.FC = () => {
             key={skill.name}
             className="w-[calc((100%-1rem)/2)] sm:w-[calc((100%-2.5rem)/3)] lg:w-[calc((100%-4.5rem)/4)] xl:w-[calc((100%-6rem)/5)]"
           >
-            <motion.div
-              className="group relative flex min-h-40 h-full transform-gpu flex-col items-center justify-center overflow-hidden rounded-[1.75rem] border border-indigo-200/70 bg-slate-100/85 p-5 shadow-lg shadow-indigo-950/5 backdrop-blur-sm transition-[border-color,box-shadow] duration-300 hover:border-violet-400/70 hover:shadow-xl dark:border-violet-300/15 dark:bg-[#160c23]/90 dark:shadow-black/25 dark:hover:border-violet-300/45 sm:min-h-44 sm:p-6"
-              whileHover={{ y: -5 }}
-              variants={skillVariants}
+            <div
+              className="group relative flex min-h-40 h-full transform-gpu flex-col items-center justify-center overflow-hidden rounded-[1.75rem] border border-indigo-200/70 bg-slate-100/85 p-5 shadow-lg shadow-indigo-950/5 transition-[border-color,box-shadow] duration-300 hover:border-violet-400/70 hover:shadow-xl dark:border-violet-300/15 dark:bg-[#160c23]/90 dark:shadow-black/25 dark:hover:border-violet-300/45 sm:min-h-44 sm:p-6"
             >
               <div className="absolute inset-x-0 top-0 h-20 bg-linear-to-b from-violet-500/10 to-transparent opacity-0 transition-opacity duration-300 group-hover:opacity-100" />
               <div className="relative mb-4 flex h-16 w-16 items-center justify-center rounded-2xl border border-indigo-100 bg-white/70 p-3 shadow-sm transition-transform duration-300 group-hover:scale-110 dark:border-violet-300/15 dark:bg-[#0d0815]/70">
@@ -135,10 +115,10 @@ const Skills: React.FC = () => {
               <h3 className="relative text-base font-semibold text-gray-800 dark:text-white sm:text-lg">
                 {skill.name}
               </h3>
-            </motion.div>
+            </div>
           </a>
         ))}
-      </motion.div>
+      </div>
     </div>
   );
 };

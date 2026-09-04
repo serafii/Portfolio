@@ -3,6 +3,8 @@ import { useEffect, useRef, memo } from 'react';
 import './DotField.css';
 
 const TWO_PI = Math.PI * 2;
+const FRAME_INTERVAL = 1000 / 60;
+const IDLE_DELAY = 350;
 
 const DotField = memo(({
   dotRadius = 1.5,
@@ -20,10 +22,9 @@ const DotField = memo(({
   ...rest
 }) => {
   const canvasRef = useRef(null);
-  const svgRef = useRef(null);
   const glowRef = useRef(null);
   const dotsRef = useRef([]);
-  const mouseRef = useRef({ x: -9999, y: -9999, prevX: -9999, prevY: -9999, speed: 0 });
+  const mouseRef = useRef({ x: -9999, y: -9999, speed: 0, lastTime: 0 });
   const rafRef = useRef(null);
   const sizeRef = useRef({ w: 0, h: 0, offsetX: 0, offsetY: 0 });
   const glowOpacity = useRef(0);
@@ -38,8 +39,11 @@ const DotField = memo(({
     const glowEl = glowRef.current;
     if (!canvas) return;
     const ctx = canvas.getContext('2d', { alpha: true });
-    const dpr = Math.min(window.devicePixelRatio || 1, 2);
+    const dpr = 1;
     let resizeTimer;
+    let frameCount = 0;
+    let lastFrameTime = 0;
+    let lastInteractionTime = -Infinity;
 
     function resize() {
       clearTimeout(resizeTimer);
@@ -65,6 +69,7 @@ const DotField = memo(({
       };
 
       buildDots(w, h);
+      drawFrame();
     }
 
     function buildDots(w, h) {
@@ -87,28 +92,28 @@ const DotField = memo(({
       dotsRef.current = dots;
     }
 
-    function onMouseMove(e) {
+    function onPointerMove(e) {
       const s = sizeRef.current;
-      mouseRef.current.x = e.pageX - s.offsetX;
-      mouseRef.current.y = e.pageY - s.offsetY;
-    }
-
-    function updateMouseSpeed() {
       const m = mouseRef.current;
-      const dx = m.prevX - m.x;
-      const dy = m.prevY - m.y;
-      const dist = Math.sqrt(dx * dx + dy * dy);
-      m.speed += (dist - m.speed) * 0.5;
-      if (m.speed < 0.001) m.speed = 0;
-      m.prevX = m.x;
-      m.prevY = m.y;
+      const x = e.pageX - s.offsetX;
+      const y = e.pageY - s.offsetY;
+      const now = performance.now();
+
+      if (m.lastTime) {
+        const distance = Math.hypot(x - m.x, y - m.y);
+        const elapsed = Math.max(now - m.lastTime, 1);
+        const speed = distance * (20 / elapsed);
+        m.speed += (speed - m.speed) * 0.5;
+      }
+
+      m.x = x;
+      m.y = y;
+      m.lastTime = now;
+      lastInteractionTime = now;
+      requestFrame();
     }
 
-    const speedInterval = setInterval(updateMouseSpeed, 20);
-
-    let frameCount = 0;
-
-    function tick() {
+    function drawFrame() {
       frameCount++;
       const dots = dotsRef.current;
       const m = mouseRef.current;
@@ -201,26 +206,63 @@ const DotField = memo(({
       }
 
       ctx.fill();
+    }
 
+    function resetToStaticState() {
+      const m = mouseRef.current;
+      m.speed = 0;
+      engagement.current = 0;
+      glowOpacity.current = 0;
+      dotsRef.current.forEach((dot) => {
+        dot.sx = dot.ax;
+        dot.sy = dot.ay;
+        dot.vx = 0;
+        dot.vy = 0;
+      });
+    }
+
+    function tick(timestamp) {
+      if (timestamp - lastFrameTime < FRAME_INTERVAL) {
+        rafRef.current = requestAnimationFrame(tick);
+        return;
+      }
+
+      lastFrameTime = timestamp;
+      if (timestamp - lastInteractionTime > IDLE_DELAY) {
+        resetToStaticState();
+        drawFrame();
+        rafRef.current = null;
+        return;
+      }
+
+      mouseRef.current.speed *= 0.92;
+      drawFrame();
       rafRef.current = requestAnimationFrame(tick);
+    }
+
+    function requestFrame() {
+      if (rafRef.current === null) {
+        rafRef.current = requestAnimationFrame(tick);
+      }
     }
 
     doResize();
     window.addEventListener('resize', resize);
-    window.addEventListener('mousemove', onMouseMove, { passive: true });
-    rafRef.current = requestAnimationFrame(tick);
+    window.addEventListener('pointermove', onPointerMove, { passive: true });
 
     rebuildRef.current = () => {
       const { w, h } = sizeRef.current;
-      if (w > 0 && h > 0) buildDots(w, h);
+      if (w > 0 && h > 0) {
+        buildDots(w, h);
+        drawFrame();
+      }
     };
 
     return () => {
-      cancelAnimationFrame(rafRef.current);
-      clearInterval(speedInterval);
+      if (rafRef.current !== null) cancelAnimationFrame(rafRef.current);
       clearTimeout(resizeTimer);
       window.removeEventListener('resize', resize);
-      window.removeEventListener('mousemove', onMouseMove);
+      window.removeEventListener('pointermove', onPointerMove);
     };
   // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
@@ -241,7 +283,6 @@ const DotField = memo(({
         }}
       />
       <svg
-        ref={svgRef}
         style={{
           position: 'absolute',
           inset: 0,

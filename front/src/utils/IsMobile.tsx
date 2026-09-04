@@ -14,3 +14,21 @@ export const useIsMobile = (breakpoint = 768) => {
 
   return isMobile;
 };
+
+export const useIsCoarsePointer = () => {
+  const [isCoarsePointer, setIsCoarsePointer] = useState(() =>
+    typeof window !== "undefined" &&
+    window.matchMedia("(pointer: coarse)").matches,
+  );
+
+  useEffect(() => {
+    const mediaQuery = window.matchMedia("(pointer: coarse)");
+    const updatePointerType = () => setIsCoarsePointer(mediaQuery.matches);
+
+    updatePointerType();
+    mediaQuery.addEventListener("change", updatePointerType);
+    return () => mediaQuery.removeEventListener("change", updatePointerType);
+  }, []);
+
+  return isCoarsePointer;
+};

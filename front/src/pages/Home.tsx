@@ -12,7 +12,8 @@ import Contact from "../components/Contact";
 import garen from "../assets/garenDance_nobg.gif";
 import DarkModeToggle from "../utils/DarkMode.tsx";
 import useIsDark from "../utils/IsDark.tsx";
-import { useIsMobile } from "../utils/IsMobile";
+import { useIsCoarsePointer, useIsMobile } from "../utils/IsMobile";
+import { useReducedMotion } from "../utils/ReducedMotion";
 import cat from "../assets/spin_cat.gif";
 import cat2 from "../assets/sideway_cat.gif";
 import DotField from "../../components/DotField.jsx";
@@ -163,6 +164,8 @@ const HoverFreezeGif: React.FC<HoverFreezeGifProps> = ({
 const Home: React.FC = () => {
   const isDark = useIsDark();
   const isMobile = useIsMobile();
+  const isCoarsePointer = useIsCoarsePointer();
+  const prefersReducedMotion = useReducedMotion();
   const ref = useRef(null);
   const { scrollYProgress } = useScroll({
     target: ref,
@@ -207,18 +210,21 @@ const Home: React.FC = () => {
   const scrollToSection = (id: string) => {
     document
       .getElementById(id)
-      ?.scrollIntoView({ behavior: "smooth", block: "start" });
+      ?.scrollIntoView({
+        behavior: prefersReducedMotion ? "auto" : "smooth",
+        block: "start",
+      });
   };
 
   return (
     <div className="portfolio-page relative min-h-dvh overflow-hidden transition-colors duration-500">
-      {isMobile ? (
+      {isMobile || isCoarsePointer || prefersReducedMotion ? (
         <div aria-hidden="true" className="mobile-dot-field" />
       ) : (
         <DotField
           className="pointer-events-none absolute inset-0 z-0"
           dotRadius={1.5}
-          dotSpacing={14}
+          dotSpacing={16}
           bulgeStrength={80}
           glowRadius={100}
           sparkle={false}

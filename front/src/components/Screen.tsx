@@ -2,18 +2,20 @@ import React, { useState, useEffect } from "react";
 import { motion } from "framer-motion";
 import { WordsPullUp } from "../utils/words-pull-up";
 import { arrow } from "../subcomponents/Icons.tsx";
+import { useReducedMotion } from "../utils/ReducedMotion";
 import { Popover } from "antd";
 
-const Main: React.FC = () => {
-  const textLines: string[] = [
-    "Hello! I'm",
-    "Nice to meet you! I'm",
-    "The person who typed this is",
-    "Get to know me! I'm",
-  ];
+const textLines = [
+  "Hello! I'm",
+  "Nice to meet you! I'm",
+  "The person who typed this is",
+  "Get to know me! I'm",
+];
 
+const Main: React.FC = () => {
   const [currentLine, setCurrentLine] = useState(textLines[0]);
-  const [scrollY, setScrollY] = useState(0);
+  const [showBackToTop, setShowBackToTop] = useState(false);
+  const prefersReducedMotion = useReducedMotion();
 
   useEffect(() => {
     const interval = setInterval(() => {
@@ -28,8 +30,12 @@ const Main: React.FC = () => {
 
   useEffect(() => {
     const handleScroll = () => {
-      setScrollY(window.scrollY);
+      const shouldShow = window.scrollY > 200;
+      setShowBackToTop((currentlyShown) =>
+        currentlyShown === shouldShow ? currentlyShown : shouldShow,
+      );
     };
+    handleScroll();
     window.addEventListener("scroll", handleScroll, { passive: true });
     return () => window.removeEventListener("scroll", handleScroll);
   }, []);
@@ -37,14 +43,14 @@ const Main: React.FC = () => {
   const handleBackToTop = () => {
     window.scrollTo({
       top: 0,
-      behavior: "smooth",
+      behavior: prefersReducedMotion ? "auto" : "smooth",
     });
   };
 
   return (
     <div className="relative flex min-h-screen w-full items-center justify-center overflow-hidden">
       <div className="absolute top-0 left-0 w-full h-1/2 z-0">
-        {scrollY > 200 && (
+        {showBackToTop && (
           <Popover
             content={<p className="text-white">Back to Top</p>}
             placement="top"
@@ -63,9 +69,9 @@ const Main: React.FC = () => {
         )}
       </div>
       <motion.div
-        initial={{ opacity: 0, y: 50 }}
+        initial={{ opacity: 0, y: 25 }}
         whileInView={{ opacity: 1, y: 0 }}
-        transition={{ duration: 1 }}
+        transition={{ duration: 0.8 }}
         viewport={{ once: true }}
         className="relative z-10 rounded-lg p-8 text-center"
       >
