@@ -74,13 +74,7 @@ const Main: React.FC = () => {
           )}
         </AnimatePresence>
       </div>
-      <motion.div
-        initial={{ opacity: 0, y: 50 }}
-        whileInView={{ opacity: 1, y: 0 }}
-        transition={{ duration: 1 }}
-        viewport={{ once: true }}
-        className="relative z-10 rounded-lg p-8 text-center"
-      >
+      <div className="relative z-10 rounded-lg p-8 text-center">
         <WordsPullUp key={currentLine} text={currentLine} />
         <div className="bg-linear-to-r from-indigo-600 to-purple-600 bg-clip-text pt-1 text-5xl font-bold text-transparent dark:from-indigo-400 dark:to-purple-400">
           Sami Erafii.
@@ -91,7 +85,7 @@ const Main: React.FC = () => {
             Automation
           </span>
         </p>
-      </motion.div>
+      </div>
     </div>
   );
 };

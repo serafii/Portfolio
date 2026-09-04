@@ -1,5 +1,4 @@
 import React from "react";
-import { motion, type Variants } from "framer-motion";
 import { ExternalLink } from "lucide-react";
 import { GithubIcon } from "../Icons";
 
@@ -11,18 +10,6 @@ interface ProjectCardProps {
   liveUrl?: string;
   githubUrl?: string;
 }
-const cardVariants: Variants = {
-  hidden: {
-    y: 30,
-  },
-  visible: {
-    y: 0,
-    transition: {
-      duration: 0.35,
-      ease: "easeOut" as const,
-    },
-  },
-};
 const ProjectCard: React.FC<ProjectCardProps> = ({
   title,
   description,
@@ -32,8 +19,7 @@ const ProjectCard: React.FC<ProjectCardProps> = ({
   githubUrl,
 }: ProjectCardProps) => {
   return (
-    <motion.div
-      variants={cardVariants}
+    <div
       className="group flex h-full transform-gpu flex-col overflow-hidden rounded-2xl border border-gray-100 bg-slate-100 shadow-lg transition-transform transition-shadow duration-300 hover:shadow-xl dark:border-violet-300/15 dark:bg-[#160c23]"
     >
       <div className="relative overflow-hidden h-48">
@@ -89,7 +75,7 @@ const ProjectCard: React.FC<ProjectCardProps> = ({
           ))}
         </div>
       </div>
-    </motion.div>
+    </div>
   );
 };
 

@@ -130,7 +130,13 @@ const Skills: React.FC = () => {
             >
               <div className="absolute inset-x-0 top-0 h-20 bg-linear-to-b from-violet-500/10 to-transparent opacity-0 transition-opacity duration-300 group-hover:opacity-100" />
               <div className="relative mb-4 flex h-16 w-16 items-center justify-center rounded-2xl border border-indigo-100 bg-white/70 p-3 shadow-sm transition-transform duration-300 group-hover:scale-110 dark:border-violet-300/15 dark:bg-[#0d0815]/70">
-                <img src={skill.src} alt="" loading="lazy" decoding="async" className="h-10 w-10 object-contain" />
+                <img
+                  src={skill.src}
+                  alt=""
+                  loading="lazy"
+                  decoding="async"
+                  className="h-10 w-10 object-contain"
+                />
               </div>
               <h3 className="relative text-base font-semibold text-gray-800 dark:text-white sm:text-lg">
                 {skill.name}
