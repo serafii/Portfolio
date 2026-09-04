@@ -61,7 +61,7 @@ const Main: React.FC = () => {
               exit={{ opacity: 0 }}
               onClick={handleBackToTop}
               aria-label="Back to top"
-              className="group fixed bottom-6 right-6 z-50 invisible flex h-16 w-16 items-center justify-center rounded-full bg-indigo-600 p-3 text-2xl text-white shadow-lg transition-colors duration-300 hover:cursor-pointer hover:bg-indigo-500 sm:visible"
+              className="group fixed bottom-6 right-6 z-100 invisible flex h-16 w-16 items-center justify-center rounded-full bg-indigo-600 p-3 text-2xl text-white shadow-lg transition-colors duration-300 hover:cursor-pointer hover:bg-indigo-500 sm:visible"
             >
               {arrow}
               <span
