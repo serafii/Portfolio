@@ -1,5 +1,4 @@
 import React, { useState, useEffect } from "react";
-import { motion } from "framer-motion";
 import { WordsPullUp } from "../utils/words-pull-up";
 import { arrow } from "../subcomponents/Icons.tsx";
 import { Popover } from "antd";
@@ -13,7 +12,7 @@ const Main: React.FC = () => {
   ];
 
   const [currentLine, setCurrentLine] = useState(textLines[0]);
-  const [scrollY, setScrollY] = useState(0);
+  const [showBackToTop, setShowBackToTop] = useState(false);
 
   useEffect(() => {
     const interval = setInterval(() => {
@@ -27,8 +26,15 @@ const Main: React.FC = () => {
   }, []);
 
   useEffect(() => {
+    let isPastThreshold = window.scrollY > 200;
+    setShowBackToTop(isPastThreshold);
+
     const handleScroll = () => {
-      setScrollY(window.scrollY);
+      const shouldShow = window.scrollY > 200;
+      if (shouldShow === isPastThreshold) return;
+
+      isPastThreshold = shouldShow;
+      setShowBackToTop(shouldShow);
     };
     window.addEventListener("scroll", handleScroll, { passive: true });
     return () => window.removeEventListener("scroll", handleScroll);
@@ -44,31 +50,22 @@ const Main: React.FC = () => {
   return (
     <div className="relative flex min-h-screen w-full items-center justify-center overflow-hidden">
       <div className="absolute top-0 left-0 w-full h-1/2 z-0">
-        {scrollY > 200 && (
+        {showBackToTop && (
           <Popover
             content={<p className="text-white">Back to Top</p>}
             placement="top"
             color="oklch(58.5% 0.233 277.117) "
           >
-            <motion.button
-              initial={{ opacity: 0 }}
-              animate={{ opacity: 1 }}
-              exit={{ opacity: 0 }}
+            <button
               onClick={handleBackToTop}
               className="fixed bottom-6 w-16 h-16 right-6 bg-indigo-600 hover:bg-indigo-500 text-white p-3 rounded-full shadow-lg z-50 transition-colors duration-300 hover:cursor-pointer flex items-center justify-center text-2xl invisible sm:visible"
             >
               {arrow}
-            </motion.button>
+            </button>
           </Popover>
         )}
       </div>
-      <motion.div
-        initial={{ opacity: 0, y: 50 }}
-        whileInView={{ opacity: 1, y: 0 }}
-        transition={{ duration: 1 }}
-        viewport={{ once: true }}
-        className="relative z-10 rounded-lg p-8 text-center"
-      >
+      <div className="relative z-10 rounded-lg p-8 text-center">
         <WordsPullUp key={currentLine} text={currentLine} />
         <div className="bg-linear-to-r from-indigo-600 to-purple-600 bg-clip-text pt-1 text-5xl font-bold text-transparent dark:from-indigo-400 dark:to-purple-400">
           Sami Erafii.
@@ -79,7 +76,7 @@ const Main: React.FC = () => {
             Automation
           </span>
         </p>
-      </motion.div>
+      </div>
     </div>
   );
 };

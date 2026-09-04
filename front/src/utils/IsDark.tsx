@@ -1,11 +1,14 @@
 import { useState, useEffect } from "react";
 
 export default function useIsDark() {
-  const [isDark, setIsDark] = useState<boolean>(() =>
-    typeof window !== "undefined"
-      ? document.documentElement.classList.contains("dark")
-      : false
-  );
+  const [isDark, setIsDark] = useState<boolean>(() => {
+    if (typeof window === "undefined") return false;
+
+    return (
+      document.documentElement.classList.contains("dark") ||
+      window.matchMedia("(prefers-color-scheme: dark)").matches
+    );
+  });
 
   useEffect(() => {
     const el = document.documentElement;
