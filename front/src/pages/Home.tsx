@@ -1,14 +1,8 @@
 import React, { useEffect, useRef, useState } from "react";
-import { motion, useScroll } from "motion/react";
+import { motion, useScroll } from "framer-motion";
 import { CircleUserRound } from "lucide-react";
 import Main from "../components/Screen";
 import About from "../components/About";
-import Education from "../components/Education";
-import Experience from "../components/Experience";
-import Skills from "../components/Skills";
-import Projects from "../components/Projects";
-import Interests from "../components/Interests";
-import Contact from "../components/Contact";
 import garen from "../assets/garenDance_nobg.gif";
 import DarkModeToggle from "../utils/DarkMode.tsx";
 import useIsDark from "../utils/IsDark.tsx";
@@ -31,6 +25,12 @@ const observedSectionIds = [
 ];
 
 const LazyTravelMap = React.lazy(() => import("../components/TravelMap.tsx"));
+const LazyEducation = React.lazy(() => import("../components/Education.tsx"));
+const LazyExperience = React.lazy(() => import("../components/Experience.tsx"));
+const LazySkills = React.lazy(() => import("../components/Skills.tsx"));
+const LazyProjects = React.lazy(() => import("../components/Projects.tsx"));
+const LazyInterests = React.lazy(() => import("../components/Interests.tsx"));
+const LazyContact = React.lazy(() => import("../components/Contact.tsx"));
 
 const TravelMapPlaceholder: React.FC = () => (
   <section
@@ -44,6 +44,35 @@ const TravelMapPlaceholder: React.FC = () => (
     </div>
   </section>
 );
+
+const SectionPlaceholder: React.FC = () => (
+  <div aria-hidden="true" className="min-h-[420px] w-full" />
+);
+
+const DeferredSection: React.FC<React.PropsWithChildren> = ({ children }) => {
+  const sectionRef = useRef<HTMLDivElement>(null);
+  const [shouldRender, setShouldRender] = useState(false);
+
+  useEffect(() => {
+    const section = sectionRef.current;
+    if (!section) return;
+
+    const observer = new IntersectionObserver(
+      ([entry]) => {
+        if (entry.isIntersecting) {
+          setShouldRender(true);
+          observer.disconnect();
+        }
+      },
+      { rootMargin: "600px 0px" },
+    );
+
+    observer.observe(section);
+    return () => observer.disconnect();
+  }, []);
+
+  return <div ref={sectionRef}>{shouldRender ? children : <SectionPlaceholder />}</div>;
+};
 
 const DeferredTravelMap: React.FC = () => {
   const sectionRef = useRef<HTMLDivElement>(null);
@@ -218,7 +247,7 @@ const Home: React.FC = () => {
         <DotField
           className="pointer-events-none absolute inset-0 z-0"
           dotRadius={1.5}
-          dotSpacing={14}
+          dotSpacing={16}
           bulgeStrength={80}
           glowRadius={100}
           sparkle={false}
@@ -292,7 +321,7 @@ const Home: React.FC = () => {
 
       <nav
         aria-label="Page sections"
-        className="fixed top-5 left-1/2 z-50 hidden max-w-max -translate-x-1/2 overflow-x-auto rounded-full border border-slate-300/70 bg-slate-100/85 p-1 shadow-lg shadow-slate-900/10 backdrop-blur-md sm:block dark:border-violet-300/15 dark:bg-[#120a20]/75 dark:shadow-black/40"
+        className="fixed top-5 left-1/2 z-50 hidden max-w-max -translate-x-1/2 overflow-x-auto rounded-full border border-slate-300/70 bg-slate-100/95 p-1 shadow-lg shadow-slate-900/10 sm:block dark:border-violet-300/15 dark:bg-[#120a20]/95 dark:shadow-black/40"
       >
         <div className="flex w-max items-center gap-1">
           {navigationItems.map(({ id, label }) => {
@@ -331,11 +360,19 @@ const Home: React.FC = () => {
           </div>
         </div>
         <div id="experience" className="w-full flex flex-col items-center ">
-          <Experience />
-          <Education />
+          <DeferredSection>
+            <React.Suspense fallback={<SectionPlaceholder />}>
+              <LazyExperience />
+              <LazyEducation />
+            </React.Suspense>
+          </DeferredSection>
         </div>
         <div id="skills" className="w-full">
-          <Skills />
+          <DeferredSection>
+            <React.Suspense fallback={<SectionPlaceholder />}>
+              <LazySkills />
+            </React.Suspense>
+          </DeferredSection>
         </div>
         <div className="w-full flex items-center justify-center">
           <HoverFreezeGif
@@ -347,7 +384,11 @@ const Home: React.FC = () => {
           />
         </div>
         <div id="projects" className="w-full">
-          <Projects />
+          <DeferredSection>
+            <React.Suspense fallback={<SectionPlaceholder />}>
+              <LazyProjects />
+            </React.Suspense>
+          </DeferredSection>
         </div>
         <div
           id="after-projects"
@@ -362,13 +403,21 @@ const Home: React.FC = () => {
           />
         </div>
         <div id="interests" className="w-full">
-          <Interests />
+          <DeferredSection>
+            <React.Suspense fallback={<SectionPlaceholder />}>
+              <LazyInterests />
+            </React.Suspense>
+          </DeferredSection>
         </div>
         <div id="travel" className="w-full">
           <DeferredTravelMap />
         </div>
         <div id="contact" className="w-full">
-          <Contact />
+          <DeferredSection>
+            <React.Suspense fallback={<SectionPlaceholder />}>
+              <LazyContact />
+            </React.Suspense>
+          </DeferredSection>
         </div>
       </div>
     </div>

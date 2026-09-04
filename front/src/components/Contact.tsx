@@ -137,7 +137,7 @@ const Contact: React.FC = () => {
                   target="_blank"
                   rel="noopener noreferrer"
                   variants={cardVariants}
-                  className={`group relative flex flex-col items-center justify-center gap-4 p-6 md:p-8 rounded-2xl bg-linear-to-br ${contact.gradient} dark:from-[#160c23]/95 dark:to-[#1d0e2d]/90 backdrop-blur-sm border border-gray-200/50 dark:border-violet-300/15 ${contact.hoverBorder} shadow-sm hover:shadow-lg hover:-translate-y-1 transition-all duration-300`}
+                  className={`group relative flex flex-col items-center justify-center gap-4 rounded-2xl border border-gray-200/50 bg-linear-to-br p-6 shadow-sm transition-all duration-300 hover:-translate-y-1 hover:shadow-lg md:p-8 ${contact.gradient} dark:from-[#160c23] dark:to-[#1d0e2d] dark:border-violet-300/15 ${contact.hoverBorder}`}
                 >
                   <div className="absolute top-3 right-3 opacity-0 group-hover:opacity-100 -translate-x-1 group-hover:translate-x-0 translate-y-1 group-hover:translate-y-0 transition-all duration-300">
                     <ArrowUpRight className="w-4 h-4 text-gray-400 dark:text-gray-500" />

@@ -1,19 +1,19 @@
-import React, { useState, useEffect } from "react";
-import { motion } from "framer-motion";
+import React, { useState, useEffect, useRef } from "react";
+import { AnimatePresence, motion } from "framer-motion";
 import { WordsPullUp } from "../utils/words-pull-up";
 import { arrow } from "../subcomponents/Icons.tsx";
-import { Popover } from "antd";
+
+const textLines = [
+  "Hello! I'm",
+  "Nice to meet you! I'm",
+  "The person who typed this is",
+  "Get to know me! I'm",
+];
 
 const Main: React.FC = () => {
-  const textLines: string[] = [
-    "Hello! I'm",
-    "Nice to meet you! I'm",
-    "The person who typed this is",
-    "Get to know me! I'm",
-  ];
-
   const [currentLine, setCurrentLine] = useState(textLines[0]);
-  const [scrollY, setScrollY] = useState(0);
+  const [showBackToTop, setShowBackToTop] = useState(false);
+  const backToTopThresholdRef = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
     const interval = setInterval(() => {
@@ -27,11 +27,15 @@ const Main: React.FC = () => {
   }, []);
 
   useEffect(() => {
-    const handleScroll = () => {
-      setScrollY(window.scrollY);
-    };
-    window.addEventListener("scroll", handleScroll, { passive: true });
-    return () => window.removeEventListener("scroll", handleScroll);
+    const threshold = backToTopThresholdRef.current;
+    if (!threshold) return;
+
+    const observer = new IntersectionObserver(([entry]) => {
+      setShowBackToTop(!entry.isIntersecting);
+    });
+
+    observer.observe(threshold);
+    return () => observer.disconnect();
   }, []);
 
   const handleBackToTop = () => {
@@ -43,24 +47,32 @@ const Main: React.FC = () => {
 
   return (
     <div className="relative flex min-h-screen w-full items-center justify-center overflow-hidden">
+      <div
+        ref={backToTopThresholdRef}
+        aria-hidden="true"
+        className="pointer-events-none absolute top-[200px] h-px w-px"
+      />
       <div className="absolute top-0 left-0 w-full h-1/2 z-0">
-        {scrollY > 200 && (
-          <Popover
-            content={<p className="text-white">Back to Top</p>}
-            placement="top"
-            color="oklch(58.5% 0.233 277.117) "
-          >
+        <AnimatePresence>
+          {showBackToTop && (
             <motion.button
               initial={{ opacity: 0 }}
               animate={{ opacity: 1 }}
               exit={{ opacity: 0 }}
               onClick={handleBackToTop}
-              className="fixed bottom-6 w-16 h-16 right-6 bg-indigo-600 hover:bg-indigo-500 text-white p-3 rounded-full shadow-lg z-50 transition-colors duration-300 hover:cursor-pointer flex items-center justify-center text-2xl invisible sm:visible"
+              aria-label="Back to top"
+              className="group fixed bottom-6 right-6 z-50 invisible flex h-16 w-16 items-center justify-center rounded-full bg-indigo-600 p-3 text-2xl text-white shadow-lg transition-colors duration-300 hover:cursor-pointer hover:bg-indigo-500 sm:visible"
             >
               {arrow}
+              <span
+                role="tooltip"
+                className="pointer-events-none absolute bottom-full right-0 mb-3 whitespace-nowrap rounded-md bg-indigo-600 px-2.5 py-1.5 text-xs font-medium opacity-0 shadow-md transition-opacity duration-150 group-hover:opacity-100 group-focus-visible:opacity-100"
+              >
+                Back to Top
+              </span>
             </motion.button>
-          </Popover>
-        )}
+          )}
+        </AnimatePresence>
       </div>
       <motion.div
         initial={{ opacity: 0, y: 50 }}

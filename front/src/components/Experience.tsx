@@ -79,7 +79,7 @@ const Experience: React.FC = () => {
             <div className="absolute left-3 top-7 flex h-4 w-4 items-center justify-center rounded-full border-2 border-indigo-500 bg-slate-100 shadow-sm shadow-indigo-500/30 transition-transform duration-300 group-hover:scale-125 dark:border-violet-300 dark:bg-[#0d0815] dark:shadow-violet-500/40">
               <span className="h-1.5 w-1.5 rounded-full bg-indigo-500 dark:bg-violet-300" />
             </div>
-            <div className="rounded-[2rem] border border-indigo-200/70 bg-slate-100/85 p-7 shadow-xl shadow-indigo-950/5 backdrop-blur-sm transition-[border-color,box-shadow,transform] duration-300 hover:border-violet-400/70 hover:shadow-2xl dark:border-violet-300/15 dark:bg-[#160c23]/90 dark:shadow-black/25 dark:hover:border-violet-300/45 md:p-8">
+            <div className="rounded-[2rem] border border-indigo-200/70 bg-slate-100 p-7 shadow-xl shadow-indigo-950/5 transition-[border-color,box-shadow,transform] duration-300 hover:border-violet-400/70 hover:shadow-2xl dark:border-violet-300/15 dark:bg-[#160c23] dark:shadow-black/25 dark:hover:border-violet-300/45 md:p-8">
               <div className="flex flex-col sm:flex-row gap-6 items-start text-left">
                 <img
                   src={must}
