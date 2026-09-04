@@ -45,7 +45,7 @@ const chipVariants: Variants = {
 };
 const TechnicalInterests: React.FC = () => {
   return (
-    <section className="w-full py-8">
+    <section className="w-full py-5 sm:py-8">
       <motion.div
         initial={{
           opacity: 0,
@@ -61,9 +61,9 @@ const TechnicalInterests: React.FC = () => {
         transition={{
           duration: 0.5,
         }}
-        className="mb-6"
+        className="mb-4 sm:mb-6"
       >
-        <h3 className="text-2xl font-bold text-violet-600 dark:text-violet-400 mb-1">
+        <h3 className="mb-1 text-xl font-bold text-violet-600 dark:text-violet-400 sm:text-2xl">
           Technical Interests
         </h3>
         <p className="text-gray-600 dark:text-gray-400 text-sm">
@@ -72,7 +72,7 @@ const TechnicalInterests: React.FC = () => {
       </motion.div>
 
       <motion.div
-        className="flex flex-wrap gap-3 items-center justify-center"
+        className="flex flex-wrap items-center justify-center gap-2 sm:gap-3"
         variants={containerVariants}
         initial="hidden"
         whileInView="visible"
@@ -87,10 +87,10 @@ const TechnicalInterests: React.FC = () => {
             <motion.div
               key={item.label}
               variants={chipVariants}
-              className="group flex items-center gap-2.5 px-4 py-2.5 rounded-full bg-white dark:bg-[#160c23]/80 border border-gray-200 dark:border-violet-300/15 shadow-sm hover:border-violet-300 dark:hover:border-violet-400/40 hover:shadow-md transition-all duration-300 cursor-default"
+              className="group flex items-center gap-2 rounded-full border border-gray-200 bg-white px-3 py-2 shadow-sm transition-all duration-300 hover:border-violet-300 hover:shadow-md dark:border-violet-300/15 dark:bg-[#160c23]/80 dark:hover:border-violet-400/40 sm:gap-2.5 sm:px-4 sm:py-2.5"
             >
               <Icon className="w-4.5 h-4.5 text-violet-500 dark:text-violet-400 group-hover:scale-110 transition-transform duration-300" />
-              <span className="text-sm font-medium text-gray-700 dark:text-gray-300">
+              <span className="text-xs font-medium text-gray-700 dark:text-gray-300 sm:text-sm">
                 {item.label}
               </span>
             </motion.div>

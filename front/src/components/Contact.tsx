@@ -152,7 +152,7 @@ const Contact: React.FC = () => {
       <footer className="relative isolate mt-14 flex min-h-52 w-full flex-col items-center justify-center gap-4 bg-[#3d4264] px-4 py-14 text-center dark:bg-[#180c26] sm:text-sm md:gap-9 md:py-16 3xl:py-20">
         <div
           aria-hidden="true"
-          className="pointer-events-none absolute inset-x-0 -top-18 -z-10 h-18 bg-linear-to-b from-transparent via-[#3d4264]/55 to-[#3d4264] dark:via-[#180c26]/55 dark:to-[#180c26]"
+          className="pointer-events-none absolute inset-x-0 -top-10 -z-10 h-10 bg-linear-to-b from-transparent via-[#3d4264]/55 to-[#3d4264] dark:via-[#180c26]/55 dark:to-[#180c26]"
         />
         <span className="flex flex-wrap items-center justify-center gap-x-3 gap-y-1 text-sm font-medium tracking-wide text-slate-100/90 dark:text-violet-100/85 md:gap-x-5 md:text-base">
           <p>&copy; {year}</p>

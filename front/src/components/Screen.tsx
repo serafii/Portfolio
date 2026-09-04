@@ -79,18 +79,18 @@ const Main: React.FC = () => {
         whileInView={{ opacity: 1, y: 0 }}
         transition={{ duration: 1 }}
         viewport={{ once: true }}
-        className="relative z-10 rounded-lg p-5 text-center sm:p-8"
+        className="relative z-10 rounded-lg p-4 text-center sm:p-8"
       >
         <WordsPullUp
           key={currentLine}
           text={currentLine}
-          className="text-lg sm:text-xl"
+          className="text-base sm:text-xl"
         />
-        <div className="bg-linear-to-r from-indigo-600 to-purple-600 bg-clip-text pt-1 text-4xl font-bold text-transparent dark:from-indigo-400 dark:to-purple-400 sm:text-5xl">
+        <div className="bg-linear-to-r from-indigo-600 to-purple-600 bg-clip-text pt-1 text-3xl font-bold text-transparent dark:from-indigo-400 dark:to-purple-400 sm:text-5xl">
           Sami Erafii.
         </div>
-        <p className="pt-5 sm:pt-8">
-          <span className="text-base text-slate-700 dark:text-slate-300 sm:text-lg">
+        <p className="pt-4 sm:pt-8">
+          <span className="text-sm text-slate-700 dark:text-slate-300 sm:text-lg">
             Software Engineering Student | Full Stack Developer | AI &
             Automation
           </span>

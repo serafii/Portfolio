@@ -253,7 +253,7 @@ const Home: React.FC = () => {
               cx="50"
               cy="50"
               r="45"
-              stroke="#ccc"
+              stroke={isDark ? "#c4b5fd" : "#818cf8"}
               strokeWidth="6"
               fill="none"
               opacity="0.3"
@@ -262,7 +262,7 @@ const Home: React.FC = () => {
               cx="50"
               cy="50"
               r="45"
-              stroke="#5b48f0"
+              stroke={isDark ? "#a855f7" : "#4f46e5"}
               strokeWidth="6"
               fill="none"
               strokeDasharray="1"
@@ -454,10 +454,25 @@ const Home: React.FC = () => {
 
         <section className="relative isolate overflow-hidden bg-sky-100/65 pt-18 pb-0 dark:bg-[#100819] 3xl:pt-24">
           {isMobile ? (
-            <div aria-hidden="true" className="mobile-dot-field" />
+            <div
+              aria-hidden="true"
+              className="mobile-dot-field"
+              style={{
+                WebkitMaskImage:
+                  "linear-gradient(to bottom, transparent, #000 8rem, #000 calc(100% - 18rem), transparent calc(100% - 2rem))",
+                maskImage:
+                  "linear-gradient(to bottom, transparent, #000 8rem, #000 calc(100% - 18rem), transparent calc(100% - 2rem))",
+              }}
+            />
           ) : (
             <DotField
               className="pointer-events-none absolute! inset-0! z-0"
+              style={{
+                WebkitMaskImage:
+                  "linear-gradient(to bottom, transparent, #000 8rem, #000 calc(100% - 18rem), transparent calc(100% - 2rem))",
+                maskImage:
+                  "linear-gradient(to bottom, transparent, #000 8rem, #000 calc(100% - 18rem), transparent calc(100% - 2rem))",
+              }}
               dotRadius={1.5}
               dotSpacing={16}
               bulgeStrength={80}
