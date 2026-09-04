@@ -1,6 +1,5 @@
 import React from "react";
 import gmail from "../assets/gmail.svg";
-import { motion } from "framer-motion";
 import { ArrowUpRight } from "lucide-react";
 
 const Contact: React.FC = () => {
@@ -56,88 +55,30 @@ const Contact: React.FC = () => {
     },
   ];
 
-  const containerVariants = {
-    hidden: {},
-    visible: {
-      transition: {
-        staggerChildren: 0.12,
-      },
-    },
-  };
-  const cardVariants = {
-    hidden: {
-      y: 25,
-    },
-    visible: {
-      y: 0,
-      transition: {
-        duration: 0.5,
-        ease: "easeOut" as const,
-      },
-    },
-  };
-
   return (
     <div className="w-full">
       <div className="w-10/12 py-16 sm:px-2 lg:px-8 2xl:px-16 text-center text-slate-700 dark:text-white z-10 mx-auto mb-48 2xl:mb-80">
-        <motion.div
-          initial={{
-            opacity: 0,
-            y: 50,
-          }}
-          whileInView={{
-            opacity: 1,
-            y: 0,
-          }}
-          transition={{
-            duration: 1,
-          }}
-          viewport={{
-            once: true,
-          }}
-        >
+        <div>
           <h2 className="text-4xl font-bold mb-6 bg-clip-text text-transparent bg-linear-to-r from-indigo-600 to-purple-600 dark:from-indigo-400 dark:to-purple-400">
             Get in Touch
           </h2>
           <p className="mb-12 text-xl font-medium text-slate-600 dark:text-slate-300 max-w-2xl mx-auto">
             Feel free to reach out through any of these platforms.
           </p>
-        </motion.div>
+        </div>
 
-        <motion.div
-          initial={{
-            y: 100,
-          }}
-          whileInView={{
-            y: 0,
-          }}
-          transition={{
-            duration: 1,
-          }}
-          viewport={{
-            once: true,
-          }}
-          className="w-full flex items-center justify-center mx-auto"
-        >
-          <motion.div
+        <div className="w-full flex items-center justify-center mx-auto">
+          <div
             className="grid w-full max-w-5xl grid-cols-2 md:grid-cols-4 gap-4 mb-16 mx-auto"
-            variants={containerVariants}
-            initial="hidden"
-            whileInView="visible"
-            viewport={{
-              once: true,
-              margin: "-50px",
-            }}
           >
             {contacts.map((contact) => {
               return (
-                <motion.a
+                <a
                   key={contact.name}
                   href={contact.url}
                   target="_blank"
                   rel="noopener noreferrer"
-                  variants={cardVariants}
-                  className={`group relative flex flex-col items-center justify-center gap-4 p-6 md:p-8 rounded-2xl bg-linear-to-br ${contact.gradient} dark:from-[#160c23]/95 dark:to-[#1d0e2d]/90 backdrop-blur-sm border border-gray-200/50 dark:border-violet-300/15 ${contact.hoverBorder} shadow-sm hover:shadow-lg hover:-translate-y-1 transition-all duration-300`}
+                  className={`group relative flex flex-col items-center justify-center gap-4 p-6 md:p-8 rounded-2xl bg-linear-to-br ${contact.gradient} dark:from-[#160c23]/95 dark:to-[#1d0e2d]/90 border border-gray-200/50 dark:border-violet-300/15 ${contact.hoverBorder} shadow-sm hover:shadow-lg hover:-translate-y-1 transition-all duration-300`}
                 >
                   <div className="absolute top-3 right-3 opacity-0 group-hover:opacity-100 -translate-x-1 group-hover:translate-x-0 translate-y-1 group-hover:translate-y-0 transition-all duration-300">
                     <ArrowUpRight className="w-4 h-4 text-gray-400 dark:text-gray-500" />
@@ -161,11 +102,11 @@ const Contact: React.FC = () => {
                   <span className="text-sm md:text-base font-semibold text-gray-700 dark:text-gray-200">
                     {contact.name}
                   </span>
-                </motion.a>
+                </a>
               );
             })}
-          </motion.div>
-        </motion.div>
+          </div>
+        </div>
       </div>
       <footer className="relative isolate mt-14 flex min-h-52 w-full flex-col items-center justify-center gap-4 bg-[#3d4264] px-4 py-14 text-center dark:bg-[#180c26] sm:text-sm md:gap-9 md:py-16 3xl:py-20">
         <div
