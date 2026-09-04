@@ -71,7 +71,11 @@ const DeferredSection: React.FC<React.PropsWithChildren> = ({ children }) => {
     return () => observer.disconnect();
   }, []);
 
-  return <div ref={sectionRef}>{shouldRender ? children : <SectionPlaceholder />}</div>;
+  return (
+    <div ref={sectionRef}>
+      {shouldRender ? children : <SectionPlaceholder />}
+    </div>
+  );
 };
 
 const DeferredTravelMap: React.FC = () => {
@@ -241,31 +245,6 @@ const Home: React.FC = () => {
 
   return (
     <div className="portfolio-page relative min-h-dvh overflow-hidden transition-colors duration-500">
-      {isMobile ? (
-        <div aria-hidden="true" className="mobile-dot-field" />
-      ) : (
-        <DotField
-          className="pointer-events-none absolute inset-0 z-0"
-          dotRadius={1.5}
-          dotSpacing={16}
-          bulgeStrength={80}
-          glowRadius={100}
-          sparkle={false}
-          waveAmplitude={0}
-          cursorRadius={500}
-          cursorForce={0.1}
-          bulgeOnly
-          gradientFrom={
-            isDark ? "rgba(196, 181, 253, 0.42)" : "rgba(67, 56, 202, 0.5)"
-          }
-          gradientTo={
-            isDark ? "rgba(168, 85, 247, 0.3)" : "rgba(109, 40, 217, 0.36)"
-          }
-          glowColor={
-            isDark ? "rgba(168, 85, 247, 0.1)" : "rgba(109, 40, 217, 0.16)"
-          }
-        />
-      )}
       {/* Fixed Top Elements */}
       <div className="fixed top-5 left-5 z-50 ">
         <div className="w-16 h-16 relative">
@@ -345,80 +324,218 @@ const Home: React.FC = () => {
         </div>
       </nav>
 
-      <div
-        className="flex flex-col gap-y-18 3xl:gap-y-24 items-center justify-center relative z-10"
-        ref={ref}
-      >
-        <div className="w-full">
+      <div ref={ref} className="relative z-10 w-full">
+        <div
+          id="home"
+          className="relative h-[calc(100dvh+8rem)] min-h-screen w-full overflow-hidden"
+        >
+          {isMobile ? (
+            <div
+              aria-hidden="true"
+              className="mobile-dot-field"
+              style={{
+                WebkitMaskImage:
+                  "linear-gradient(to bottom, #000 calc(100% - 8rem), transparent)",
+                maskImage:
+                  "linear-gradient(to bottom, #000 calc(100% - 8rem), transparent)",
+              }}
+            />
+          ) : (
+            <DotField
+              className="pointer-events-none absolute! inset-0! z-0"
+              style={{
+                WebkitMaskImage:
+                  "linear-gradient(to bottom, #000 calc(100% - 8rem), transparent)",
+                maskImage:
+                  "linear-gradient(to bottom, #000 calc(100% - 8rem), transparent)",
+              }}
+              dotRadius={1.5}
+              dotSpacing={16}
+              bulgeStrength={80}
+              glowRadius={100}
+              sparkle={false}
+              waveAmplitude={0}
+              cursorRadius={500}
+              cursorForce={0.1}
+              bulgeOnly
+              gradientFrom={
+                isDark ? "rgba(196, 181, 253, 0.42)" : "rgba(67, 56, 202, 0.5)"
+              }
+              gradientTo={
+                isDark ? "rgba(168, 85, 247, 0.3)" : "rgba(109, 40, 217, 0.36)"
+              }
+              glowColor={
+                isDark ? "rgba(168, 85, 247, 0.1)" : "rgba(109, 40, 217, 0.16)"
+              }
+            />
+          )}
+          <Main />
+        </div>
+
+        <section className="relative isolate overflow-hidden bg-slate-200 pt-10 pb-18 dark:bg-[#0b0714] 3xl:pt-16 3xl:pb-24">
+          <div
+            aria-hidden="true"
+            className="pointer-events-none absolute top-28 left-8 h-52 w-52 rounded-full bg-indigo-400/15 blur-3xl dark:bg-violet-500/10"
+          />
+          <div
+            aria-hidden="true"
+            className="pointer-events-none absolute right-0 bottom-0 h-56 w-56 rounded-full bg-sky-400/15 blur-3xl dark:bg-indigo-500/10"
+          />
           <div className="relative z-10 flex flex-col items-center gap-y-18 3xl:gap-y-24">
-            <div id="home" className="w-full">
-              <Main />
-            </div>
             <div id="about" className="w-full">
               <About />
             </div>
+            <div id="experience" className="flex w-full flex-col items-center">
+              <DeferredSection>
+                <React.Suspense fallback={<SectionPlaceholder />}>
+                  <LazyExperience />
+                  <LazyEducation />
+                </React.Suspense>
+              </DeferredSection>
+            </div>
           </div>
-        </div>
-        <div id="experience" className="w-full flex flex-col items-center ">
-          <DeferredSection>
-            <React.Suspense fallback={<SectionPlaceholder />}>
-              <LazyExperience />
-              <LazyEducation />
-            </React.Suspense>
-          </DeferredSection>
-        </div>
-        <div id="skills" className="w-full">
-          <DeferredSection>
-            <React.Suspense fallback={<SectionPlaceholder />}>
-              <LazySkills />
-            </React.Suspense>
-          </DeferredSection>
-        </div>
-        <div className="w-full flex items-center justify-center">
-          <HoverFreezeGif
-            src={cat2}
-            alt="Spinning Cat"
-            loading="lazy"
-            fetchPriority="low"
-            className="h-30 w-30"
+        </section>
+
+        <section className="relative isolate overflow-hidden border-y border-indigo-200/50 bg-indigo-100/65 py-18 dark:border-violet-300/10 dark:bg-[#11091c] 3xl:py-24">
+          <div
+            aria-hidden="true"
+            className="pointer-events-none absolute top-16 left-10 h-32 w-32 rounded-full bg-indigo-400/15 blur-3xl dark:bg-violet-400/10"
           />
-        </div>
-        <div id="projects" className="w-full">
-          <DeferredSection>
-            <React.Suspense fallback={<SectionPlaceholder />}>
-              <LazyProjects />
-            </React.Suspense>
-          </DeferredSection>
-        </div>
-        <div
-          id="after-projects"
-          className="w-full flex items-center justify-center"
-        >
-          <HoverFreezeGif
-            src={cat}
-            alt="Spinning Cat"
-            loading="lazy"
-            fetchPriority="low"
-            className="h-32 w-32"
+          <div
+            aria-hidden="true"
+            className="pointer-events-none absolute top-1/4 -right-20 h-64 w-64 rounded-full bg-violet-400/20 blur-3xl dark:bg-fuchsia-500/15"
           />
-        </div>
-        <div id="interests" className="w-full">
-          <DeferredSection>
-            <React.Suspense fallback={<SectionPlaceholder />}>
-              <LazyInterests />
-            </React.Suspense>
-          </DeferredSection>
-        </div>
-        <div id="travel" className="w-full">
-          <DeferredTravelMap />
-        </div>
-        <div id="contact" className="w-full">
-          <DeferredSection>
-            <React.Suspense fallback={<SectionPlaceholder />}>
-              <LazyContact />
-            </React.Suspense>
-          </DeferredSection>
-        </div>
+          <div
+            aria-hidden="true"
+            className="pointer-events-none absolute top-[58%] left-12 h-44 w-44 rounded-full bg-sky-400/15 blur-3xl dark:bg-cyan-400/10"
+          />
+          <div
+            aria-hidden="true"
+            className="pointer-events-none absolute bottom-0 left-1/4 h-44 w-44 rounded-full bg-blue-400/20 blur-3xl dark:bg-indigo-400/10"
+          />
+          <div className="relative z-10 flex flex-col items-center gap-y-18 3xl:gap-y-24">
+            <div id="skills" className="w-full">
+              <DeferredSection>
+                <React.Suspense fallback={<SectionPlaceholder />}>
+                  <LazySkills />
+                </React.Suspense>
+              </DeferredSection>
+            </div>
+            <div className="flex w-full items-center justify-center">
+              <HoverFreezeGif
+                src={cat2}
+                alt="Spinning Cat"
+                loading="lazy"
+                fetchPriority="low"
+                className="h-30 w-30"
+              />
+            </div>
+            <div id="projects" className="w-full">
+              <DeferredSection>
+                <React.Suspense fallback={<SectionPlaceholder />}>
+                  <LazyProjects />
+                </React.Suspense>
+              </DeferredSection>
+            </div>
+            <div
+              id="after-projects"
+              className="flex w-full items-center justify-center"
+            >
+              <HoverFreezeGif
+                src={cat}
+                alt="Spinning Cat"
+                loading="lazy"
+                fetchPriority="low"
+                className="h-32 w-32"
+              />
+            </div>
+          </div>
+        </section>
+
+        <section className="relative isolate overflow-hidden bg-sky-100/65 pt-18 pb-0 dark:bg-[#100819] 3xl:pt-24">
+          {isMobile ? (
+            <div aria-hidden="true" className="mobile-dot-field" />
+          ) : (
+            <DotField
+              className="pointer-events-none absolute! inset-0! z-0"
+              dotRadius={1.5}
+              dotSpacing={16}
+              bulgeStrength={80}
+              glowRadius={100}
+              sparkle={false}
+              waveAmplitude={0}
+              cursorRadius={500}
+              cursorForce={0.1}
+              bulgeOnly
+              gradientFrom={
+                isDark ? "rgba(196, 181, 253, 0.42)" : "rgba(67, 56, 202, 0.5)"
+              }
+              gradientTo={
+                isDark ? "rgba(168, 85, 247, 0.3)" : "rgba(109, 40, 217, 0.36)"
+              }
+              glowColor={
+                isDark ? "rgba(168, 85, 247, 0.1)" : "rgba(109, 40, 217, 0.16)"
+              }
+            />
+          )}
+          <div
+            aria-hidden="true"
+            className="pointer-events-none absolute top-0 left-1/3 h-52 w-52 rounded-full bg-fuchsia-400/15 blur-3xl dark:bg-violet-500/10"
+          />
+          <div
+            aria-hidden="true"
+            className="pointer-events-none absolute top-128 left-[18%] h-40 w-40 rounded-full bg-sky-400/20 blur-3xl dark:bg-cyan-400/10"
+          />
+          <div
+            aria-hidden="true"
+            className="pointer-events-none absolute right-1/4 bottom-80 h-64 w-64 rounded-full bg-indigo-400/15 blur-3xl dark:bg-purple-500/10"
+          />
+          <div className="relative z-10 flex flex-col items-center gap-y-18 3xl:gap-y-24">
+            <div id="interests" className="w-full">
+              <DeferredSection>
+                <React.Suspense fallback={<SectionPlaceholder />}>
+                  <LazyInterests />
+                </React.Suspense>
+              </DeferredSection>
+            </div>
+            <div
+              id="travel"
+              className="relative isolate w-full overflow-hidden"
+            >
+              <div
+                aria-hidden="true"
+                className="pointer-events-none absolute top-1/4 -left-16 h-52 w-52 rounded-full bg-sky-400/20 blur-3xl dark:bg-cyan-400/10"
+              />
+              <div
+                aria-hidden="true"
+                className="pointer-events-none absolute right-12 bottom-12 h-36 w-36 rounded-full bg-violet-400/20 blur-3xl dark:bg-fuchsia-500/10"
+              />
+              <div className="relative z-10">
+                <DeferredTravelMap />
+              </div>
+            </div>
+            <div
+              id="contact"
+              className="relative isolate w-full overflow-hidden"
+            >
+              <div
+                aria-hidden="true"
+                className="pointer-events-none absolute top-20 right-12 h-48 w-48 rounded-full bg-fuchsia-400/15 blur-3xl dark:bg-violet-500/10"
+              />
+              <div
+                aria-hidden="true"
+                className="pointer-events-none absolute top-1/2 -left-12 h-40 w-40 rounded-full bg-indigo-400/15 blur-3xl dark:bg-purple-500/10"
+              />
+              <div className="relative z-10">
+                <DeferredSection>
+                  <React.Suspense fallback={<SectionPlaceholder />}>
+                    <LazyContact />
+                  </React.Suspense>
+                </DeferredSection>
+              </div>
+            </div>
+          </div>
+        </section>
       </div>
     </div>
   );

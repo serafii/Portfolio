@@ -61,7 +61,7 @@ const Main: React.FC = () => {
               exit={{ opacity: 0 }}
               onClick={handleBackToTop}
               aria-label="Back to top"
-              className="group fixed bottom-6 right-6 z-50 invisible flex h-16 w-16 items-center justify-center rounded-full bg-indigo-600 p-3 text-2xl text-white shadow-lg transition-colors duration-300 hover:cursor-pointer hover:bg-indigo-500 sm:visible"
+              className="group fixed bottom-6 right-6 z-100 invisible flex h-16 w-16 items-center justify-center rounded-full bg-indigo-600 p-3 text-2xl text-white shadow-lg transition-colors duration-300 hover:cursor-pointer hover:bg-indigo-500 sm:visible"
             >
               {arrow}
               <span
@@ -74,18 +74,28 @@ const Main: React.FC = () => {
           )}
         </AnimatePresence>
       </div>
-      <div className="relative z-10 rounded-lg p-8 text-center">
-        <WordsPullUp key={currentLine} text={currentLine} />
-        <div className="bg-linear-to-r from-indigo-600 to-purple-600 bg-clip-text pt-1 text-5xl font-bold text-transparent dark:from-indigo-400 dark:to-purple-400">
+      <motion.div
+        initial={{ opacity: 0, y: 50 }}
+        whileInView={{ opacity: 1, y: 0 }}
+        transition={{ duration: 1 }}
+        viewport={{ once: true }}
+        className="relative z-10 rounded-lg p-5 text-center sm:p-8"
+      >
+        <WordsPullUp
+          key={currentLine}
+          text={currentLine}
+          className="text-lg sm:text-xl"
+        />
+        <div className="bg-linear-to-r from-indigo-600 to-purple-600 bg-clip-text pt-1 text-4xl font-bold text-transparent dark:from-indigo-400 dark:to-purple-400 sm:text-5xl">
           Sami Erafii.
         </div>
-        <p className="pt-8">
-          <span className="text-lg  text-slate-700 dark:text-slate-300">
+        <p className="pt-5 sm:pt-8">
+          <span className="text-base text-slate-700 dark:text-slate-300 sm:text-lg">
             Software Engineering Student | Full Stack Developer | AI &
             Automation
           </span>
         </p>
-      </div>
+      </motion.div>
     </div>
   );
 };
