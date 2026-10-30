@@ -453,46 +453,6 @@ const Home: React.FC = () => {
         </section>
 
         <section className="relative isolate overflow-hidden bg-sky-100/65 pt-18 pb-0 dark:bg-[#100819] 3xl:pt-24">
-          {isMobile ? (
-            <div
-              aria-hidden="true"
-              className="mobile-dot-field"
-              style={{
-                WebkitMaskImage:
-                  "linear-gradient(to bottom, transparent, #000 8rem, #000 calc(100% - 18rem), transparent calc(100% - 2rem))",
-                maskImage:
-                  "linear-gradient(to bottom, transparent, #000 8rem, #000 calc(100% - 18rem), transparent calc(100% - 2rem))",
-              }}
-            />
-          ) : (
-            <DotField
-              className="pointer-events-none absolute! inset-0! z-0"
-              style={{
-                WebkitMaskImage:
-                  "linear-gradient(to bottom, transparent, #000 8rem, #000 calc(100% - 18rem), transparent calc(100% - 2rem))",
-                maskImage:
-                  "linear-gradient(to bottom, transparent, #000 8rem, #000 calc(100% - 18rem), transparent calc(100% - 2rem))",
-              }}
-              dotRadius={1.5}
-              dotSpacing={16}
-              bulgeStrength={80}
-              glowRadius={100}
-              sparkle={false}
-              waveAmplitude={0}
-              cursorRadius={500}
-              cursorForce={0.1}
-              bulgeOnly
-              gradientFrom={
-                isDark ? "rgba(196, 181, 253, 0.42)" : "rgba(67, 56, 202, 0.5)"
-              }
-              gradientTo={
-                isDark ? "rgba(168, 85, 247, 0.3)" : "rgba(109, 40, 217, 0.36)"
-              }
-              glowColor={
-                isDark ? "rgba(168, 85, 247, 0.1)" : "rgba(109, 40, 217, 0.16)"
-              }
-            />
-          )}
           <div
             aria-hidden="true"
             className="pointer-events-none absolute top-0 left-1/3 h-52 w-52 rounded-full bg-fuchsia-400/15 blur-3xl dark:bg-violet-500/10"

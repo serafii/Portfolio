@@ -106,12 +106,13 @@ const Experience: React.FC = () => {
                   </div>
 
                   <p className="text-slate-700 dark:text-slate-200 leading-relaxed">
-                    • Developing automation workflows with n8n, integrating
-                    Shopify and other applications <br />
+                    • Designed and deployed a production Shopify POS extension
+                    used by sales associates
+                    <br />
                     • Working with REST/GraphQL APIs and JavaScript to process
                     data
                     <br />• Improving and automating data pipelines and
-                    workflows
+                    workflows using n8n
                   </p>
                 </div>
               </div>
