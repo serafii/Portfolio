@@ -3,6 +3,7 @@ const GithubIcon: React.ReactNode = (
     role="img"
     viewBox="0 0 24 24"
     xmlns="http://www.w3.org/2000/svg"
+    fill="currentColor"
     className="w-4 h-4"
   >
     <title>GitHub</title>

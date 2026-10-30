@@ -52,7 +52,7 @@ const Main: React.FC = () => {
         aria-hidden="true"
         className="pointer-events-none absolute top-[200px] h-px w-px"
       />
-      <div className="absolute top-0 left-0 w-full h-1/2 z-0">
+      <div className="absolute top-0 left-0 w-full h-1/2">
         <AnimatePresence>
           {showBackToTop && (
             <motion.button

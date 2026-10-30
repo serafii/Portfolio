@@ -40,6 +40,10 @@ const skills: Skill[] = [
     src: "https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/graphql/graphql-plain.svg",
   },
   {
+    name: "Shopify",
+    src: "https://cdn.simpleicons.org/shopify/7AB55C",
+  },
+  {
     name: "Git",
     src: "https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/git/git-original.svg",
   },
@@ -58,6 +62,10 @@ const skills: Skill[] = [
   {
     name: "MySQL",
     src: "https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/mysql/mysql-original-wordmark.svg",
+  },
+  {
+    name: "Redis",
+    src: "https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/redis/redis-original.svg",
   },
   {
     name: "GitHub Actions",

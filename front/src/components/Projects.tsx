@@ -9,6 +9,7 @@ import services from "../assets/edit_services.jpg";
 import portfolio from "../assets/this_website.jpg";
 import dark from "../assets/this_dark.jpg";
 import useIsDark from "../utils/IsDark.tsx";
+import posExtension from "../assets/shopify1.jpg";
 
 interface ProjectCategory {
   title: string;
@@ -25,6 +26,25 @@ const ProjectsSection: React.FC = () => {
   const isDark = useIsDark();
 
   const categories: ProjectCategory[] = [
+    {
+      title: "E-Commerce & Retail Applications",
+      projects: [
+        {
+          title: "POS Extension",
+          description:
+            "Production Shopify POS application providing sales associates with customer insights, browsing activity, and product recommendations.",
+          image: posExtension,
+          tags: [
+            "Shopify",
+            "Preact",
+            "Node.js",
+            "GraphQL",
+            "Redis",
+            "Bloomreach",
+          ],
+        },
+      ],
+    },
     {
       title: "AI-Powered Full Stack Applications",
       projects: [
