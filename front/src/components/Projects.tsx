@@ -10,6 +10,7 @@ import portfolio from "../assets/this_website.jpg";
 import dark from "../assets/this_dark.jpg";
 import useIsDark from "../utils/IsDark.tsx";
 import posExtension from "../assets/shopify1.jpg";
+import sales360 from "../assets/sales-360.png";
 
 interface ProjectCategory {
   title: string;
@@ -42,6 +43,13 @@ const ProjectsSection: React.FC = () => {
             "Redis",
             "Bloomreach",
           ],
+        },
+        {
+          title: "Sales Tracking Web App for Insulation Business",
+          description:
+            "Full stack sales management PWA for an insulation business, replacing manual spreadsheet tracking. Contains sales filtering and revenue analytics.",
+          image: sales360,
+          tags: ["React", "Supabase", "Shadcn UI"],
         },
       ],
     },

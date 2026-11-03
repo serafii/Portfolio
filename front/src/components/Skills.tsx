@@ -72,8 +72,8 @@ const skills: Skill[] = [
     src: "https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/githubactions/githubactions-original.svg",
   },
   {
-    name: "PowerShell",
-    src: "https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/powershell/powershell-plain.svg",
+    name: "Supabase",
+    src: "https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/supabase/supabase-original.svg",
   },
   {
     name: "Bash",
