@@ -27,16 +27,18 @@ const containerVariants: Variants = {
   hidden: {},
   visible: {
     transition: {
-      staggerChildren: 0.1,
+      staggerChildren: 0.08,
     },
   },
 };
-const chipVariants: Variants = {
+const rowVariants: Variants = {
   hidden: {
-    scale: 0.85,
+    opacity: 0,
+    y: 8,
   },
   visible: {
-    scale: 1,
+    opacity: 1,
+    y: 0,
     transition: {
       duration: 0.4,
       ease: "easeOut" as const,
@@ -45,7 +47,7 @@ const chipVariants: Variants = {
 };
 const TechnicalInterests: React.FC = () => {
   return (
-    <section className="w-full py-5 sm:py-8">
+    <section className="w-full pt-10 sm:pt-12">
       <motion.div
         initial={{
           opacity: 0,
@@ -61,18 +63,18 @@ const TechnicalInterests: React.FC = () => {
         transition={{
           duration: 0.5,
         }}
-        className="mb-4 sm:mb-6"
+        className="mb-4 flex flex-wrap items-baseline justify-between gap-x-6 gap-y-1"
       >
-        <h3 className="mb-1 text-xl font-bold text-violet-600 dark:text-violet-400 sm:text-2xl">
+        <h3 className="text-xl font-bold text-violet-600 dark:text-violet-400 sm:text-2xl">
           Technical Interests
         </h3>
-        <p className="text-gray-600 dark:text-gray-400 text-sm">
+        <p className="text-sm text-gray-600 dark:text-gray-400">
           Areas I'm passionate about and actively exploring.
         </p>
       </motion.div>
 
-      <motion.div
-        className="flex flex-wrap items-center justify-center gap-2 sm:gap-3"
+      <motion.ul
+        className="grid border-t border-indigo-300/60 dark:border-violet-300/15 sm:grid-cols-2"
         variants={containerVariants}
         initial="hidden"
         whileInView="visible"
@@ -81,22 +83,29 @@ const TechnicalInterests: React.FC = () => {
           margin: "-50px",
         }}
       >
-        {interests.map((item) => {
+        {interests.map((item, index) => {
           const Icon = item.icon;
           return (
-            <motion.div
+            <motion.li
               key={item.label}
-              variants={chipVariants}
-              className="group flex items-center gap-2 rounded-full border border-gray-200 bg-white px-3 py-2 shadow-sm transition-all duration-300 hover:border-violet-300 hover:shadow-md dark:border-violet-300/15 dark:bg-[#160c23]/80 dark:hover:border-violet-400/40 sm:gap-2.5 sm:px-4 sm:py-2.5"
+              variants={rowVariants}
+              className="group relative flex items-center gap-4 border-b border-indigo-300/60 py-3.5 dark:border-violet-300/15 sm:odd:pr-6 sm:even:border-l sm:even:pl-6 sm:last:col-span-2"
             >
-              <Icon className="w-4.5 h-4.5 text-violet-500 dark:text-violet-400 group-hover:scale-110 transition-transform duration-300" />
-              <span className="text-xs font-medium text-gray-700 dark:text-gray-300 sm:text-sm">
+              <span className="font-mono text-xs tabular-nums text-indigo-500/70 dark:text-violet-300/50">
+                {String(index + 1).padStart(2, "0")}
+              </span>
+              <span className="flex-1 text-sm font-medium text-slate-700 transition-colors duration-300 group-hover:text-indigo-600 dark:text-slate-200 dark:group-hover:text-violet-300 sm:text-base">
                 {item.label}
               </span>
-            </motion.div>
+              <Icon className="h-4.5 w-4.5 text-slate-400 transition-[color,transform] duration-300 group-hover:-translate-y-0.5 group-hover:text-violet-500 dark:text-violet-300/50 dark:group-hover:text-violet-300" />
+              <span
+                aria-hidden="true"
+                className="absolute -bottom-px left-0 h-px w-0 bg-linear-to-r from-indigo-500 to-violet-500 transition-[width] duration-500 ease-out group-hover:w-full dark:from-violet-400 dark:to-fuchsia-400"
+              />
+            </motion.li>
           );
         })}
-      </motion.div>
+      </motion.ul>
     </section>
   );
 };

@@ -40,7 +40,7 @@ const TravelMapPlaceholder: React.FC = () => (
   >
     <div className="mx-auto max-w-6xl">
       <div className="mb-10 h-16 w-56 animate-pulse rounded-lg bg-slate-300/40 dark:bg-violet-200/5" />
-      <div className="aspect-2/1 rounded-2xl border border-indigo-300/40 bg-slate-200/35 dark:border-violet-300/10 dark:bg-[#160c23]/35" />
+      <div className="aspect-2/1 bg-slate-300/20 dark:bg-violet-200/5" />
     </div>
   </section>
 );
@@ -379,13 +379,13 @@ const Home: React.FC = () => {
           />
           <div
             aria-hidden="true"
-            className="pointer-events-none absolute right-0 bottom-0 h-56 w-56 rounded-full bg-sky-400/15 blur-3xl dark:bg-indigo-500/10"
+            className="pointer-events-none absolute right-0 bottom-48 h-56 w-56 rounded-full bg-sky-400/15 blur-3xl dark:bg-indigo-500/10"
           />
           <div className="relative z-10 flex flex-col items-center gap-y-18 3xl:gap-y-24">
             <div id="about" className="w-full">
               <About />
             </div>
-            <div id="experience" className="flex w-full flex-col items-center">
+            <div id="experience" className="w-full">
               <DeferredSection>
                 <React.Suspense fallback={<SectionPlaceholder />}>
                   <LazyExperience />
@@ -396,10 +396,11 @@ const Home: React.FC = () => {
           </div>
         </section>
 
-        <section className="relative isolate overflow-hidden border-y border-indigo-200/50 bg-indigo-100/65 py-18 dark:border-violet-300/10 dark:bg-[#11091c] 3xl:py-24">
+        {/* Background starts as the education section's slate (the page background) and fades to indigo */}
+        <section className="relative isolate overflow-hidden bg-[linear-gradient(to_bottom,transparent,color-mix(in_oklab,var(--color-indigo-100)_65%,transparent)_24rem)] py-18 dark:bg-[linear-gradient(to_bottom,#0b0714,#11091c_24rem)] 3xl:py-24">
           <div
             aria-hidden="true"
-            className="pointer-events-none absolute top-16 left-10 h-32 w-32 rounded-full bg-indigo-400/15 blur-3xl dark:bg-violet-400/10"
+            className="pointer-events-none absolute top-40 left-10 h-32 w-32 rounded-full bg-indigo-400/15 blur-3xl dark:bg-violet-400/10"
           />
           <div
             aria-hidden="true"
@@ -411,7 +412,7 @@ const Home: React.FC = () => {
           />
           <div
             aria-hidden="true"
-            className="pointer-events-none absolute bottom-0 left-1/4 h-44 w-44 rounded-full bg-blue-400/20 blur-3xl dark:bg-indigo-400/10"
+            className="pointer-events-none absolute bottom-48 left-1/4 h-44 w-44 rounded-full bg-blue-400/20 blur-3xl dark:bg-indigo-400/10"
           />
           <div className="relative z-10 flex flex-col items-center gap-y-18 3xl:gap-y-24">
             <div id="skills" className="w-full">
@@ -452,10 +453,11 @@ const Home: React.FC = () => {
           </div>
         </section>
 
-        <section className="relative isolate overflow-hidden bg-sky-100/65 pt-18 pb-0 dark:bg-[#100819] 3xl:pt-24">
+        {/* Background starts in the projects section's indigo and fades to sky so the seam disappears */}
+        <section className="relative isolate overflow-hidden bg-[linear-gradient(to_bottom,color-mix(in_oklab,var(--color-indigo-100)_65%,transparent),color-mix(in_oklab,var(--color-sky-100)_65%,transparent)_24rem)] pt-18 pb-0 dark:bg-[linear-gradient(to_bottom,#11091c,#100819_24rem)] 3xl:pt-24">
           <div
             aria-hidden="true"
-            className="pointer-events-none absolute top-0 left-1/3 h-52 w-52 rounded-full bg-fuchsia-400/15 blur-3xl dark:bg-violet-500/10"
+            className="pointer-events-none absolute top-40 left-1/3 h-52 w-52 rounded-full bg-fuchsia-400/15 blur-3xl dark:bg-violet-500/10"
           />
           <div
             aria-hidden="true"

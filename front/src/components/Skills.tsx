@@ -1,5 +1,6 @@
 import React from "react";
 import { motion } from "framer-motion";
+import { ArrowUpRight } from "lucide-react";
 
 interface Skill {
   name: string;
@@ -89,70 +90,83 @@ const containerVariants = {
   hidden: {},
   show: {
     transition: {
-      staggerChildren: 0.06,
+      staggerChildren: 0.04,
     },
   },
 };
 
 const skillVariants = {
-  hidden: { opacity: 0, scale: 0.8 },
-  show: { opacity: 1, scale: 1, transition: { duration: 0.25 } },
+  hidden: { opacity: 0, y: 10 },
+  show: { opacity: 1, y: 0, transition: { duration: 0.3 } },
 };
 
 const Skills: React.FC = () => {
   return (
-    <div className="deferred-section relative z-10 mx-auto w-full p-6 text-center text-slate-700 transition-colors duration-500 dark:text-white sm:p-16 md:w-11/12 lg:w-10/12">
-      <motion.div
-        initial={{ opacity: 0, y: 50 }}
-        whileInView={{ opacity: 1, y: 0 }}
-        transition={{ duration: 0.6 }}
-        viewport={{ once: true }}
-      >
-        <h2 className="text-4xl font-bold mb-6 bg-clip-text text-transparent bg-linear-to-r from-indigo-600 to-purple-600 dark:from-indigo-400 dark:to-purple-400">
-          Skills & Technologies
-        </h2>
-        <p className="mb-12 text-2xl font-semibold text-slate-600 dark:text-slate-300">
-          What I'm comfortable with right now
-        </p>
-      </motion.div>
+    <div className="deferred-section relative z-10 w-full px-5 py-10 text-left text-slate-700 transition-colors duration-500 dark:text-white sm:px-10 sm:py-16">
+      <div className="mx-auto w-full max-w-6xl">
+        <motion.div
+          initial={{ opacity: 0, y: 50 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.6 }}
+          viewport={{ once: true }}
+          className="mb-10 sm:mb-12"
+        >
+          <h2 className="mb-2 bg-linear-to-r from-indigo-600 to-purple-600 bg-clip-text text-2xl font-bold tracking-tight text-transparent dark:from-indigo-400 dark:to-purple-400 sm:text-4xl">
+            Skills & Technologies
+          </h2>
+          <p className="text-gray-600 dark:text-gray-400">
+            What I'm comfortable with right now
+          </p>
+        </motion.div>
 
-      <motion.div
-        className="flex w-full flex-wrap justify-center gap-4 sm:gap-5 lg:gap-6"
-        variants={containerVariants}
-        initial="hidden"
-        whileInView="show"
-        viewport={{ once: true, amount: 0.1 }}
-      >
-        {skills.map((skill) => (
-          <a
-            target="_blank"
-            rel="noreferrer"
-            href={`https://www.google.com/search?q=${skill.name}`}
-            key={skill.name}
-            className="w-[calc((100%-1rem)/2)] sm:w-[calc((100%-2.5rem)/3)] lg:w-[calc((100%-4.5rem)/4)] xl:w-[calc((100%-6rem)/5)]"
-          >
-            <motion.div
-              className="group relative flex min-h-40 h-full transform-gpu flex-col items-center justify-center overflow-hidden rounded-[1.75rem] border border-indigo-200/70 bg-slate-100 p-5 shadow-lg shadow-indigo-950/5 transition-[border-color,box-shadow] duration-300 hover:border-violet-400/70 hover:shadow-xl dark:border-violet-300/15 dark:bg-[#160c23] dark:shadow-black/25 dark:hover:border-violet-300/45 sm:min-h-44 sm:p-6"
-              whileHover={{ y: -5 }}
+        {/* Ruled grid: container draws the top/left edges, each tile its right/bottom */}
+        <motion.ul
+          className="grid grid-cols-2 border-l border-t border-indigo-300/60 dark:border-violet-300/15 sm:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5"
+          variants={containerVariants}
+          initial="hidden"
+          whileInView="show"
+          viewport={{ once: true, amount: 0.1 }}
+        >
+          {skills.map((skill) => (
+            <motion.li
+              key={skill.name}
               variants={skillVariants}
+              className="border-b border-r border-indigo-300/60 dark:border-violet-300/15"
             >
-              <div className="absolute inset-x-0 top-0 h-20 bg-linear-to-b from-violet-500/10 to-transparent opacity-0 transition-opacity duration-300 group-hover:opacity-100" />
-              <div className="relative mb-4 flex h-16 w-16 items-center justify-center rounded-2xl border border-indigo-100 bg-white/70 p-3 shadow-sm transition-transform duration-300 group-hover:scale-110 dark:border-violet-300/15 dark:bg-[#0d0815]/70">
+              <a
+                target="_blank"
+                rel="noreferrer"
+                href={`https://www.google.com/search?q=${skill.name}`}
+                className="group relative flex h-full min-h-36 flex-col items-center justify-center gap-4 p-5 transition-colors duration-300 hover:bg-indigo-500/5 dark:hover:bg-violet-400/5 sm:min-h-40"
+              >
+                {/* Corner marks appear on hover */}
+                <span
+                  aria-hidden="true"
+                  className="pointer-events-none absolute left-2 top-2 h-3 w-3 border-l border-t border-indigo-500 opacity-0 transition-opacity duration-300 group-hover:opacity-100 dark:border-violet-400"
+                />
+                <span
+                  aria-hidden="true"
+                  className="pointer-events-none absolute bottom-2 right-2 h-3 w-3 border-b border-r border-indigo-500 opacity-0 transition-opacity duration-300 group-hover:opacity-100 dark:border-violet-400"
+                />
+                <ArrowUpRight
+                  aria-hidden="true"
+                  className="absolute right-3 top-3 h-3.5 w-3.5 text-indigo-500 opacity-0 transition-[opacity,transform] duration-300 group-hover:-translate-y-0.5 group-hover:translate-x-0.5 group-hover:opacity-100 dark:text-violet-300"
+                />
                 <img
                   src={skill.src}
                   alt=""
                   loading="lazy"
                   decoding="async"
-                  className="h-10 w-10 object-contain"
+                  className="h-11 w-11 object-contain transition-transform duration-300 group-hover:-translate-y-1 group-hover:scale-110"
                 />
-              </div>
-              <h3 className="relative text-base font-semibold text-gray-800 dark:text-white sm:text-lg">
-                {skill.name}
-              </h3>
-            </motion.div>
-          </a>
-        ))}
-      </motion.div>
+                <h3 className="text-center text-sm font-semibold text-gray-800 transition-colors duration-300 group-hover:text-indigo-600 dark:text-white dark:group-hover:text-violet-300 sm:text-base">
+                  {skill.name}
+                </h3>
+              </a>
+            </motion.li>
+          ))}
+        </motion.ul>
+      </div>
     </div>
   );
 };

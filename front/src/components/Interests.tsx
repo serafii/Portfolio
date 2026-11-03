@@ -9,43 +9,56 @@ import {
   Footprints,
 } from "lucide-react";
 
+// Vertical dividers only between columns: 2 columns on sm, 3 on lg.
+const dividerClasses = (index: number) =>
+  [
+    index % 2 === 0
+      ? "sm:border-r sm:pl-0 sm:pr-8"
+      : "sm:border-r-0 sm:pl-8 sm:pr-0",
+    index % 3 === 0
+      ? "lg:border-r lg:pl-0 lg:pr-8"
+      : index % 3 === 1
+        ? "lg:border-r lg:px-8"
+        : "lg:border-r-0 lg:pl-8 lg:pr-0",
+  ].join(" ");
+
 const Interests: React.FC = () => {
   const hobbies = [
     {
       title: "Gaming",
       desc: "Enjoying multiplayer or single-player campaigns",
-      gradient: "from-indigo-500/40 to-purple-400/30",
-      icon: <Gamepad className="w-8 h-8" />,
+      accent: "group-hover:text-indigo-500 dark:group-hover:text-indigo-400",
+      icon: Gamepad,
     },
     {
       title: "Nature",
       desc: "Hiking, exploring, and spending time outdoors",
-      gradient: "from-emerald-500/40 to-teal-400/30",
-      icon: <Trees className="w-8 h-8" />,
+      accent: "group-hover:text-emerald-500 dark:group-hover:text-emerald-400",
+      icon: Trees,
     },
     {
       title: "Aviation",
       desc: "Passionate about aircraft design and technology",
-      gradient: "from-sky-500/40 to-blue-400/30",
-      icon: <Plane className="w-8 h-8" />,
+      accent: "group-hover:text-sky-500 dark:group-hover:text-sky-400",
+      icon: Plane,
     },
     {
       title: "Travel",
       desc: "Broadening points of views and experiences",
-      gradient: "from-amber-500/40 to-yellow-400/30",
-      icon: <Globe className="w-8 h-8" />,
+      accent: "group-hover:text-amber-500 dark:group-hover:text-amber-400",
+      icon: Globe,
     },
     {
       title: "Music",
       desc: "Listening to diverse music genres and artists",
-      gradient: "from-rose-500/40 to-pink-400/30",
-      icon: <Music className="w-8 h-8" />,
+      accent: "group-hover:text-rose-500 dark:group-hover:text-rose-400",
+      icon: Music,
     },
     {
       title: "Running",
       desc: "Staying active by running and participating in races",
-      gradient: "from-green-500/40 to-lime-400/30",
-      icon: <Footprints className="w-8 h-8" />,
+      accent: "group-hover:text-green-500 dark:group-hover:text-green-400",
+      icon: Footprints,
     },
   ];
 
@@ -64,7 +77,7 @@ const Interests: React.FC = () => {
     visible: {
       y: 0,
       transition: {
-            duration: 0.35,
+        duration: 0.35,
         ease: "easeOut" as const,
       },
     },
@@ -72,7 +85,7 @@ const Interests: React.FC = () => {
 
   return (
     <div className="w-full py-8 sm:px-6 lg:px-8 2xl:px-16">
-      <div className="deferred-section max-w-400 p-10 text-center text-slate-700 dark:text-white z-10 mx-auto">
+      <div className="deferred-section mx-auto max-w-6xl px-5 py-10 text-left text-slate-700 dark:text-white z-10 sm:px-10 lg:px-0">
         <motion.div
           initial={{
             opacity: 0,
@@ -88,18 +101,18 @@ const Interests: React.FC = () => {
           viewport={{
             once: true,
           }}
-          className="mb-16"
+          className="mb-10 sm:mb-12"
         >
-          <h2 className="text-4xl font-bold mb-6 bg-clip-text text-transparent bg-linear-to-r from-indigo-600 to-purple-600 dark:from-indigo-400 dark:to-purple-400">
+          <h2 className="mb-3 bg-linear-to-r from-indigo-600 to-purple-600 bg-clip-text text-2xl font-bold tracking-tight text-transparent dark:from-indigo-400 dark:to-purple-400 sm:text-4xl">
             Interests & Hobbies
           </h2>
-          <p className="mb-12 text-xl font-medium text-slate-600 dark:text-slate-300 max-w-2xl mx-auto">
+          <p className="max-w-2xl text-base font-medium text-slate-600 dark:text-slate-300 sm:text-lg">
             What I'm interested in and enjoy doing in my free time outside of
             coding
           </p>
         </motion.div>
-        <motion.div
-          className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 text-left"
+        <motion.ul
+          className="grid grid-cols-1 border-t border-indigo-300/60 dark:border-violet-300/15 sm:grid-cols-2 lg:grid-cols-3"
           variants={containerVariants}
           initial="hidden"
           whileInView="visible"
@@ -108,26 +121,36 @@ const Interests: React.FC = () => {
             margin: "-50px",
           }}
         >
-          {hobbies.map((hobby) => (
-            <motion.div
-              key={hobby.title}
-              variants={cardVariants}
-              className="group transform-gpu bg-slate-200/95 dark:bg-[#160c23]/85 rounded-2xl p-6 shadow-sm border border-gray-100 dark:border-violet-300/15 hover:-translate-y-1 hover:shadow-md transition-transform transition-shadow duration-300 cursor-default"
-            >
-              <div
-                className={`w-14 h-14 rounded-xl flex items-center justify-center mb-4 bg-linear-to-br ${hobby.gradient} text-white group-hover:scale-110 transition-transform duration-300`}
+          {hobbies.map((hobby, index) => {
+            const Icon = hobby.icon;
+            return (
+              <motion.li
+                key={hobby.title}
+                variants={cardVariants}
+                className={`group relative cursor-default border-b border-indigo-300/60 py-7 dark:border-violet-300/15 sm:py-9 ${dividerClasses(index)}`}
               >
-                {hobby.icon}
-              </div>
-              <h3 className="text-lg font-bold text-gray-900 dark:text-white mb-2">
-                {hobby.title}
-              </h3>
-              <p className="text-sm text-gray-600 dark:text-gray-400 leading-relaxed">
-                {hobby.desc}
-              </p>
-            </motion.div>
-          ))}
-        </motion.div>
+                <div className="mb-6 flex items-center justify-between">
+                  <span className="font-mono text-xs tabular-nums text-indigo-500/70 dark:text-violet-300/50">
+                    {String(index + 1).padStart(2, "0")}
+                  </span>
+                  <Icon
+                    className={`h-7 w-7 text-slate-400 transition-[color,transform] duration-300 group-hover:-translate-y-0.5 group-hover:scale-110 dark:text-violet-300/50 ${hobby.accent}`}
+                  />
+                </div>
+                <h3 className="mb-2 text-xl font-bold text-gray-900 transition-colors duration-300 group-hover:text-indigo-600 dark:text-white dark:group-hover:text-violet-300">
+                  {hobby.title}
+                </h3>
+                <p className="text-sm leading-relaxed text-gray-600 dark:text-gray-400">
+                  {hobby.desc}
+                </p>
+                <span
+                  aria-hidden="true"
+                  className="absolute -bottom-px left-0 h-px w-0 bg-linear-to-r from-indigo-500 to-violet-500 transition-[width] duration-500 ease-out group-hover:w-full dark:from-violet-400 dark:to-fuchsia-400"
+                />
+              </motion.li>
+            );
+          })}
+        </motion.ul>
       </div>
     </div>
   );

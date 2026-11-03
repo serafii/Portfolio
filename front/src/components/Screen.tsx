@@ -1,7 +1,6 @@
 import React, { useState, useEffect, useRef } from "react";
-import { AnimatePresence, motion } from "framer-motion";
+import { motion } from "framer-motion";
 import { WordsPullUp } from "../utils/words-pull-up";
-import { arrow } from "../subcomponents/Icons.tsx";
 
 const textLines = [
   "Hello! I'm",
@@ -12,7 +11,6 @@ const textLines = [
 
 const Main: React.FC = () => {
   const [currentLine, setCurrentLine] = useState(textLines[0]);
-  const [showBackToTop, setShowBackToTop] = useState(false);
   const backToTopThresholdRef = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
@@ -26,25 +24,6 @@ const Main: React.FC = () => {
     return () => clearInterval(interval);
   }, []);
 
-  useEffect(() => {
-    const threshold = backToTopThresholdRef.current;
-    if (!threshold) return;
-
-    const observer = new IntersectionObserver(([entry]) => {
-      setShowBackToTop(!entry.isIntersecting);
-    });
-
-    observer.observe(threshold);
-    return () => observer.disconnect();
-  }, []);
-
-  const handleBackToTop = () => {
-    window.scrollTo({
-      top: 0,
-      behavior: "smooth",
-    });
-  };
-
   return (
     <div className="relative flex min-h-screen w-full items-center justify-center overflow-hidden">
       <div
@@ -52,28 +31,6 @@ const Main: React.FC = () => {
         aria-hidden="true"
         className="pointer-events-none absolute top-[200px] h-px w-px"
       />
-      <div className="absolute top-0 left-0 w-full h-1/2">
-        <AnimatePresence>
-          {showBackToTop && (
-            <motion.button
-              initial={{ opacity: 0 }}
-              animate={{ opacity: 1 }}
-              exit={{ opacity: 0 }}
-              onClick={handleBackToTop}
-              aria-label="Back to top"
-              className="group fixed bottom-6 right-6 z-100 invisible flex h-16 w-16 items-center justify-center rounded-full bg-indigo-600 p-3 text-2xl text-white shadow-lg transition-colors duration-300 hover:cursor-pointer hover:bg-indigo-500 sm:visible"
-            >
-              {arrow}
-              <span
-                role="tooltip"
-                className="pointer-events-none absolute bottom-full right-0 mb-3 whitespace-nowrap rounded-md bg-indigo-600 px-2.5 py-1.5 text-xs font-medium opacity-0 shadow-md transition-opacity duration-150 group-hover:opacity-100 group-focus-visible:opacity-100"
-              >
-                Back to Top
-              </span>
-            </motion.button>
-          )}
-        </AnimatePresence>
-      </div>
       <motion.div
         initial={{ opacity: 0, y: 50 }}
         whileInView={{ opacity: 1, y: 0 }}

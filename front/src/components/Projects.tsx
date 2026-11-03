@@ -50,6 +50,7 @@ const ProjectsSection: React.FC = () => {
             "Full stack sales management PWA for an insulation business, replacing manual spreadsheet tracking. Contains sales filtering and revenue analytics.",
           image: sales360,
           tags: ["React", "Supabase", "Shadcn UI"],
+          liveUrl: "https://sales-360.yourbusinesscompany001.workers.dev/login",
         },
       ],
     },
@@ -107,7 +108,7 @@ const ProjectsSection: React.FC = () => {
             "https://github.com/AbderrahmaneBoulmalf/Group_A-SOEN341_Project_F25",
         },
         {
-          title: "Business Template",
+          title: "Business Website Template",
           description:
             "This project is a customizable website template designed for small businesses. Admins can modify content and images through a custom interface. Clients can view services, contact the business and claim services.",
           image: services,
@@ -140,45 +141,48 @@ const ProjectsSection: React.FC = () => {
   ];
 
   return (
-    <div className="w-full flex items-center justify-center">
-      <div className="deferred-section w-full max-w-6xl p-6 text-center text-slate-700 dark:text-white">
-        <div className="mb-10 2xl:mb-0">
-          <h2 className="text-4xl font-bold mb-6 bg-clip-text text-transparent bg-linear-to-r from-indigo-600 to-purple-600 dark:from-indigo-400 dark:to-purple-400">
+    <div className="w-full px-5 sm:px-10">
+      <div className="deferred-section mx-auto w-full max-w-6xl py-6 text-left text-slate-700 dark:text-white">
+        <div className="mb-12">
+          <h2 className="mb-2 bg-linear-to-r from-indigo-600 to-purple-600 bg-clip-text text-2xl font-bold tracking-tight text-transparent dark:from-indigo-400 dark:to-purple-400 sm:text-4xl">
             Completed Projects
           </h2>
-          <p className="mb-4 text-xl font-semibold text-slate-600 dark:text-slate-300">
+          <p className="text-gray-600 dark:text-gray-400">
             What I've worked on so far
           </p>
         </div>
-        <div className="space-y-14">
+        <div className="space-y-16">
           {categories.map((category) => {
             const isSingleProject = category.projects.length === 1;
 
             return (
-              <div key={category.title}>
-                <div
-                  className={`mb-6 flex items-center gap-3 ${
-                    isSingleProject ? "justify-center" : ""
-                  }`}
-                >
-                  <div className="w-1.5 h-6 rounded-full bg-violet-500 dark:bg-violet-400" />
-                  <h3 className="text-lg font-semibold text-gray-800 dark:text-gray-200">
+              <section key={category.title}>
+                <div className="mb-8 flex items-center gap-4">
+                  <h3 className="shrink-0 text-lg font-semibold text-gray-800 dark:text-gray-200 sm:text-xl">
                     {category.title}
                   </h3>
+                  <span className="h-px flex-1 bg-linear-to-r from-indigo-400/70 to-transparent dark:from-violet-300/30" />
+                  <span className="shrink-0 font-mono text-xs tabular-nums text-slate-500 dark:text-violet-200/50">
+                    {String(category.projects.length).padStart(2, "0")}
+                  </span>
                 </div>
 
                 <div
-                  className={`mx-auto grid gap-6 md:gap-x-10 ${
+                  className={`grid gap-12 ${
                     isSingleProject
-                      ? "max-w-xl grid-cols-1"
-                      : "max-w-272 grid-cols-1 md:grid-cols-2"
+                      ? "grid-cols-1"
+                      : "grid-cols-1 md:grid-cols-2 md:gap-x-12"
                   }`}
                 >
                   {category.projects.map((project) => (
-                    <ProjectCard key={project.title} {...project} />
+                    <ProjectCard
+                      key={project.title}
+                      wide={isSingleProject}
+                      {...project}
+                    />
                   ))}
                 </div>
-              </div>
+              </section>
             );
           })}
         </div>
