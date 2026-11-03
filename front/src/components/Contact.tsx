@@ -1,10 +1,51 @@
-import React from "react";
+import React, { useEffect, useRef, useState } from "react";
 import gmail from "../assets/gmail.svg";
 import { motion } from "framer-motion";
-import { ArrowUpRight } from "lucide-react";
+import { ArrowUp, ArrowUpRight, Check, Copy } from "lucide-react";
+
+const email = "sami.erafii@gmail.com";
+
+const montrealTime = new Intl.DateTimeFormat("en-CA", {
+  hour: "2-digit",
+  minute: "2-digit",
+  hour12: false,
+  timeZone: "America/Toronto",
+  timeZoneName: "short",
+});
+
+// Re-renders once a minute; no animation frames involved.
+const useMontrealTime = () => {
+  const [time, setTime] = useState(() => montrealTime.format(new Date()));
+
+  useEffect(() => {
+    const id = window.setInterval(
+      () => setTime(montrealTime.format(new Date())),
+      30_000,
+    );
+    return () => window.clearInterval(id);
+  }, []);
+
+  return time;
+};
 
 const Contact: React.FC = () => {
   const year = new Date().getFullYear();
+  const time = useMontrealTime();
+  const [copied, setCopied] = useState(false);
+  const copyTimeout = useRef<number | undefined>(undefined);
+
+  useEffect(() => () => window.clearTimeout(copyTimeout.current), []);
+
+  const copyEmail = async () => {
+    try {
+      await navigator.clipboard.writeText(email);
+      setCopied(true);
+      window.clearTimeout(copyTimeout.current);
+      copyTimeout.current = window.setTimeout(() => setCopied(false), 2000);
+    } catch {
+      window.location.href = `mailto:${email}`;
+    }
+  };
 
   const linkedin =
     "https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/linkedin/linkedin-original.svg";
@@ -24,34 +65,30 @@ const Contact: React.FC = () => {
   const contacts = [
     {
       name: "LinkedIn",
+      handle: "in/sami-erafii",
       url: "https://www.linkedin.com/in/sami-erafii-bb618220a/",
       icon: linkedin,
-      gradient: "from-blue-500/40 to-blue-400/20",
-      hoverBorder: "hover:border-blue-400/50",
       iconColor: "text-blue-500",
     },
     {
       name: "GitHub",
+      handle: "@serafii",
       url: "https://github.com/serafii",
       icon: github,
-      gradient: "from-slate-500/30 to-slate-400/15",
-      hoverBorder: "hover:border-slate-400/50",
       iconColor: "text-gray-700 dark:invert dark:brightness-200",
     },
     {
       name: "Discord",
+      handle: "serafii",
       url: "https://discord.com/users/serafii",
       icon: discord,
-      gradient: "from-indigo-500/35 to-purple-400/20",
-      hoverBorder: "hover:border-indigo-400/50",
-      iconColor: "text-indigo-500",
+      iconColor: "text-indigo-500 dark:text-indigo-400",
     },
     {
       name: "Email",
-      url: "mailto:sami.erafii@gmail.com",
+      handle: email,
+      url: `mailto:${email}`,
       icon: gmail,
-      gradient: "from-rose-500/35 to-pink-400/20",
-      hoverBorder: "hover:border-rose-400/50",
       iconColor: "text-rose-500",
     },
   ];
@@ -60,21 +97,21 @@ const Contact: React.FC = () => {
     hidden: {},
     visible: {
       transition: {
-        staggerChildren: 0.12,
+        staggerChildren: 0.1,
       },
     },
   };
 
-  const cardVariants = {
+  const rowVariants = {
     hidden: {
       opacity: 0,
-      y: 25,
+      y: 16,
     },
     visible: {
       opacity: 1,
       y: 0,
       transition: {
-        duration: 0.5,
+        duration: 0.45,
         ease: "easeOut" as const,
       },
     },
@@ -82,95 +119,175 @@ const Contact: React.FC = () => {
 
   return (
     <div className="w-full">
-      <div className="w-10/12 py-16 sm:px-2 lg:px-8 2xl:px-16 text-center text-slate-700 dark:text-white z-10 mx-auto mb-48 2xl:mb-80">
+      <div className="mx-auto mb-24 w-full max-w-6xl px-5 py-16 text-left text-slate-700 dark:text-white z-10 sm:mb-32 sm:px-10 lg:px-0 2xl:mb-48">
         <motion.div
-          initial={{ opacity: 0, y: 50 }}
+          initial={{ opacity: 0, y: 40 }}
           whileInView={{ opacity: 1, y: 0 }}
-          transition={{ duration: 1 }}
+          transition={{ duration: 0.7 }}
           viewport={{ once: true }}
+          className="mb-12"
         >
-          <h2 className="text-4xl font-bold mb-6 bg-clip-text text-transparent bg-linear-to-r from-indigo-600 to-purple-600 dark:from-indigo-400 dark:to-purple-400">
+          <div className="mb-4 flex items-center gap-4">
+            <span className="font-mono text-xs uppercase tracking-[0.25em] text-indigo-600 dark:text-violet-300">
+              Contact
+            </span>
+            <span className="h-px flex-1 bg-linear-to-r from-indigo-400/70 to-transparent dark:from-violet-300/30" />
+          </div>
+          <h2 className="mb-3 bg-linear-to-r from-indigo-600 to-purple-600 bg-clip-text text-2xl font-bold tracking-tight text-transparent dark:from-indigo-400 dark:to-purple-400 sm:text-4xl">
             Get in Touch
           </h2>
-          <p className="mb-12 text-xl font-medium text-slate-600 dark:text-slate-300 max-w-2xl mx-auto">
+          <p className="max-w-2xl text-base font-medium text-slate-600 dark:text-slate-300 sm:text-lg">
             Feel free to reach out through any of these platforms.
           </p>
         </motion.div>
 
-        <motion.div
-          initial={{ opacity: 0, y: 100 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          transition={{ duration: 1 }}
-          viewport={{ once: true }}
-          className="w-full flex items-center justify-center mx-auto"
-        >
+        <div className="grid gap-12 lg:grid-cols-[minmax(0,1.1fr)_minmax(0,1fr)] lg:gap-16">
+          {/* Email call to action */}
           <motion.div
-            className="grid w-full max-w-5xl grid-cols-2 md:grid-cols-4 gap-4 mb-16 mx-auto"
+            initial={{ opacity: 0, y: 30 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.6 }}
+            viewport={{ once: true }}
+            className="flex flex-col justify-between gap-8"
+          >
+            <div>
+              <p className="mb-3 font-mono text-[11px] uppercase tracking-[0.2em] text-slate-500 dark:text-violet-200/50">
+                Fastest way to reach me
+              </p>
+              <a
+                href={`mailto:${email}`}
+                className="group relative inline-block break-all text-2xl font-bold tracking-tight text-slate-900 transition-colors duration-300 hover:text-indigo-600 dark:text-white dark:hover:text-violet-300 sm:text-4xl"
+              >
+                {email}
+                <span
+                  aria-hidden="true"
+                  className="absolute -bottom-1 left-0 h-0.5 w-full origin-left scale-x-0 bg-linear-to-r from-indigo-500 to-violet-500 transition-transform duration-500 ease-out group-hover:scale-x-100 dark:from-violet-400 dark:to-fuchsia-400"
+                />
+              </a>
+            </div>
+
+            <div className="flex flex-wrap items-center gap-3">
+              <a
+                href={`mailto:${email}`}
+                className="group inline-flex items-center gap-2 bg-indigo-600 px-5 py-3 text-sm font-semibold text-white transition-colors duration-300 hover:bg-indigo-700 dark:bg-violet-500 dark:hover:bg-violet-400"
+              >
+                Send an email
+                <ArrowUpRight className="h-4 w-4 transition-transform duration-300 group-hover:-translate-y-0.5 group-hover:translate-x-0.5" />
+              </a>
+              <button
+                type="button"
+                onClick={copyEmail}
+                className="inline-flex cursor-pointer items-center gap-2 border border-indigo-400/70 px-5 py-3 text-sm font-semibold text-indigo-700 transition-colors duration-300 hover:border-indigo-600 hover:bg-indigo-600/5 dark:border-violet-300/35 dark:text-violet-200 dark:hover:border-violet-300 dark:hover:bg-violet-300/5"
+              >
+                {copied ? (
+                  <Check className="h-4 w-4" />
+                ) : (
+                  <Copy className="h-4 w-4" />
+                )}
+                <span aria-live="polite">
+                  {copied ? "Copied!" : "Copy address"}
+                </span>
+              </button>
+            </div>
+          </motion.div>
+
+          {/* Platform links */}
+          <motion.ul
+            className="border-t border-indigo-300/60 dark:border-violet-300/15"
             variants={containerVariants}
             initial="hidden"
             whileInView="visible"
             viewport={{ once: true, margin: "-50px" }}
           >
-            {contacts.map((contact) => {
-              return (
-                <motion.a
-                  key={contact.name}
+            {contacts.map((contact, index) => (
+              <motion.li key={contact.name} variants={rowVariants}>
+                <a
                   href={contact.url}
                   target="_blank"
                   rel="noopener noreferrer"
-                  variants={cardVariants}
-                  className={`group relative flex flex-col items-center justify-center gap-4 p-6 md:p-8 rounded-2xl bg-linear-to-br ${contact.gradient} dark:from-[#160c23]/95 dark:to-[#1d0e2d]/90 border border-gray-200/50 dark:border-violet-300/15 ${contact.hoverBorder} shadow-sm hover:shadow-lg hover:-translate-y-1 transition-all duration-300`}
+                  className="group relative flex items-center gap-4 border-b border-indigo-300/60 py-4 dark:border-violet-300/15 sm:gap-5 sm:py-5"
                 >
-                  <div className="absolute top-3 right-3 opacity-0 group-hover:opacity-100 -translate-x-1 group-hover:translate-x-0 translate-y-1 group-hover:translate-y-0 transition-all duration-300">
-                    <ArrowUpRight className="w-4 h-4 text-gray-400 dark:text-gray-500" />
-                  </div>
-
-                  <div
-                    className={`${contact.iconColor} group-hover:scale-110 transition-transform duration-300`}
+                  <span className="font-mono text-xs tabular-nums text-indigo-500/70 dark:text-violet-300/50">
+                    {String(index + 1).padStart(2, "0")}
+                  </span>
+                  <span
+                    className={`${contact.iconColor} flex h-6 w-6 shrink-0 items-center justify-center grayscale-60 transition-[filter,transform] duration-300 group-hover:scale-110 group-hover:grayscale-0 [&>svg]:h-full [&>svg]:w-full`}
                   >
                     {typeof contact.icon === "string" ? (
                       <img
                         src={contact.icon}
-                        alt={`${contact.name} icon`}
-                        className="w-10 h-10 md:w-12 md:h-12"
+                        alt=""
+                        loading="lazy"
+                        className="h-full w-full"
                       />
                     ) : (
-                      <span className="w-10 h-10 md:w-12 md:h-12 flex items-center justify-center [&>svg]:w-full [&>svg]:h-full">
-                        {contact.icon}
-                      </span>
+                      contact.icon
                     )}
-                  </div>
-                  <span className="text-sm md:text-base font-semibold text-gray-700 dark:text-gray-200">
-                    {contact.name}
                   </span>
-                </motion.a>
-              );
-            })}
-          </motion.div>
-        </motion.div>
+                  <span className="flex min-w-0 flex-1 flex-col sm:flex-row sm:items-baseline sm:gap-4">
+                    <span className="text-base font-semibold text-slate-800 transition-colors duration-300 group-hover:text-indigo-600 dark:text-slate-100 dark:group-hover:text-violet-300 sm:text-lg">
+                      {contact.name}
+                    </span>
+                    <span className="truncate font-mono text-xs text-slate-500 dark:text-slate-400">
+                      {contact.handle}
+                    </span>
+                  </span>
+                  <ArrowUpRight className="h-5 w-5 shrink-0 text-slate-400 transition-[color,transform] duration-300 group-hover:-translate-y-0.5 group-hover:translate-x-0.5 group-hover:text-indigo-600 dark:text-violet-300/50 dark:group-hover:text-violet-300" />
+                  <span
+                    aria-hidden="true"
+                    className="absolute -bottom-px left-0 h-px w-full origin-left scale-x-0 bg-linear-to-r from-indigo-500 to-violet-500 transition-transform duration-500 ease-out group-hover:scale-x-100 dark:from-violet-400 dark:to-fuchsia-400"
+                  />
+                </a>
+              </motion.li>
+            ))}
+          </motion.ul>
+        </div>
       </div>
-      <footer className="relative isolate mt-14 flex min-h-52 w-full flex-col items-center justify-center gap-4 bg-[#3d4264] px-4 py-14 text-center dark:bg-[#180c26] sm:text-sm md:gap-9 md:py-16 3xl:py-20">
+
+      <footer className="relative isolate mt-14 w-full overflow-hidden bg-[#3d4264] text-slate-100 dark:bg-[#180c26]">
         <div
           aria-hidden="true"
           className="pointer-events-none absolute inset-x-0 -top-10 -z-10 h-10 bg-linear-to-b from-transparent via-[#3d4264]/55 to-[#3d4264] dark:via-[#180c26]/55 dark:to-[#180c26]"
         />
-        <span className="flex flex-wrap items-center justify-center gap-x-3 gap-y-1 text-sm font-medium tracking-wide text-slate-100/90 dark:text-violet-100/85 md:gap-x-5 md:text-base">
-          <p>&copy; {year}</p>
-          <span
-            aria-hidden="true"
-            className="hidden h-1 w-1 rounded-full bg-violet-300/70 sm:block"
-          />
-          <p>Designed &amp; Developed by Sami Erafii</p>
-        </span>
-        <span className="flex flex-col items-center justify-center gap-1 text-xs font-medium text-slate-200/75 sm:flex-row sm:gap-2 md:text-sm dark:text-violet-100/65">
-          Have a question? Reach out at
-          <a
-            href="mailto:sami.erafii@gmail.com"
-            className="font-semibold text-violet-200 transition-colors duration-300 hover:text-white hover:underline"
-          >
-            sami.erafii@gmail.com
-          </a>
-        </span>
+        <div className="mx-auto w-full max-w-6xl px-5 pt-12 sm:px-10 lg:px-0 md:pt-16">
+          <div className="flex flex-col gap-10 md:flex-row md:items-start md:justify-between">
+            <div>
+              <p className="mb-2 font-mono text-[11px] uppercase tracking-[0.2em] text-violet-200/60">
+                Have a question?
+              </p>
+              <a
+                href={`mailto:${email}`}
+                className="group inline-flex items-center gap-2 text-lg font-semibold text-white transition-colors duration-300 hover:text-violet-200"
+              >
+                {email}
+                <ArrowUpRight className="h-4 w-4 transition-transform duration-300 group-hover:-translate-y-0.5 group-hover:translate-x-0.5" />
+              </a>
+              <p className="mt-4 flex items-center gap-2 font-mono text-xs text-slate-300/80 dark:text-violet-100/60">
+                <span className="relative flex h-2 w-2">
+                  <span className="absolute inline-flex h-full w-full animate-ping rounded-full bg-emerald-400 opacity-60 motion-reduce:hidden" />
+                  <span className="relative inline-flex h-2 w-2 rounded-full bg-emerald-400" />
+                </span>
+                Montreal, QC &middot; {time}
+              </p>
+            </div>
+          </div>
+
+          <div className="mt-10 flex flex-col items-start justify-between gap-4 border-t border-white/10 py-6 md:mt-12 text-xs text-slate-300/80 dark:text-violet-100/60 sm:flex-row sm:items-center sm:text-sm">
+            <p>
+              &copy; {year} &middot; Designed &amp; Developed by Sami Erafii
+            </p>
+            <button
+              type="button"
+              onClick={() => window.scrollTo({ top: 0, behavior: "smooth" })}
+              className="group inline-flex cursor-pointer items-center gap-2 font-medium text-slate-200 transition-colors duration-300 hover:text-white"
+            >
+              Back to top
+              <span className="flex h-8 w-8 items-center justify-center border border-white/20 transition-[border-color,transform] duration-300 group-hover:-translate-y-1 group-hover:border-violet-300">
+                <ArrowUp className="h-4 w-4" />
+              </span>
+            </button>
+          </div>
+        </div>
       </footer>
     </div>
   );

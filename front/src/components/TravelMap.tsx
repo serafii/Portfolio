@@ -1234,14 +1234,21 @@ function WorldMapPaths({ className }: { className: string }) {
   );
 }
 function getRegionStats(allCities: City[]) {
-  const regions = new Set(allCities.map((c) => c.region));
+  const counts = new Map<string, number>();
+  allCities.forEach((c) => counts.set(c.region, (counts.get(c.region) ?? 0) + 1));
   return {
     cities: allCities.length,
-    regions: regions.size,
+    regions: [...counts]
+      .map(([name, count]) => ({ name, count }))
+      .sort((a, b) => b.count - a.count),
   };
 }
+const formatCoord = (value: number, positive: string, negative: string) =>
+  `${Math.abs(value).toFixed(2)}°${value >= 0 ? positive : negative}`;
 const TravelMap: React.FC = () => {
   const [hoveredCluster, setHoveredCluster] = useState<City[] | null>(null);
+  const [hoveredRegion, setHoveredRegion] = useState<string | null>(null);
+  const [selectedRegion, setSelectedRegion] = useState<string | null>(null);
   const [tooltipPos, setTooltipPos] = useState({
     x: 0,
     y: 0,
@@ -1250,6 +1257,12 @@ const TravelMap: React.FC = () => {
   const containerRef = useRef<HTMLDivElement>(null);
   const clusters = useMemo(() => clusterCities(cities, 10), []);
   const stats = useMemo(() => getRegionStats(cities), []);
+  const activeRegion = hoveredRegion ?? selectedRegion;
+  const activeCities = useMemo(
+    () =>
+      activeRegion ? cities.filter((c) => c.region === activeRegion) : [],
+    [activeRegion],
+  );
   const handleMouseEnter = useCallback(
     (cluster: City[], x: number, y: number) => {
       setHoveredCluster(cluster);
@@ -1295,24 +1308,44 @@ const TravelMap: React.FC = () => {
       },
     },
   };
+  const readoutCity = hoveredCluster?.[0];
   return (
-    <section className="w-full py-16 px-4 md:px-8 transition-colors duration-500 overflow-hidden">
+    <section className="w-full py-16 px-5 sm:px-10 transition-colors duration-500 overflow-hidden">
       <div className="max-w-6xl mx-auto">
-        <div className="mb-10 text-center md:text-left">
-          <h2 className="text-3xl md:text-4xl font-bold mb-2 tracking-tight bg-clip-text text-transparent bg-linear-to-r from-indigo-600 to-purple-600 dark:from-indigo-400 dark:to-purple-400">
+        <div className="mb-10 text-left">
+          <h2 className="mb-2 bg-linear-to-r from-indigo-600 to-purple-600 bg-clip-text text-2xl font-bold tracking-tight text-transparent dark:from-indigo-400 dark:to-purple-400 sm:text-4xl">
             Places I've Visited
           </h2>
-          <p className="text-slate-600 dark:text-slate-300 text-base">
-            {stats.regions} regions · {stats.cities} cities across the globe
+          <p className="text-gray-600 dark:text-gray-400">
+            {stats.regions.length} regions · {stats.cities} cities across the
+            globe
           </p>
         </div>
 
         <div
           ref={containerRef}
-          className="relative w-full aspect-2/1 bg-slate-200 dark:bg-[#160c23]/70 rounded-2xl border border-indigo-300/70 dark:border-violet-300/15 overflow-hidden p-3 md:p-6"
+          className="relative w-full aspect-2/1 overflow-hidden py-3 md:py-6"
         >
+          {/* Viewfinder corner marks */}
+          <span
+            aria-hidden="true"
+            className="pointer-events-none absolute left-0 top-0 h-4 w-4 border-l border-t border-indigo-500 dark:border-violet-400"
+          />
+          <span
+            aria-hidden="true"
+            className="pointer-events-none absolute right-0 top-0 h-4 w-4 border-r border-t border-indigo-500 dark:border-violet-400"
+          />
+          <span
+            aria-hidden="true"
+            className="pointer-events-none absolute bottom-0 left-0 h-4 w-4 border-b border-l border-indigo-500 dark:border-violet-400"
+          />
+          <span
+            aria-hidden="true"
+            className="pointer-events-none absolute bottom-0 right-0 h-4 w-4 border-b border-r border-indigo-500 dark:border-violet-400"
+          />
+
           {/* Subtle grid pattern */}
-          <svg className="absolute inset-0 w-full h-full opacity-[0.03] dark:opacity-[0.05] pointer-events-none">
+          <svg className="absolute inset-0 w-full h-full opacity-[0.05] dark:opacity-[0.07] pointer-events-none">
             <defs>
               <pattern
                 id="grid"
@@ -1404,7 +1437,10 @@ const TravelMap: React.FC = () => {
               {clusters.map((cluster, i) => {
                 const { x, y } = project(cluster[0].lat, cluster[0].lon);
                 const isMulti = cluster.length > 1;
-                const pinR = isMulti ? 6 : 4.5;
+                const pinR = isMulti ? 5.5 : 4;
+                const region = cluster[0].region;
+                const isDimmed = activeRegion !== null && region !== activeRegion;
+                const isHighlighted = activeRegion === region;
                 return (
                   <motion.g
                     key={i}
@@ -1416,60 +1452,65 @@ const TravelMap: React.FC = () => {
                       transformOrigin: `${x}px ${y}px`,
                     }}
                   >
-                    {/* Outer glow ring */}
-                    <circle
-                      cx={x}
-                      cy={y}
-                      r={pinR + 6}
-                      className="fill-indigo-500/9 dark:fill-indigo-400/14"
-                    />
-                    <circle
-                      cx={x}
-                      cy={y}
-                      r={pinR + 3}
-                      className="fill-indigo-500/18 dark:fill-indigo-400/22"
-                    />
-                    {/* Pin dot */}
-                    <circle
-                      cx={x}
-                      cy={y}
-                      r={pinR}
-                      className="fill-indigo-500 dark:fill-indigo-400 stroke-white dark:stroke-slate-900 transition-colors duration-200"
-                      strokeWidth="2"
-                    />
-                    {/* Inner highlight */}
-                    <circle
-                      cx={x - 1}
-                      cy={y - 1}
-                      r={pinR * 0.35}
-                      className="fill-white/40"
-                    />
-                    {/* Count badge for clusters */}
-                    {isMulti && (
-                      <g>
-                        <circle
-                          cx={x + 7}
-                          cy={y - 7}
-                          r="6.5"
-                          className="fill-indigo-600 dark:fill-indigo-300 stroke-white dark:stroke-slate-900"
-                          strokeWidth="1.5"
-                        />
-                        <text
-                          x={x + 7}
-                          y={y - 7}
-                          textAnchor="middle"
-                          dominantBaseline="central"
-                          className="fill-white dark:fill-slate-900 text-[7px] font-bold select-none"
-                        >
-                          {cluster.length}
-                        </text>
-                      </g>
-                    )}
+                    <g
+                      className={`group transition-opacity duration-300 ${isDimmed ? "opacity-20" : ""}`}
+                    >
+                      {/* Hit area */}
+                      <circle cx={x} cy={y} r={pinR + 8} fill="transparent" />
+                      {/* Outline ring, expands on hover or region highlight */}
+                      <circle
+                        cx={x}
+                        cy={y}
+                        r={pinR + 4}
+                        strokeWidth="1"
+                        className={`fill-indigo-500/10 stroke-indigo-500/50 [transform-box:fill-box] origin-center transition-transform duration-300 group-hover:scale-150 dark:fill-violet-400/10 dark:stroke-violet-300/50 ${isHighlighted ? "scale-150" : ""}`}
+                      />
+                      {/* Pin dot */}
+                      <circle
+                        cx={x}
+                        cy={y}
+                        r={pinR}
+                        className="fill-indigo-500 dark:fill-violet-400 stroke-white dark:stroke-slate-900 transition-colors duration-200"
+                        strokeWidth="1.5"
+                      />
+                      {/* Count badge for clusters */}
+                      {isMulti && (
+                        <g>
+                          <rect
+                            x={x + 2}
+                            y={y - 14}
+                            width="11"
+                            height="11"
+                            className="fill-indigo-600 dark:fill-violet-300 stroke-white dark:stroke-slate-900"
+                            strokeWidth="1"
+                          />
+                          <text
+                            x={x + 7.5}
+                            y={y - 8.5}
+                            textAnchor="middle"
+                            dominantBaseline="central"
+                            className="fill-white dark:fill-slate-900 text-[7px] font-bold select-none"
+                          >
+                            {cluster.length}
+                          </text>
+                        </g>
+                      )}
+                    </g>
                   </motion.g>
                 );
               })}
             </motion.g>
           </svg>
+
+          {/* Coordinate readout */}
+          <p
+            aria-hidden="true"
+            className="pointer-events-none absolute bottom-3 left-5 z-20 hidden font-mono text-[11px] uppercase tracking-[0.15em] text-slate-500 dark:text-violet-200/50 sm:block"
+          >
+            {readoutCity
+              ? `${formatCoord(readoutCity.lat, "N", "S")} ${formatCoord(readoutCity.lon, "E", "W")} · ${readoutCity.name}`
+              : "Hover a pin"}
+          </p>
 
           {/* Tooltip */}
           <AnimatePresence>
@@ -1478,17 +1519,14 @@ const TravelMap: React.FC = () => {
                 initial={{
                   opacity: 0,
                   y: 8,
-                  scale: 0.96,
                 }}
                 animate={{
                   opacity: 1,
                   y: 0,
-                  scale: 1,
                 }}
                 exit={{
                   opacity: 0,
                   y: 4,
-                  scale: 0.96,
                 }}
                 transition={{
                   duration: 0.12,
@@ -1498,13 +1536,13 @@ const TravelMap: React.FC = () => {
                   left: tooltipPos.x,
                   top: tooltipPos.y,
                   transform: "translate(-50%, -100%)",
-                  marginTop: "-14px",
+                  marginTop: "-16px",
                 }}
               >
-                <div className="bg-slate-50 dark:bg-[#160c23] text-slate-800 dark:text-white px-3 py-2.5 rounded-xl shadow-lg shadow-black/10 dark:shadow-black/30 border border-indigo-100/80 dark:border-violet-300/15 whitespace-nowrap">
-                  <div className="flex items-center gap-1.5 mb-1">
-                    <MapPinIcon className="w-3 h-3 text-indigo-500 dark:text-indigo-400" />
-                    <span className="text-[10px] font-semibold text-indigo-500 dark:text-indigo-400 uppercase tracking-widest">
+                <div className="whitespace-nowrap border-l-2 border-indigo-500 bg-slate-50/95 px-3 py-2.5 text-slate-800 shadow-lg shadow-black/10 dark:border-violet-400 dark:bg-[#160c23]/95 dark:text-white dark:shadow-black/30">
+                  <div className="mb-1 flex items-center gap-1.5">
+                    <MapPinIcon className="h-3 w-3 text-indigo-500 dark:text-violet-300" />
+                    <span className="font-mono text-[10px] uppercase tracking-[0.2em] text-indigo-500 dark:text-violet-300">
                       {hoveredCluster[0].region}
                     </span>
                   </div>
@@ -1523,6 +1561,70 @@ const TravelMap: React.FC = () => {
             )}
           </AnimatePresence>
         </div>
+
+        {/* Region legend: hover (mouse) or tap to highlight */}
+        <ul className="mt-6 grid grid-cols-2 border-t border-indigo-300/60 dark:border-violet-300/15 sm:grid-cols-4 lg:grid-cols-7">
+          {stats.regions.map(({ name, count }) => {
+            const isActive = activeRegion === name;
+            return (
+              <li key={name}>
+                <button
+                  type="button"
+                  aria-pressed={selectedRegion === name}
+                  onPointerEnter={(e) => {
+                    if (e.pointerType === "mouse") setHoveredRegion(name);
+                  }}
+                  onPointerLeave={(e) => {
+                    if (e.pointerType === "mouse") setHoveredRegion(null);
+                  }}
+                  onClick={() =>
+                    setSelectedRegion((current) =>
+                      current === name ? null : name,
+                    )
+                  }
+                  className="group relative flex w-full cursor-pointer items-baseline justify-between gap-3 border-b border-indigo-300/60 py-3 pr-4 text-left dark:border-violet-300/15"
+                >
+                  <span
+                    className={`text-sm font-medium transition-colors duration-300 ${
+                      isActive
+                        ? "text-indigo-600 dark:text-violet-300"
+                        : "text-slate-700 group-hover:text-indigo-600 dark:text-slate-200 dark:group-hover:text-violet-300"
+                    }`}
+                  >
+                    {name}
+                  </span>
+                  <span className="font-mono text-xs tabular-nums text-slate-500 dark:text-violet-200/50">
+                    {String(count).padStart(2, "0")}
+                  </span>
+                  <span
+                    aria-hidden="true"
+                    className={`absolute -bottom-px left-0 h-px w-full origin-left bg-linear-to-r from-indigo-500 to-violet-500 transition-transform duration-500 ease-out dark:from-violet-400 dark:to-fuchsia-400 ${
+                      isActive ? "scale-x-100" : "scale-x-0"
+                    }`}
+                  />
+                </button>
+              </li>
+            );
+          })}
+        </ul>
+
+        <p
+          aria-live="polite"
+          className="mt-4 min-h-6 text-sm text-slate-600 dark:text-slate-300"
+        >
+          {activeRegion ? (
+            <>
+              <span className="mr-3 font-mono text-[11px] uppercase tracking-[0.2em] text-indigo-600 dark:text-violet-300">
+                {activeRegion}
+              </span>
+              {activeCities.map((c) => c.name).join(" · ")}
+            </>
+          ) : (
+            <span className="font-mono text-[11px] uppercase tracking-[0.2em] text-slate-500 dark:text-violet-200/50">
+              Select a region to highlight it on the map
+            </span>
+          )}
+        </p>
       </div>
     </section>
   );

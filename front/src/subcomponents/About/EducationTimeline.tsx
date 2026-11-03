@@ -1,6 +1,6 @@
 import React from "react";
 import { motion, type Variants } from "framer-motion";
-import { Calendar, MapPin } from "lucide-react";
+import { MapPin } from "lucide-react";
 import hku from "../../assets/hku.png";
 import concordia from "../../assets/concordia.png";
 
@@ -18,7 +18,7 @@ const educationData = [
   {
     id: 2,
     school: "The University of Hong Kong",
-    major: "B.S. in Computer Science (Exchange Program)",
+    major: "Computer Science Exchange Program",
     date: "Jan 2026 - May 2026",
     location: "Hong Kong SAR",
     description:
@@ -40,11 +40,11 @@ const containerVariants: Variants = {
 const itemVariants: Variants = {
   hidden: {
     opacity: 0,
-    x: -20,
+    y: 16,
   },
   visible: {
     opacity: 1,
-    x: 0,
+    y: 0,
     transition: {
       duration: 0.5,
       ease: "easeOut" as const,
@@ -71,7 +71,7 @@ const EducationTimeline: React.FC = () => {
         }}
         className="mb-10 text-left"
       >
-        <h2 className="text-3xl font-bold bg-clip-text text-transparent bg-linear-to-r from-indigo-600 to-purple-600 dark:from-indigo-400 dark:to-purple-400 mb-2">
+        <h2 className="mb-2 bg-linear-to-r from-indigo-600 to-purple-600 bg-clip-text text-2xl font-bold tracking-tight text-transparent dark:from-indigo-400 dark:to-purple-400 sm:text-4xl">
           Education
         </h2>
         <p className="text-gray-600 dark:text-gray-400">
@@ -79,8 +79,8 @@ const EducationTimeline: React.FC = () => {
         </p>
       </motion.div>
 
-      <motion.div
-        className="relative"
+      <motion.ol
+        className="border-t border-indigo-300/60 text-left dark:border-violet-300/15"
         variants={containerVariants}
         initial="hidden"
         whileInView="visible"
@@ -89,55 +89,59 @@ const EducationTimeline: React.FC = () => {
           margin: "-100px",
         }}
       >
-        <div
-          aria-hidden="true"
-          className="pointer-events-none absolute bottom-6 left-5 top-4 w-px bg-linear-to-b from-indigo-300 via-violet-400 to-indigo-200 dark:from-violet-300/25 dark:via-violet-400/80 dark:to-violet-300/10"
-        />
         {educationData.map((item) => (
-          <motion.div
+          <motion.li
             key={item.id}
             variants={itemVariants}
-            className="relative mb-10 pl-12 last:mb-0 group"
+            className="group relative border-b border-indigo-300/60 py-8 dark:border-violet-300/15 md:py-10"
           >
-            {/* Timeline Dot */}
-            <div className="absolute left-3 top-7 flex h-4 w-4 items-center justify-center rounded-full border-2 border-indigo-500 bg-slate-100 shadow-sm shadow-indigo-500/30 transition-transform duration-300 group-hover:scale-125 dark:border-violet-300 dark:bg-[#0d0815] dark:shadow-violet-500/40">
-              <span className="h-1.5 w-1.5 rounded-full bg-indigo-500 dark:bg-violet-300" />
-            </div>
-            <div className="rounded-[2rem] border border-indigo-200/70 bg-slate-100/85 p-7 shadow-xl shadow-indigo-950/5 backdrop-blur-sm transition-[border-color,box-shadow,transform] duration-300 hover:border-violet-400/70 hover:shadow-2xl dark:border-violet-300/15 dark:bg-[#160c23]/90 dark:shadow-black/25 dark:hover:border-violet-300/45 md:p-8">
-              <div className="flex flex-col sm:flex-row gap-6 items-start text-left">
+            <div className="flex flex-col gap-5 sm:flex-row sm:gap-6">
+              <div className="relative h-16 w-16 shrink-0">
+                <div
+                  aria-hidden="true"
+                  className="absolute inset-0 translate-x-1.5 translate-y-1.5 border border-indigo-400/70 transition-transform duration-500 ease-out group-hover:translate-x-0.5 group-hover:translate-y-0.5 dark:border-violet-300/35"
+                />
                 <img
                   src={item.image}
                   alt={item.school}
-                  className="w-20 h-20 rounded-xl object-cover shadow-sm border border-gray-100 dark:border-violet-300/15"
+                  className="relative h-full w-full bg-white object-cover"
                 />
-                <div className="flex-1">
-                  <h3 className="text-xl font-bold text-gray-800 dark:text-white">
-                    {item.major}
-                  </h3>
-                  <div className="text-lg font-medium text-indigo-600 dark:text-indigo-400 mb-3">
-                    {item.school}
-                  </div>
+              </div>
 
-                  <div className="flex flex-wrap gap-4 text-sm text-slate-600 dark:text-slate-300 mb-4">
-                    <div className="flex items-center gap-1.5">
-                      <Calendar className="w-4 h-4" />
-                      <span>{item.date}</span>
-                    </div>
-                    <div className="flex items-center gap-1.5">
-                      <MapPin className="w-4 h-4" />
-                      <span>{item.location}</span>
+              <div className="min-w-0 flex-1">
+                <div className="flex flex-col gap-3 md:flex-row md:items-start md:justify-between md:gap-8">
+                  <div>
+                    <h3 className="text-xl font-bold text-gray-800 transition-colors duration-300 group-hover:text-indigo-600 dark:text-white dark:group-hover:text-violet-300 sm:text-2xl">
+                      {item.major}
+                    </h3>
+                    <div className="mt-1 text-base font-medium text-indigo-600 dark:text-indigo-400">
+                      {item.school}
                     </div>
                   </div>
-
-                  <p className="text-slate-700 dark:text-slate-200 leading-relaxed">
-                    {item.description}
-                  </p>
+                  <div className="flex shrink-0 flex-wrap items-center gap-x-4 gap-y-1 text-slate-500 dark:text-slate-400 md:flex-col md:items-end md:gap-1.5 md:pt-1.5 md:text-right">
+                    <span className="font-mono text-xs uppercase tracking-[0.15em]">
+                      {item.date}
+                    </span>
+                    <span className="flex items-center gap-1.5 text-sm">
+                      <MapPin className="h-3.5 w-3.5" />
+                      {item.location}
+                    </span>
+                  </div>
                 </div>
+
+                <p className="mt-5 max-w-2xl border-l-2 border-indigo-500/70 pl-4 leading-relaxed text-slate-700 dark:border-violet-400/60 dark:text-slate-200">
+                  {item.description}
+                </p>
               </div>
             </div>
-          </motion.div>
+
+            <span
+              aria-hidden="true"
+              className="absolute -bottom-px left-0 h-px w-0 bg-linear-to-r from-indigo-500 to-violet-500 transition-[width] duration-700 ease-out group-hover:w-full dark:from-violet-400 dark:to-fuchsia-400"
+            />
+          </motion.li>
         ))}
-      </motion.div>
+      </motion.ol>
     </section>
   );
 };
